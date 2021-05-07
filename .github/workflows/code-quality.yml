@@ -5,9 +5,7 @@ name: Code Quality
 
 on:
   push:
-    paths:
-      - "**.py"
-
+  
 jobs:
   lint:
     name: Python Lint
