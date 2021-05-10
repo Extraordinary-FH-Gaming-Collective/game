@@ -3,7 +3,7 @@ import os
 import random
 
 # Settings
-WIDTH = 720
+WIDTH = 721
 HEIGHT = 480
 FPS = 60
 WEISS = (255, 255, 255)
