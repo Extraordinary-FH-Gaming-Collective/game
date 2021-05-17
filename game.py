@@ -1,6 +1,5 @@
 import pygame
-import random
-from settings import *
+from settings import * # NOQA
 
 # Initialisierung
 pygame.init()
