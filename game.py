@@ -1,5 +1,5 @@
 import pygame
-from settings import * # NOQA
+from settings import *
 
 # Initialisierung
 pygame.init()
