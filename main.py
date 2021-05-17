@@ -1,15 +1,8 @@
 import pygame
 import os
 import random
+from settings import *
 
-# Settings
-WIDTH = 720
-HEIGHT = 480
-FPS = 60
-WEISS = (255, 255, 255)
-SCHWARZ = (0, 0, 0)
-BLAU = (0, 0, 255)
-ROT = (255, 0, 0)
 
 # Initialisierung
 pygame.init()
@@ -85,4 +78,4 @@ while running:
     # Display
     pygame.display.flip()
 
-pygame.quit()
+# pygame.quit()
