@@ -1,8 +1,6 @@
 import pygame
-import os
 import random
 from settings import *
-
 
 # Initialisierung
 pygame.init()
