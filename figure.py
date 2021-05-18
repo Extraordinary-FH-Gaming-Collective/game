@@ -1,3 +1,3 @@
-class Figure:
+class Character:
     x: int
     y: int
