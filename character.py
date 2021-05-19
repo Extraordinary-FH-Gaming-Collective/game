@@ -10,7 +10,6 @@ class Character:
         self.position_x = 0
         self.step_size = 50
         self.row = 0
-        
 
     def move_up(self):
         self.position_y += self.step_size
@@ -29,10 +28,9 @@ class Character:
     def move_left(self):
         self.position_x -= self.step_size
         self.state.look_left(self)
-        
+
     def render(self, screen):
         screen.blit(self.image, self.wrapper)
-
 
 
 class CharacterState:
@@ -51,9 +49,6 @@ class CharacterState:
 
 
 class LookingUp(CharacterState):
-    def __init__ (self, character: Character):
-        character.image = 
-    
     def look_up():
         pass
 
