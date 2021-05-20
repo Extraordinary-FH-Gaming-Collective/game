@@ -1,20 +1,40 @@
+import pygame
+import os
+
+# Load Images
+player_image_dict = {}
+dir_assets_player = os.path.dirname("assets/player/")
+player_image_dict["standing_up"] = pygame.image.load(
+    os.path.join(dir_assets_player, "standing_up.png")
+)
+player_image_dict["standing_down"] = pygame.image.load(
+    os.path.join(dir_assets_player, "standing_down.png")
+)
+player_image_dict["standing_right"] = pygame.image.load(
+    os.path.join(dir_assets_player, "standing_right.png")
+)
+player_image_dict["standing_left"] = pygame.image.load(
+    os.path.join(dir_assets_player, "standing_left.png")
+)
+
+
 class Character:
-    def __init__(self, image):
-        self.state = LookingUp()
-        self.image = image
-        self.image_wrapper = image.get_rect()
+    def __init__(self):
+        self.state = LookingUp(self)
+        self.image
         self.position_y = 550
         self.position_x = 400
-        self.step_size = 50
+        self.step_size = 5
         self.row = 0
 
     def move_up(self):
-        self.position_y += self.step_size
+
+        self.position_y -= self.step_size
         self.row += 1
         self.state.look_up(self)
 
     def move_down(self):
-        self.position_y -= self.step_size
+        self.position_y += self.step_size
         self.row -= 1
         self.state.look_down(self)
 
@@ -31,7 +51,7 @@ class Character:
 
 
 class CharacterState:
-    def __init__(self):
+    def __init__(self, character: Character):
         def look_up(self, character: Character):
             raise NotImplementedError
 
@@ -46,56 +66,68 @@ class CharacterState:
 
 
 class LookingUp(CharacterState):
-    def look_up():
+    def __init__(self, character: Character):
+        character.image = player_image_dict["standing_up"]
+
+    def look_up(self, character: Character):
         pass
 
     def look_down(self, character: Character):
-        character.state = LookingDown()
+        character.state = LookingDown(self)
 
     def look_right(self, character: Character):
-        character.state = LookingRight()
+        character.state = LookingRight(self)
 
     def look_left(self, character: Character):
-        character.state = LookingLeft()
+        character.state = LookingLeft(self)
 
 
 class LookingDown(CharacterState):
-    def look_up(self, character: Character):
-        character.state = LookingUp()
+    def __init__(self, character: Character):
+        character.image = player_image_dict["standing_down"]
 
-    def look_down():
+    def look_up(self, character: Character):
+        character.state = LookingUp(self)
+
+    def look_down(self, character: Character):
         pass
 
     def look_right(self, character: Character):
-        character.state = LookingRight()
+        character.state = LookingRight(self)
 
     def look_left(self, character: Character):
-        character.state = LookingLeft()
+        character.state = LookingLeft(self)
 
 
 class LookingRight(CharacterState):
+    def __init__(self, character: Character):
+        character.image = player_image_dict["standing_right"]
+
     def look_up(self, character: Character):
-        character.state = LookingUp()
+        character.state = LookingUp(self)
 
     def look_down(self, character: Character):
-        character.state = LookingDown()
+        character.state = LookingDown(self)
 
-    def look_right():
+    def look_right(self, character: Character):
         pass
 
     def look_left(self, character: Character):
-        character.state = LookingLeft()
+        character.state = LookingLeft(self)
 
 
 class LookingLeft(CharacterState):
-    def look_up():
+    def __init__(self, character: Character):
+        character.image = player_image_dict["standing_left"]
+
+    def look_up(self, character: Character):
         pass
 
     def look_down(self, character: Character):
-        character.state.LookingDown()
+        character.state = LookingDown(self)
 
     def look_right(self, character: Character):
-        character.state = LookingRight()
+        character.state = LookingRight(self)
 
     def look_left(self, character: Character):
-        character.state.LookingLeft()
+        character.state = LookingLeft(self)
