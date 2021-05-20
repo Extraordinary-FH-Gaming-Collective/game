@@ -1,13 +1,10 @@
-import pygame
-
-
 class Character:
     def __init__(self, image):
         self.state = LookingUp()
         self.image = image
-        self.wrapper = image.get_rect()
-        self.position_y = 0
-        self.position_x = 0
+        self.image_wrapper = image.get_rect()
+        self.position_y = 550
+        self.position_x = 400
         self.step_size = 50
         self.row = 0
 
@@ -30,7 +27,7 @@ class Character:
         self.state.look_left(self)
 
     def render(self, screen):
-        screen.blit(self.image, self.wrapper)
+        screen.blit(self.image, (self.position_x, self.position_y))
 
 
 class CharacterState:
