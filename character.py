@@ -24,7 +24,7 @@ class Character:
         self.state = LookingUp(self)
         self.position_y = 550
         self.position_x = 400
-        self.step_size = 30
+        self.step_size = 42
         self.row = 0
 
     def move_up(self):
