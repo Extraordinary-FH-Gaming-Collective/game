@@ -6,7 +6,7 @@ from character import Character
 pygame.init()
 pygame.mixer.init()
 
-background = pygame.image.load("add-visual_content/game_source/grids/player_lines_grid.png") 
+background = pygame.image.load("add-visual_content/game_source/grids/player_lines_grid.png")
 # has to be changed in the final version to add-visual_content/game_source/map_1280x720.png
 screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption(GAME_NAME)
@@ -47,7 +47,7 @@ while running:
     # Should be done right
 
     # Render
-    screen.blit(background, (0,0))
+    screen.blit(background, (0, 0))
 
     player.render(screen)
 
