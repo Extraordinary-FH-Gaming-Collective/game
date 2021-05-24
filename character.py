@@ -75,7 +75,7 @@ class CharacterState:
 
 class LookingUp(CharacterState):
     def __init__(self, character: Character):
-        character.walk() # TODO: Maybe there is a better solution?
+        character.walk()  # TODO: Maybe there is a better solution?
         character.image = player_image_dict["standing_up"][character.walkCount]
         character.position_y -= character.step_size
         character.row += 1
