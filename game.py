@@ -6,8 +6,6 @@ from character import Character
 pygame.init()
 pygame.mixer.init()
 
-# background = pygame.image.load("assets/map_1280x720.png")
-# has to be changed in the final version to add-visual_content/game_source/map_1280x720.png
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption(GAME_NAME)
 clock = pygame.time.Clock()
