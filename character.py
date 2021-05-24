@@ -36,7 +36,7 @@ class Character:
         self.walkCount = 0
         self.state = LookingUp(self)
 
-    def walk(self): # TODO: It's the right direction, but we aren't there yet.
+    def walk(self):  # TODO: It's the right direction, but we aren't there yet.
         if self.walkCount < 2:
             self.walkCount += 1
         else:
