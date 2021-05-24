@@ -20,42 +20,25 @@ player_image_dict["standing_left"] = pygame.image.load(
 
 class Character:
     def __init__(self):
-        self.image = None
-        self.state = LookingUp(self)
+        self.image = None        
         self.position_y = 550
         self.position_x = 400
         self.step_size = 42
         self.row = 0
+        self.walkCount = 0
+        self.state = LookingUp(self)
 
     def move_up(self):
-        self.image = player_image_dict[
-            "standing_up"
-        ]  # Temp Solution - should update over the State
-        self.position_y -= self.step_size
-        self.row += 1
-        self.state.look_up(self)
+        self.state = LookingUp(self)
 
     def move_down(self):
-        self.image = player_image_dict[
-            "standing_down"
-        ]  # Temp Solution - should update over the State
-        self.position_y += self.step_size
-        self.row -= 1
-        self.state.look_down(self)
+        self.state = LookingDown(self)
 
     def move_right(self):
-        self.image = player_image_dict[
-            "standing_right"
-        ]  # Temp Solution - should update over the State
-        self.position_x += self.step_size
-        self.state.look_right(self)
+        self.state = LookingRight(self)
 
     def move_left(self):
-        self.image = player_image_dict[
-            "standing_left"
-        ]  # Temp Solution - should update over the State
-        self.position_x -= self.step_size
-        self.state.look_left(self)
+        self.state = LookingLeft(self)
 
     def render(self, screen):
         screen.blit(self.image, (self.position_x, self.position_y))
@@ -78,9 +61,9 @@ class CharacterState:
 
 class LookingUp(CharacterState):
     def __init__(self, character: Character):
-        character.image = player_image_dict[
-            "standing_up"
-        ]  # Doesn`t work - and i don`t know why
+        character.image = player_image_dict["standing_up"]
+        character.position_y -= character.step_size
+        character.row += 1
 
     def look_up(self, character: Character):
         pass
@@ -97,56 +80,54 @@ class LookingUp(CharacterState):
 
 class LookingDown(CharacterState):
     def __init__(self, character: Character):
-        character.image = player_image_dict[
-            "standing_down"
-        ]  # Doesn`t work - and i don`t know why
+        character.image = player_image_dict["standing_down"]
+        character.position_y += character.step_size
+        character.row -= 1
 
     def look_up(self, character: Character):
-        character.state = LookingUp(self)
+        character.state = LookingUp(character)
 
     def look_down(self, character: Character):
         pass
 
     def look_right(self, character: Character):
-        character.state = LookingRight(self)
+        character.state = LookingRight(character)
 
     def look_left(self, character: Character):
-        character.state = LookingLeft(self)
+        character.state = LookingLeft(character)
 
 
 class LookingRight(CharacterState):
     def __init__(self, character: Character):
-        character.image = player_image_dict[
-            "standing_right"
-        ]  # Doesn`t work - and i don`t know why
+        character.image = player_image_dict["standing_right"]
+        character.position_x += character.step_size
 
     def look_up(self, character: Character):
-        character.state = LookingUp(self)
+        character.state = LookingUp(character)
 
     def look_down(self, character: Character):
-        character.state = LookingDown(self)
+        character.state = LookingDown(character)
 
     def look_right(self, character: Character):
         pass
 
     def look_left(self, character: Character):
-        character.state = LookingLeft(self)
+        character.state = LookingLeft(character)
 
 
 class LookingLeft(CharacterState):
     def __init__(self, character: Character):
-        character.image = player_image_dict[
-            "standing_left"
-        ]  # Doesn`t work - and i don`t know why
+        character.image = player_image_dict["standing_left"]
+        character.position_x -= character.step_size
 
     def look_up(self, character: Character):
-        character.state = LookingUp(self)
+        character.state = LookingUp(character)
 
     def look_down(self, character: Character):
-        character.state = LookingDown(self)
+        character.state = LookingDown(character)
 
     def look_right(self, character: Character):
-        character.state = LookingRight(self)
+        character.state = LookingRight(character)
 
     def look_left(self, character: Character):
         pass
