@@ -20,7 +20,7 @@ player_image_dict["standing_left"] = pygame.image.load(
 
 class Character:
     def __init__(self):
-        self.image = None        
+        self.image = None
         self.position_y = 550
         self.position_x = 400
         self.step_size = 42
