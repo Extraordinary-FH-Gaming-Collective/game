@@ -29,8 +29,8 @@ player_image_dict["standing_left"] = (
 class Character:
     def __init__(self):
         self.image = None
-        self.position_y = 550
-        self.position_x = 400
+        self.position_y = 645
+        self.position_x = 580
         self.step_size = 42
         self.row = 0
         self.walkCount = 0
