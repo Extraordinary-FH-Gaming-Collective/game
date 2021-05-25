@@ -43,7 +43,6 @@ while running:
             if event.key == pygame.K_LEFT:
                 player.move_left()
 
-
     # Render / Needs refactoring
     screen.blit(BACKGROUND_IMAGE, (0, 0))
     dummyCar.render(screen)
