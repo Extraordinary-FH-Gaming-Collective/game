@@ -36,7 +36,7 @@ class Character:
         self.animationCount = 0
         self.state = LookingUp(self)
 
-    def walk(self): 
+    def walk(self):
         if self.animationCount < 2:
             self.animationCount += 1
         else:
