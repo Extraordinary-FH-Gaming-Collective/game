@@ -3,6 +3,7 @@ import os
 
 dir_assets_cars = os.path.dirname("assets/cars/")
 
+
 class Sprite:
     def __init__(self):
         self.image = None
@@ -16,13 +17,14 @@ class Sprite:
     def render(self, screen):
         screen.blit(self.image, (self.position_x, self.position_y))
 
+
 class SmallCar(Sprite):
     def __init__(self):
         self.image = pygame.image.load(os.path.join(dir_assets_cars, "car.png"))
         self.position_y = 620
         self.position_x = 200
         self.row = 1
-    
+
     def update(self):
         self.position_x += 3
 
