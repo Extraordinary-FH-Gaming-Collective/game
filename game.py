@@ -1,6 +1,7 @@
 import pygame
 from settings import *
 from character import Character
+from sprites import SmallCar
 
 # Initialisierung
 pygame.init()
@@ -14,6 +15,7 @@ running = True
 
 # Create a Character
 player = Character()
+dummyCar = SmallCar()
 
 
 while running:
@@ -47,7 +49,11 @@ while running:
     # Render
     screen.blit(BACKGROUND_IMAGE, (0, 0))
 
+    dummyCar.render(screen)
+
     player.render(screen)
+
+    dummyCar.update()
 
     # Display
     pygame.display.flip()
