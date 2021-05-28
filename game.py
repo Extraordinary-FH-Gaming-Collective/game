@@ -1,6 +1,7 @@
 import pygame
 from settings import *
 from character import Character
+from sprites import SmallCar
 
 # Initialisierung
 pygame.init()
@@ -14,6 +15,7 @@ running = True
 
 # Create a Character
 player = Character()
+dummyCar = SmallCar()
 
 
 while running:
@@ -41,13 +43,13 @@ while running:
             if event.key == pygame.K_LEFT:
                 player.move_left()
 
-    # Update
-    # Should be done right
-
-    # Render
+    # Render / Needs refactoring
     screen.blit(BACKGROUND_IMAGE, (0, 0))
-
+    dummyCar.render(screen)
     player.render(screen)
+
+    # Update / Needs refactoring
+    dummyCar.update()
 
     # Display
     pygame.display.flip()
