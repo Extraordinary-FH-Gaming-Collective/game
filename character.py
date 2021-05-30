@@ -1,5 +1,7 @@
 import pygame
 import os
+from settings import SCREEN_WIDTH
+
 
 # Load Images
 player_image_dict = {}
@@ -35,6 +37,7 @@ class Character:
         self.row = 0
         self.animationCount = 0
         self.state = LookingUp(self)
+        self.wrapper = self.image.get_rect()
 
     def walk(self):
         if self.animationCount < 2:
@@ -117,7 +120,8 @@ class LookingRight(CharacterState):
     def __init__(self, character: Character):
         character.walk()
         character.image = player_image_dict["standing_right"][character.animationCount]
-        character.position_x += character.step_size
+        if character.position_x < (SCREEN_WIDTH - character.wrapper.w):
+            character.position_x += character.step_size
 
     def look_up(self, character: Character):
         character.state = LookingUp(character)
@@ -136,7 +140,8 @@ class LookingLeft(CharacterState):
     def __init__(self, character: Character):
         character.walk()
         character.image = player_image_dict["standing_left"][character.animationCount]
-        character.position_x -= character.step_size
+        if character.position_x > 0:
+            character.position_x -= character.step_size
 
     def look_up(self, character: Character):
         character.state = LookingUp(character)
