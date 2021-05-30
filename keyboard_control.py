@@ -1,5 +1,6 @@
 from character_commands import ICommandCharacter
 
+
 # Invoker for Character Movement
 class KeyboardControl:
     def __init__(self):
