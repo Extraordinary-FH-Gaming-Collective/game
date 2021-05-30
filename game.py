@@ -30,7 +30,6 @@ dummyCar = SmallCar()
 keyboard_control = KeyboardControl()
 
 # Map Keys to Keyboard Control
-
 key_map = {
     pygame.K_UP: keyboard_control.press_arrowkey_up,
     pygame.K_DOWN: keyboard_control.press_arrowkey_down,
@@ -55,7 +54,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        # Listen for Keyboard Events
+        # Listen for Keyboard Events and execute mapped Keyboard Control
         if event.type == pygame.KEYDOWN:
             if event.key in key_map:
                 key_map[event.key]()

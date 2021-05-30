@@ -1,5 +1,7 @@
 from character import Character
 
+# Commands for Character Movement
+
 
 class ICommandCharacter:
     def __init__(self, character: Character):
