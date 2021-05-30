@@ -9,7 +9,7 @@ fence_bottom_image = pygame.image.load("assets/boundaries/fence_bottom.png")
 class FenceTop:
     def __init__(self):
         self.image = fence_top_image
-        self.position_y = 200
+        self.position_y = 215
 
     def render(self, screen):
         screen.blit(self.image, (0, 0))

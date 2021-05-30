@@ -36,9 +36,9 @@ fence_bottom = FenceBottom()
 class Character:
     def __init__(self):
         self.image = None
-        self.position_y = 687
+        self.position_y = 715
         self.position_x = 580
-        self.step_size = 42
+        self.step_size = 45
         self.row = 0
         self.animationCount = 0
         self.state = LookingUp(self)
