@@ -35,6 +35,8 @@ class Character:
         self.row = 0
         self.animationCount = 0
         self.state = LookingUp(self)
+        self.leben = 3
+        self.herzImage = pygame.image.load(os.path.join(dir_assets_player, "heart.png"))
 
     def walk(self):
         if self.animationCount < 2:
@@ -56,6 +58,19 @@ class Character:
 
     def render(self, screen):
         screen.blit(self.image, (self.position_x, self.position_y))
+        self.herzen(screen)
+
+    def herzen(self, screen):
+        if self.leben == 3:
+            screen.blit(self.herzImage, (507, 15))
+            screen.blit(self.herzImage, (636, 15))
+            screen.blit(self.herzImage, (765, 15))
+        if self.leben == 2:
+            screen.blit(self.herzImage, (507, 15))
+            screen.blit(self.herzImage, (636, 15))
+        if self.leben == 1:
+            screen.blit(self.herzImage, (507, 15))
+
 
 
 class CharacterState:
