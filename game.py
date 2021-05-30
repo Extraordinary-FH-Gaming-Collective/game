@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from character import Character
 from sprites import SmallCar
+from boundaries import FenceBottom, FenceTop
 
 # Initialisierung
 pygame.init()
@@ -16,6 +17,8 @@ running = True
 # Create a Character
 player = Character()
 dummyCar = SmallCar()
+fence_top = FenceTop()
+fence_bottom = FenceBottom()
 
 
 while running:
@@ -46,7 +49,9 @@ while running:
     # Render / Needs refactoring
     screen.blit(BACKGROUND_IMAGE, (0, 0))
     dummyCar.render(screen)
+    fence_top.render(screen)
     player.render(screen)
+    fence_bottom.render(screen)
 
     # Update / Needs refactoring
     dummyCar.update()
