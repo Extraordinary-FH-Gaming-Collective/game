@@ -1,7 +1,7 @@
 import pygame
 import os
 from settings import SCREEN_WIDTH
-from boundaries import FenceBottom, FenceTop
+from fence import FenceBottom, FenceTop
 
 
 # Load Images

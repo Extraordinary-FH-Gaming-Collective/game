@@ -2,7 +2,7 @@ import pygame
 from settings import *
 from character import Character
 from sprites import SmallCar
-from boundaries import FenceBottom, FenceTop
+from fence import FenceBottom, FenceTop
 from keyboard_control import KeyboardControl
 from character_commands import (
     MoveDownCommand,
