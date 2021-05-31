@@ -38,7 +38,7 @@ class Character:
         self.image = None
         self.position_y = 715
         self.position_x = 580
-        self.step_size = 45
+        self.step_size = CHARACTER_STEP_SIZE
         self.row = 0
         self.animationCount = 0
         self.state = LookingUp(self)

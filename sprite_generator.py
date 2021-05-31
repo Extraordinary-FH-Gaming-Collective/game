@@ -1,4 +1,5 @@
 from support import Image
+from lanes import Lanes
 from support import *
 from sprites import (
     FireTruck,
@@ -22,11 +23,15 @@ class SpriteGenerator:
         pass
 
     def generate(self):
-        #  self.generateLanes()
+        # self.generateLanes()
         self.generateCars()
         #  self.generateTrains()
+        self.fillLanes()
 
         return inaktiv_sprites
+
+    def generateLanes(self):
+        lanes = Lanes().generate()
 
     def generateCars(self):
         while to_create["firetruck"] > 0:
@@ -44,3 +49,6 @@ class SpriteGenerator:
         while to_create["small"] > 0:
             inaktiv_sprites.append(SmallCar())
             to_create["small"] -= 1
+
+    def fillLanes(self):
+        pass
