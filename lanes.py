@@ -79,6 +79,5 @@ class Lane:
     def outOfView(self, sprite: Sprite):
         return settings.SCREEN_WIDTH < sprite.position_x
 
-    def calculateYPosition(self, row: int):
-        # TODO: Calculate correctly
-        return settings.SCREEN_HEIGHT - (row * settings.CHARACTER_STEP_SIZE) - settings.MAP_BOTTOM_PADDING - 50  
+    def calculateYPosition(self, row: int):  # TODO: Calculate correctly
+        return settings.SCREEN_HEIGHT - (row * settings.CHARACTER_STEP_SIZE) - settings.MAP_BOTTOM_PADDING - 50

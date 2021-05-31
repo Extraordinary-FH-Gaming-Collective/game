@@ -27,7 +27,6 @@ player = Character()
 fence_top = FenceTop()
 fence_bottom = FenceBottom()
 
-
 # Create Control for Keyboard Events
 keyboard_control = KeyboardControl()
 
