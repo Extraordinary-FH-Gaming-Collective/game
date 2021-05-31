@@ -1,28 +1,30 @@
 import pygame
 import os
+from support import Image
 
 # Load Images
 player_image_dict = {}
-dir_assets_player = os.path.dirname("assets/player/")
+dir_assets_player = "assets/player/"
+
 player_image_dict["standing_up"] = (
-    pygame.image.load(os.path.join(dir_assets_player, "standing_up.png")),
-    pygame.image.load(os.path.join(dir_assets_player, "walking_up1.png")),
-    pygame.image.load(os.path.join(dir_assets_player, "walking_up2.png")),
+    Image(dir_assets_player, 'standing_up.png').get(),
+    Image(dir_assets_player, 'walking_up1.png').get(),
+    Image(dir_assets_player, 'walking_up2.png').get(),
 )
 player_image_dict["standing_down"] = (
-    pygame.image.load(os.path.join(dir_assets_player, "standing_down.png")),
-    pygame.image.load(os.path.join(dir_assets_player, "walking_down1.png")),
-    pygame.image.load(os.path.join(dir_assets_player, "walking_down2.png")),
+    Image(dir_assets_player, 'standing_down.png').get(),
+    Image(dir_assets_player, 'walking_down1.png').get(),
+    Image(dir_assets_player, 'walking_down2.png').get(),
 )
 player_image_dict["standing_right"] = (
-    pygame.image.load(os.path.join(dir_assets_player, "standing_right.png")),
-    pygame.image.load(os.path.join(dir_assets_player, "walking_right1.png")),
-    pygame.image.load(os.path.join(dir_assets_player, "walking_right2.png")),
+    Image(dir_assets_player, 'standing_right.png').get(),
+    Image(dir_assets_player, 'walking_right1.png').get(),
+    Image(dir_assets_player, 'walking_right2.png').get(),
 )
 player_image_dict["standing_left"] = (
-    pygame.image.load(os.path.join(dir_assets_player, "standing_left.png")),
-    pygame.image.load(os.path.join(dir_assets_player, "walking_left1.png")),
-    pygame.image.load(os.path.join(dir_assets_player, "walking_left2.png")),
+    Image(dir_assets_player, 'standing_left.png').get(),
+    Image(dir_assets_player, 'walking_left1.png').get(),
+    Image(dir_assets_player, 'walking_left2.png').get(),
 )
 
 

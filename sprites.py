@@ -1,8 +1,6 @@
 import pygame
 import os
-
-dir_assets_cars = os.path.dirname("assets/cars/")
-
+from support import Image
 
 class Sprite:
     def __init__(self):
@@ -20,7 +18,7 @@ class Sprite:
 
 class SmallCar(Sprite):
     def __init__(self):
-        self.image = pygame.image.load(os.path.join(dir_assets_cars, "car.png"))
+        self.image = Image('assets/cars/', 'car.png').get()
         self.position_y = 620
         self.position_x = 200
         self.row = 1
