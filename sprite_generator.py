@@ -1,5 +1,4 @@
 from lanes import Lanes
-from support import *
 import random
 from sprites import (
     FireTruck,
