@@ -1,6 +1,7 @@
 from support import Image
 from settings import *
 
+
 # Load Images
 player_image_dict = {}
 dir_assets_player = "assets/player/"
@@ -27,15 +28,20 @@ player_image_dict["standing_left"] = (
 )
 
 
+fence_top = FenceTop()
+fence_bottom = FenceBottom()
+
+
 class Character:
     def __init__(self):
         self.image = None
-        self.position_y = 645
+        self.position_y = 715
         self.position_x = 580
-        self.step_size = 42
+        self.step_size = 45
         self.row = 0
         self.animationCount = 0
         self.state = LookingUp(self)
+        self.wrapper = self.image.get_rect()
 
     def walk(self):
         if self.animationCount < 2:
@@ -78,7 +84,8 @@ class LookingUp(CharacterState):
     def __init__(self, character: Character):
         character.walk()  # TODO: Maybe there is a better solution?
         character.image = player_image_dict["standing_up"][character.animationCount]
-        character.position_y -= character.step_size
+        if character.position_y > fence_top.position_y:
+            character.position_y -= character.step_size
         character.row += 1
 
     def look_up(self, character: Character):
@@ -98,7 +105,8 @@ class LookingDown(CharacterState):
     def __init__(self, character: Character):
         character.walk()
         character.image = player_image_dict["standing_down"][character.animationCount]
-        character.position_y += character.step_size
+        if character.position_y < fence_bottom.position_y:
+            character.position_y += character.step_size
         character.row -= 1
 
     def look_up(self, character: Character):
@@ -118,7 +126,8 @@ class LookingRight(CharacterState):
     def __init__(self, character: Character):
         character.walk()
         character.image = player_image_dict["standing_right"][character.animationCount]
-        character.position_x += character.step_size
+        if character.position_x < (SCREEN_WIDTH - character.wrapper.w):
+            character.position_x += character.step_size
 
     def look_up(self, character: Character):
         character.state = LookingUp(character)
@@ -137,7 +146,8 @@ class LookingLeft(CharacterState):
     def __init__(self, character: Character):
         character.walk()
         character.image = player_image_dict["standing_left"][character.animationCount]
-        character.position_x -= character.step_size
+        if character.position_x > 0:
+            character.position_x -= character.step_size
 
     def look_up(self, character: Character):
         character.state = LookingUp(character)
