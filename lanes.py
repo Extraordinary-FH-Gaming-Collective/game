@@ -1,3 +1,4 @@
+from character import Character
 import pygame
 import settings
 import random
@@ -23,6 +24,10 @@ class Lanes:
     def render(self, screen):
         for lane in self.lanes:
             lane.render(screen)
+
+    def collision(self, character: Character):
+        for lane in self.lanes:
+            lane.collision(character)
 
     def get(self):
         return self.lanes
@@ -51,6 +56,10 @@ class Lane:
     def render(self, screen):
         for sprite in self.sprites:
             sprite.render(screen)
+
+    def collision(self, character: Character):
+        pass
+        #  CHECK HERE FOR COLLISIONS. We need to return the result somehow. 
 
     def firstPlacement(self, sprites: list):
         position_x = 0
