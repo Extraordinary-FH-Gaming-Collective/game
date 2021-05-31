@@ -1,5 +1,4 @@
 from support import Image
-import random
 
 dir_car_assets = "assets/cars/"
 speed = 12
@@ -36,7 +35,7 @@ class SmallCar(Sprite):
     def __init__(self):
         super().__init__()
         self.image = sprite_dict["small"]
-        
+
 
 class EstateCar(Sprite):
     def __init__(self):

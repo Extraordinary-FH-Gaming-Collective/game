@@ -1,4 +1,3 @@
-from support import Image
 from lanes import Lanes
 from support import *
 import random
@@ -16,6 +15,7 @@ to_create["firetruck"] = 10
 to_create["estate"] = 20
 to_create["truck"] = 15
 to_create["small"] = 20
+
 
 class SpriteGenerator:
     def __init__(self):
@@ -51,7 +51,7 @@ class SpriteGenerator:
             to_create["small"] -= 1
 
     def shuffle(self):
-        inaktive_sprites = random.shuffle(inactive_sprites)
+        random.shuffle(inactive_sprites)
 
     def fillLanes(self):
         for lane in self.lanes.get():

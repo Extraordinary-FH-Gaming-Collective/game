@@ -63,7 +63,7 @@ while running:
 
     # Update / Needs refactoring
     lanes.update()
-    lanes.collision(player) # This can't work as it is, as we need to return a result in case something did collide. 
+    lanes.collision(player)  # This can't work as it is, as we need to return a result in case something did collide.
 
     # Render / Needs refactoring
     screen.blit(BACKGROUND_IMAGE, (0, 0))

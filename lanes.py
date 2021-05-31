@@ -1,8 +1,8 @@
 from character import Character
-import pygame
 import settings
 import random
 from sprites import Sprite
+
 
 class Lanes:
     def __init__(self):
@@ -13,7 +13,7 @@ class Lanes:
         self.lanes.append(Lane(4))
         self.lanes.append(Lane(3))
         self.lanes.append(Lane(2))
-        self.lanes.append(Lane(1))   
+        self.lanes.append(Lane(1))
 
         return self
 
@@ -32,6 +32,7 @@ class Lanes:
     def get(self):
         return self.lanes
 
+
 class Lane:
     def __init__(self, row: int, empty: bool = False):
         self.sprites = []
@@ -40,12 +41,12 @@ class Lane:
         self.position_y = self.calculateYPosition(row)
         self.firstSprite: Sprite
         self.lastSprite: Sprite
-    
+
     def update(self):
         for sprite in self.sprites:
             sprite.update()
 
-            # check if the first sprite is out of view. 
+            # check if the first sprite is out of view.
             # If it is, remove it from the sprite and make the next to the first sprite
             # move this sprite back as an inaktive sprite
             if self.outOfView(sprite):
@@ -59,7 +60,7 @@ class Lane:
 
     def collision(self, character: Character):
         pass
-        #  CHECK HERE FOR COLLISIONS. We need to return the result somehow. 
+        #  CHECK HERE FOR COLLISIONS. We need to return the result somehow.
 
     def firstPlacement(self, sprites: list):
         position_x = 0
@@ -79,4 +80,5 @@ class Lane:
         return settings.SCREEN_WIDTH < sprite.position_x
 
     def calculateYPosition(self, row: int):
-        return settings.SCREEN_HEIGHT - (row * settings.CHARACTER_STEP_SIZE) - settings.MAP_BOTTOM_PADDING - 50 # TODO: Calculate correctly
+        # TODO: Calculate correctly
+        return settings.SCREEN_HEIGHT - (row * settings.CHARACTER_STEP_SIZE) - settings.MAP_BOTTOM_PADDING - 50  
