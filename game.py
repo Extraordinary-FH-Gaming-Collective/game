@@ -1,9 +1,9 @@
 import pygame
 from settings import *
 from character import Character
-from sprites import SmallCar
 from fence import FenceBottom, FenceTop
 from keyboard_control import KeyboardControl
+from sprite_generator import SpriteGenerator
 from character_commands import (
     MoveDownCommand,
     MoveLeftCommand,
@@ -24,7 +24,7 @@ running = True
 # Create a Character
 
 player = Character()
-dummyCar = SmallCar()
+sprites = SpriteGenerator().generate()
 fence_top = FenceTop()
 fence_bottom = FenceBottom()
 
@@ -62,15 +62,17 @@ while running:
             if event.key in key_map:
                 key_map[event.key]()
 
+    # Update / Needs refactoring
+    for sprite in sprites:
+        sprite.update()
+
     # Render / Needs refactoring
     screen.blit(BACKGROUND_IMAGE, (0, 0))
-    dummyCar.render(screen)
     fence_top.render(screen)
     player.render(screen)
     fence_bottom.render(screen)
-
-    # Update / Needs refactoring
-    dummyCar.update()
+    for sprite in sprites:
+        sprite.render(screen)
 
     # Display
     pygame.display.flip()
