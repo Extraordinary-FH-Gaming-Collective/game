@@ -1,6 +1,5 @@
-import pygame
-import os
 from support import Image
+
 
 class Sprite:
     def __init__(self):

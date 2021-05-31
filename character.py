@@ -1,5 +1,3 @@
-import pygame
-import os
 from support import Image
 
 # Load Images
