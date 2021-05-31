@@ -1,4 +1,5 @@
 from support import Image
+from settings import *
 
 # Load Images
 player_image_dict = {}
