@@ -22,9 +22,8 @@ clock = pygame.time.Clock()
 running = True
 
 # Create a Character
-
+lanes = SpriteGenerator().generate()
 player = Character()
-sprites = SpriteGenerator().generate()
 fence_top = FenceTop()
 fence_bottom = FenceBottom()
 
@@ -63,16 +62,15 @@ while running:
                 key_map[event.key]()
 
     # Update / Needs refactoring
-    for sprite in sprites:
-        sprite.update()
+    lanes.update()
 
     # Render / Needs refactoring
     screen.blit(BACKGROUND_IMAGE, (0, 0))
     fence_top.render(screen)
     player.render(screen)
     fence_bottom.render(screen)
-    for sprite in sprites:
-        sprite.render(screen)
+
+    lanes.render(screen)
 
     # Display
     pygame.display.flip()
