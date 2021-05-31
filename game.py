@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from character import Character
 from sprites import SmallCar
+from fence import FenceBottom, FenceTop
 from keyboard_control import KeyboardControl
 from character_commands import (
     MoveDownCommand,
@@ -24,6 +25,8 @@ running = True
 
 player = Character()
 dummyCar = SmallCar()
+fence_top = FenceTop()
+fence_bottom = FenceBottom()
 
 
 # Create Control for Keyboard Events
@@ -62,7 +65,9 @@ while running:
     # Render / Needs refactoring
     screen.blit(BACKGROUND_IMAGE, (0, 0))
     dummyCar.render(screen)
+    fence_top.render(screen)
     player.render(screen)
+    fence_bottom.render(screen)
 
     # Update / Needs refactoring
     dummyCar.update()
