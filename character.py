@@ -1,11 +1,13 @@
 from support import Image
 from settings import *
 from fence import FenceBottom, FenceTop
+import os
 
 
 # Load Images
 player_image_dict = {}
 dir_assets_player = "assets/player/"
+dir_assets_other = "assets/"
 
 player_image_dict["standing_up"] = (
     Image(dir_assets_player, 'standing_up.png').get(),
@@ -42,6 +44,8 @@ class Character:
         self.row = 0
         self.animationCount = 0
         self.state = LookingUp(self)
+        self.leben = 3
+        self.herzImage = pygame.image.load(os.path.join(dir_assets_other, "pixelherz64_56.png"))
         self.wrapper = self.image.get_rect()
 
     def walk(self):
@@ -64,6 +68,18 @@ class Character:
 
     def render(self, screen):
         screen.blit(self.image, (self.position_x, self.position_y))
+        self.herzen(screen)
+
+    def herzen(self, screen):
+        if self.leben == 3:
+            screen.blit(self.herzImage, (1088, 15))
+            screen.blit(self.herzImage, (1152, 15))
+            screen.blit(self.herzImage, (1215, 15))
+        if self.leben == 2:
+            screen.blit(self.herzImage, (1088, 15))
+            screen.blit(self.herzImage, (1152, 15))
+        if self.leben == 1:
+            screen.blit(self.herzImage, (1088, 15))
 
 
 class CharacterState:
