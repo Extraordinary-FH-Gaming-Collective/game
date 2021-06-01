@@ -61,7 +61,7 @@ keyboard_control.assign_arrowkey_left(MoveLeftCommand(player))
             player.leben -=1
         if abs(playerRectangle.top - carRectangle.bottom) < collision_tolerance:
             player.leben -=1
-        if abs(playerRectangle.bottom - carRectangle.top) < collision_tolerance:
+        if abs(playerRectangle.bottom - carRectangle.top) < collision_tolerance: 
             player.leben -=1"""
 while running:
     # Game Loop
