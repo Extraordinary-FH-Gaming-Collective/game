@@ -1,9 +1,9 @@
 import pygame
 from settings import *
 from character import Character
-from sprites import SmallCar
 from fence import FenceBottom, FenceTop
 from keyboard_control import KeyboardControl
+from sprite_generator import SpriteGenerator
 from character_commands import (
     MoveDownCommand,
     MoveLeftCommand,
@@ -22,12 +22,10 @@ clock = pygame.time.Clock()
 running = True
 
 # Create a Character
-
+lanes = SpriteGenerator().generate()
 player = Character()
-dummyCar = SmallCar()
 fence_top = FenceTop()
 fence_bottom = FenceBottom()
-
 
 # Create Control for Keyboard Events
 keyboard_control = KeyboardControl()
@@ -81,16 +79,18 @@ while running:
             if event.key in key_map:
                 key_map[event.key]()
 
+    # Update / Needs refactoring
+    lanes.update()
+    lanes.collision(player)  # This can't work as it is, as we need to return a result in case something did collide.
+
     # Render / Needs refactoring
     screen.blit(BACKGROUND_IMAGE, (0, 0))
-    dummyCar.render(screen)
     fence_top.render(screen)
     player.render(screen)
     checkCollision()
     fence_bottom.render(screen)
 
-    # Update / Needs refactoring
-    dummyCar.update()
+    lanes.render(screen)
 
     # Display
     pygame.display.flip()
