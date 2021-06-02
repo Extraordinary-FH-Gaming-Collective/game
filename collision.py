@@ -1,12 +1,9 @@
-from character import Character
-
-
 class CollisionHandler:
     def __init__(self):
         pass
 
-    def check(self, sprites: list, chracter: Character):
-        for sprite in sprites:
+    def check(self, lane, chracter):
+        for sprite in lane.sprites:
             #  Check right here if the Sprite is colliding with the Character
             #  Something like
             #

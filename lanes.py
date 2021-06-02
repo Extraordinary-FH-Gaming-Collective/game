@@ -1,14 +1,14 @@
-from character import Character
 from collision import CollisionHandler
+from character import Character
+from sprites import Sprite
 import settings
 import random
-from sprites import Sprite
 
 
 class Lanes:
     def __init__(self):
         self.lanes = []
-        self.collisionHandler = CollisionHandler
+        self.collisionHandler = CollisionHandler()
 
     def generate(self):
         self.lanes.append(Lane(5))
@@ -27,12 +27,9 @@ class Lanes:
         for lane in self.lanes:
             lane.render(screen)
 
-    def isColliding(self, character: Character, collisionHandler: CollisionHandler):
+    def isColliding(self, character: Character):
         for lane in self.lanes:
-            if self.collisionHandler().check(lane.sprites, character):
-                return True
-
-        return False
+            self.collisionHandler.check(lane, character)
 
     def get(self):
         return self.lanes
