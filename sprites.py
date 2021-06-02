@@ -61,30 +61,36 @@ class FireTruck(Sprite):
         super().__init__()
         self.image = car_dict["firetruck"]
 
+
 class TrainSmallGreen(Sprite):
     def __init__(self):
         super().__init__()
         self.image = train_dict["green_small"]
+
 
 class TrainMediumGreen(Sprite):
     def __init__(self):
         super().__init__()
         self.image = train_dict["green_medium"]
 
+
 class TrainLargeGreen(Sprite):
     def __init__(self):
         super().__init__()
         self.image = train_dict["green_large"]
+
 
 class TrainSmallOrange(Sprite):
     def __init__(self):
         super().__init__()
         self.image = train_dict["orange_small"]
 
+
 class TrainMediumOrange(Sprite):
     def __init__(self):
         super().__init__()
-        self.image = train_dict["orange_medium"]
+        s
+        elf.image = train_dict["orange_medium"]
 
 class TrainLargeOrange(Sprite):
     def __init__(self):
