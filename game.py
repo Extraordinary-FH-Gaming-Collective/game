@@ -69,7 +69,7 @@ while running:
     screen.blit(BACKGROUND_IMAGE, (0, 0))
     fence_top.render(screen)
     player.render(screen)
-    
+
     fence_bottom.render(screen)
 
     lanes.render(screen)
