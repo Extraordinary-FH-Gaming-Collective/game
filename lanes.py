@@ -42,8 +42,11 @@ class Lane:
     def __init__(self, row: int, type: str):
         self.sprites = []
         self.type = type
-        self.spriteCount = random.randrange(5, 8)
-        self.speed = random.randrange(6, 12)
+        self.spriteCount = random.randrange(
+            settings.MINIMUM_CARS_PER_LANE if type == 'cars' else settings.MINIMUM_TRAINS_PER_LANE, 
+            settings.MAXIMUM_CARS_PER_LANE if type == 'cars' else settings.MAXIMUM_TRAINS_PER_LANE, 
+        )
+        self.speed = random.randrange(settings.SPRITE_MINIMUM_SPEED, settings.SPRITE_MAXIMUM_SPEED)
         self.position_y = self.calculateYPosition(row)
         self.firstSprite: Sprite
         self.lastSprite: Sprite
@@ -56,7 +59,7 @@ class Lane:
             # If it is, remove it from the sprite and make the next to the first sprite
             # move this sprite back as an inaktive sprite
             if self.outOfView(sprite):
-                sprite.position_x = -120
+                sprite.position_x = -230
 
             # After it has been removed, add a new sprite.
 
