@@ -89,8 +89,8 @@ class TrainSmallOrange(Sprite):
 class TrainMediumOrange(Sprite):
     def __init__(self):
         super().__init__()
-        s
-        elf.image = train_dict["orange_medium"]
+        self.image = train_dict["orange_medium"]
+
 
 class TrainLargeOrange(Sprite):
     def __init__(self):
