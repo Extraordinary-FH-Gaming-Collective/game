@@ -1,7 +1,6 @@
 import pygame
 from settings import *
 from character import Character
-from sprites import SmallCar
 from fence import FenceBottom, FenceTop
 from keyboard_control import KeyboardControl
 from sprite_generator import SpriteGenerator

@@ -1,4 +1,5 @@
 from character import Character
+from collision import CollisionHandler
 import settings
 import random
 from sprites import Sprite
@@ -7,6 +8,7 @@ from sprites import Sprite
 class Lanes:
     def __init__(self):
         self.lanes = []
+        self.collisionHandler = CollisionHandler
 
     def generate(self):
         self.lanes.append(Lane(5))
@@ -25,9 +27,9 @@ class Lanes:
         for lane in self.lanes:
             lane.render(screen)
 
-    def isColliding(self, character: Character):
+    def isColliding(self, character: Character, collisionHandler: CollisionHandler):
         for lane in self.lanes:
-            if lane.isColliding(character):
+            if self.collisionHandler().check(lane.sprites, character):
                 return True
 
         return False
@@ -60,10 +62,6 @@ class Lane:
     def render(self, screen):
         for sprite in self.sprites:
             sprite.render(screen)
-
-    def isColliding(self, character: Character):
-        pass
-        #  CHECK HERE FOR COLLISIONS. We need to return the result somehow.
 
     def firstPlacement(self, sprites: list):
         position_x = 0
