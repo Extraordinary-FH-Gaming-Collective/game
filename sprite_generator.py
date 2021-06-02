@@ -87,4 +87,13 @@ class SpriteGenerator:
 
     def fillLanes(self):
         for lane in self.lanes.get():
-            lane.firstPlacement(inactive_cars)
+            if lane.type == 'cars':
+                sprites = inactive_cars
+            if lane.type == 'small_trains':
+                sprites = inactive_trains_small
+            if lane.type == 'medium_trains':
+                sprites = inactive_trains_medium
+            if lane.type == 'large_trains':
+                sprites = inactive_trains_large
+
+            lane.firstPlacement(sprites)

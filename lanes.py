@@ -11,11 +11,14 @@ class Lanes:
         self.collisionHandler = CollisionHandler()
 
     def generate(self):
-        self.lanes.append(Lane(5))
-        self.lanes.append(Lane(4))
-        self.lanes.append(Lane(3))
-        self.lanes.append(Lane(2))
-        self.lanes.append(Lane(1))
+        self.lanes.append(Lane(9, 'large_trains'))
+        self.lanes.append(Lane(8, 'medium_trains'))
+        self.lanes.append(Lane(7, 'small_trains'))
+        self.lanes.append(Lane(5, 'cars'))
+        self.lanes.append(Lane(4, 'cars'))
+        self.lanes.append(Lane(3, 'cars'))
+        self.lanes.append(Lane(2, 'cars'))
+        self.lanes.append(Lane(1, 'cars'))
 
         return self
 
@@ -36,10 +39,11 @@ class Lanes:
 
 
 class Lane:
-    def __init__(self, row: int, empty: bool = False):
+    def __init__(self, row: int, type: str):
         self.sprites = []
-        self.spriteCount = 0 if empty else random.randrange(5, 8)
-        self.speed = 0 if empty else random.randrange(6, 12)
+        self.type = type
+        self.spriteCount = random.randrange(5, 8)
+        self.speed = random.randrange(6, 12)
         self.position_y = self.calculateYPosition(row)
         self.firstSprite: Sprite
         self.lastSprite: Sprite
