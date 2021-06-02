@@ -1,6 +1,7 @@
 import pygame
 from settings import *
 from character import Character
+from sprites import SmallCar
 from fence import FenceBottom, FenceTop
 from keyboard_control import KeyboardControl
 from sprite_generator import SpriteGenerator
@@ -44,26 +45,6 @@ keyboard_control.assign_arrowkey_down(MoveDownCommand(player))
 keyboard_control.assign_arrowkey_right(MoveRightCommand(player))
 keyboard_control.assign_arrowkey_left(MoveLeftCommand(player))
 
-# Kollisionsabfrage, draw.rect nur temp
-#  def checkCollision():
-#     collision_tolerance = 3
-
-#     playerRectangle = pygame.Rect(player.position_x, player.position_y, 21, 35)
-#     pygame.draw.rect(screen, (255,255,0), playerRectangle, 3)
-
-#     carRectangle = pygame.Rect(dummyCar.position_x, dummyCar.position_y, 62, 51)
-#     pygame.draw.rect(screen, (255,255,0), carRectangle, 3)
-
-#     if playerRectangle.colliderect(carRectangle):
-#         if abs(playerRectangle.left - carRectangle.right) < collision_tolerance:
-#             player.leben -=1
-#         if abs(playerRectangle.right - carRectangle.left) < collision_tolerance:
-#             player.leben -=1
-#         if abs(playerRectangle.top - carRectangle.bottom) < collision_tolerance:
-#             player.leben -=1
-#         if abs(playerRectangle.bottom - carRectangle.top) < collision_tolerance:
-#             player.leben -=1
-
 while running:
     # Game Loop
     clock.tick(SCREEN_FPS)
@@ -81,15 +62,15 @@ while running:
 
     # Update / Needs refactoring
     lanes.update()
-    lanes.collision(
-        player
-    )  # This can't work as it is, as we need to return a result in case something did collide.
+    if lanes.isColliding(player):
+        # We could doe something in case we want to.
+        pass
 
     # Render / Needs refactoring
     screen.blit(BACKGROUND_IMAGE, (0, 0))
     fence_top.render(screen)
     player.render(screen)
-    # checkCollision()
+    
     fence_bottom.render(screen)
 
     lanes.render(screen)
