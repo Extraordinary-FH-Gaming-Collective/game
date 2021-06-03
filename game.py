@@ -3,6 +3,8 @@ from settings import *
 from character import Character
 from keyboard_control import KeyboardControl
 from sprite_generator import SpriteGenerator
+from endzone import Endzone
+from obstacles import Obstacle
 from fence import FenceBottom, FenceTop
 from character_commands import (
     MoveDownCommand,
@@ -22,10 +24,38 @@ clock = pygame.time.Clock()
 running = True
 
 # Create a Character
-lanes = SpriteGenerator().generate()
 player = Character()
+
+# Create Lanes including moving Sprites
+lanes = SpriteGenerator().generate()
+
+# Create Fences
 fence_top = FenceTop()
 fence_bottom = FenceBottom()
+
+# Create Obstacles
+
+obs1 = Obstacle(0, 230)
+obs2 = Obstacle(283, 140)
+obs3 = Obstacle(490, 120)
+obs4 = Obstacle(675, 135)
+obs5 = Obstacle(875, 110)
+obs6 = Obstacle(1050, 600)
+
+obstacle_group = pygame.sprite.Group()
+obstacle_group.add(obs1, obs2, obs3, obs4, obs5, obs6)
+
+
+# Create Endzones
+endzone1 = Endzone(243, 165)
+endzone2 = Endzone(450, 165)
+endzone3 = Endzone(630, 165)
+endzone4 = Endzone(830, 165)
+endzone5 = Endzone(1010, 165)
+
+endzone_group = pygame.sprite.Group()
+endzone_group.add(endzone1, endzone2, endzone3, endzone4, endzone5)
+
 
 # Create Control for Keyboard Events
 keyboard_control = KeyboardControl()
@@ -66,13 +96,35 @@ while running:
         pass
 
     # Render / Needs refactoring
-    screen.blit(BACKGROUND_IMAGE, (0, 0))
-    fence_top.render(screen)
-    player.render(screen)
 
+    screen.blit(BACKGROUND_IMAGE, (0, 0))
+    endzone_group.draw(screen)
+    fence_top.render(screen)
+    lanes.render(screen)
+    player.render(screen)
     fence_bottom.render(screen)
 
-    lanes.render(screen)
+    # Update Rect Positions
+    player.update()
+    endzone_group.update()
+    obstacle_group.update()
+
+    # Collision Detection Player/Obstacles
+    obstacle_reached = pygame.sprite.spritecollideany(player, obstacle_group)
+    if obstacle_reached:
+        player.bounce_back()
+
+    # Collision Detection for Player/Endzones
+    endzone_reached = pygame.sprite.spritecollideany(player, endzone_group)
+
+    if endzone_reached:
+        player.cheer()
+        endzone_reached.reached(player)
+        player.back_to_start()
+        # TBD:
+        # Counter += 1
+        # Wenn der Counter auf 5 steht:
+        #   Winning Screen anzeigen mit Score z.B.
 
     # Display
     pygame.display.flip()
