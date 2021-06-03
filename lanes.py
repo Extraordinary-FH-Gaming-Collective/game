@@ -1,19 +1,24 @@
+from collision import CollisionHandler
 from character import Character
+from sprites import Sprite
 import settings
 import random
-from sprites import Sprite
 
 
 class Lanes:
     def __init__(self):
         self.lanes = []
+        self.collisionHandler = CollisionHandler()
 
     def generate(self):
-        self.lanes.append(Lane(5))
-        self.lanes.append(Lane(4))
-        self.lanes.append(Lane(3))
-        self.lanes.append(Lane(2))
-        self.lanes.append(Lane(1))
+        self.lanes.append(Lane(9, 'large_trains'))
+        self.lanes.append(Lane(8, 'medium_trains'))
+        self.lanes.append(Lane(7, 'small_trains'))
+        self.lanes.append(Lane(5, 'cars'))
+        self.lanes.append(Lane(4, 'cars'))
+        self.lanes.append(Lane(3, 'cars'))
+        self.lanes.append(Lane(2, 'cars'))
+        self.lanes.append(Lane(1, 'cars'))
 
         return self
 
@@ -25,19 +30,23 @@ class Lanes:
         for lane in self.lanes:
             lane.render(screen)
 
-    def collision(self, character: Character):
+    def isColliding(self, character: Character):
         for lane in self.lanes:
-            lane.collision(character)
+            self.collisionHandler.check(lane, character)
 
     def get(self):
         return self.lanes
 
 
 class Lane:
-    def __init__(self, row: int, empty: bool = False):
+    def __init__(self, row: int, type: str):
         self.sprites = []
-        self.spriteCount = 0 if empty else random.randrange(5, 8)
-        self.speed = 0 if empty else random.randrange(6, 12)
+        self.type = type
+        self.spriteCount = random.randrange(
+            settings.MINIMUM_CARS_PER_LANE if type == 'cars' else settings.MINIMUM_TRAINS_PER_LANE,
+            settings.MAXIMUM_CARS_PER_LANE if type == 'cars' else settings.MAXIMUM_TRAINS_PER_LANE,
+        )
+        self.speed = random.randrange(settings.SPRITE_MINIMUM_SPEED, settings.SPRITE_MAXIMUM_SPEED)
         self.position_y = self.calculateYPosition(row)
         self.firstSprite: Sprite
         self.lastSprite: Sprite
@@ -50,17 +59,13 @@ class Lane:
             # If it is, remove it from the sprite and make the next to the first sprite
             # move this sprite back as an inaktive sprite
             if self.outOfView(sprite):
-                sprite.position_x = -120
+                sprite.position_x = -230
 
             # After it has been removed, add a new sprite.
 
     def render(self, screen):
         for sprite in self.sprites:
             sprite.render(screen)
-
-    def collision(self, character: Character):
-        pass
-        #  CHECK HERE FOR COLLISIONS. We need to return the result somehow.
 
     def firstPlacement(self, sprites: list):
         position_x = 0
