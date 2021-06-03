@@ -97,6 +97,10 @@ class Character(pygame.sprite.Sprite):
         self.rect.x = self.position_x
         self.rect.y = self.position_y
 
+    def back_to_start(self):
+        self.position_y = CHARACTER_START_POSITION_Y
+        self.position_x = CHARACTER_START_POSITION_X
+
 
 class CharacterState:
     def __init__(self, character: Character):
@@ -162,7 +166,7 @@ class LookingRight(CharacterState):
     def __init__(self, character: Character):
         character.walk()
         character.image = player_image_dict["standing_right"][character.animationCount]
-        if character.position_x < (BORDER_RIGHT - character.rect.w):
+        if (character.rect.x + character.rect.w) < BORDER_RIGHT:
             character.position_x += character.step_size
 
     def look_up(self, character: Character):
@@ -182,7 +186,7 @@ class LookingLeft(CharacterState):
     def __init__(self, character: Character):
         character.walk()
         character.image = player_image_dict["standing_left"][character.animationCount]
-        if character.position_x > (BORDER_LEFT):
+        if (character.rect.x - character.rect.w) > BORDER_LEFT:
             character.position_x -= character.step_size
 
     def look_up(self, character: Character):
