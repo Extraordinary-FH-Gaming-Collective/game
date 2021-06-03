@@ -17,10 +17,11 @@ class Fence:
 class FenceTop(Fence):
     def __init__(self):
         self.image = fence_top_image
-        self.position_y = 215
+        self.position_y = 185
+        self.position_x = 0
 
     def render(self, screen):
-        screen.blit(self.image, (0, 0))
+        screen.blit(self.image, (self.position_x, self.position_y))
 
 
 class FenceBottom(Fence):
