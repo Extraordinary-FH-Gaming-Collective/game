@@ -1,17 +1,37 @@
+import pygame
+
 class CollisionHandler:
     def __init__(self):
-        pass
+        self.hits = 0
+
     
     
     def check(self, lane, character):
         for sprite in lane.sprites:
-            if (character.position_x < (sprite.position_x and character.position_x)):
-                if ((character.position_x and character.position_x.width) > character.position_x):
-                    if (character.position_y < (sprite.position_y and sprite.position_y.height)):
-                        if(character.position_y and character.position_y.height) > sprite.position_y:
-                            print("Treffer")
-          
-          
+            if lane.type == 'cars':
+                if character.position_x >= sprite.position_x:
+                    if character.position_x <= sprite.position_x+25:
+                        if character.position_y >= sprite.position_y:
+                            if character.position_y <= sprite.position_y +25:
+                                character.position_y = 715
+                                character.position_x = 580
+                                print(self.hits, 'Hits')
+                                self.hits += 1
+                                character.leben -=1
+                                if character.leben == 0:
+                                    pass
+                                #Game-Over-Overlay
+            #Zug-Lane, need refactoring
+            if lane.type != 'cars':
+                if character.position_x <= sprite.position_x:
+                    if character.position_x >= sprite.position_x+320:
+                        if character.position_y <= sprite.position_y:
+                           if character.position_y >= sprite.position_y+34:
+                                character.position_y = 715
+                                character.position_x = 580
+                                print('daneben')
+                                character.leben -=1
+
             # jetzt wird eine Kollision entdeckt, sobald es eine Überschneidung gibt -> für Car-Lanes
             # Return False setzen für -> Zug Lanes
            

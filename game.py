@@ -63,7 +63,7 @@ while running:
     lanes.update()
     if lanes.isColliding(player):
         # We could doe something in case we want to.
-        player.leben -= 1
+        pass
 
     # Render / Needs refactoring
     screen.blit(BACKGROUND_IMAGE, (0, 0))
