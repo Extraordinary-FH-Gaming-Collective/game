@@ -7,10 +7,19 @@ SCREEN_HEIGHT = 720
 SCREEN_FPS = 60
 BACKGROUND_IMAGE = pygame.image.load("assets/map_1280x720.png")
 
+
+# Borders of the walkable Area for the Character
+BORDER_TOP = 180  # Y Position of Top Border
+BORDER_BOTTOM = 675  # Y Position of Bottom Border
+BORDER_RIGHT = SCREEN_WIDTH  # X Position Right Border
+BORDER_LEFT = 22  # X Position of Left Border
+
 COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (255, 255, 255)
 
-CHARACTER_STEP_SIZE = 45
+CHARACTER_START_POSITION_X = 580
+CHARACTER_START_POSITION_Y = BORDER_BOTTOM
+CHARACTER_STEP_SIZE = 43
 
 MAP_BOTTOM_PADDING = 12
 
