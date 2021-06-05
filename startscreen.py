@@ -17,8 +17,10 @@ def text_drawer(text, font, color, surface, x, y):
     textrect.topleft = (x, y)
     surface.blit(textobj, textrect)
 
+
 # hier läuft später die Gameklasse drin
 def game():
+
     running = True
     while running:
         screen.blit(BACKGROUND_IMAGE, (0, 0))
@@ -34,6 +36,8 @@ def game():
 
 # hier wird die Anleitung generiert
 def introduction():
+
+
     running = True
     while running:
         screen.blit(START_BACKGROUND_IMAGE, (0, 0))
@@ -54,9 +58,13 @@ def introduction():
                     running = False
         pygame.display.update()
         mainClock.tick(SCREEN_FPS)
+
+
 mouse_click = False
 
 def startscreen():
+
+
     while True:
         # Ich denke das könnte man eleganter Lösen
         # Meine Versuche mit Screen_WIDTH/2 -Textlänge haben leider nicht geklappt
