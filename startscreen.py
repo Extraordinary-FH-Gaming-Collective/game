@@ -59,9 +59,9 @@ mouse_click = False
 def startscreen():
     while True:
         # Ich denke das könnte man eleganter Lösen
-        # Meine Versuche mit Screen_WIDTH/2 -Textlänge haben leider nicht geklappt        
+        # Meine Versuche mit Screen_WIDTH/2 -Textlänge haben leider nicht geklappt
         screen.blit(START_BACKGROUND_IMAGE, (0, 0))
-        text_drawer("Frogger City", header_font, (COLOR_BLACK), screen, 495, 80) 
+        text_drawer("Frogger City", header_font, (COLOR_BLACK), screen, 495, 80)
 
         mouse_x, mouse_y = pygame.mouse.get_pos()
 
