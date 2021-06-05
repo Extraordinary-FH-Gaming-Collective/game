@@ -6,8 +6,7 @@ mainClock = pygame.time.Clock()
 pygame.init()
 pygame.display.set_caption(GAME_NAME)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.font.init()
- 
+pygame.font.init() 
 menu_font = pygame.font.SysFont(None, 50)
 header_font = pygame.font.SysFont(None, 70)
 
@@ -63,7 +62,7 @@ def startscreen():
         text_drawer("Frogger City", header_font, (COLOR_BLACK), screen, 495, 80) # Ich denke das könnte man eleganter Lösen
                                                                                  # Meine Versuche mit Screen_WIDTH/2 -Textlänge haben leider nicht geklappt
         mouse_x, mouse_y = pygame.mouse.get_pos()
-        
+
         # Buttonzeichnung
         start_button = pygame.Rect(SCREEN_WIDTH/2-100, 210, 200, 50)
         introduction_button = pygame.Rect(SCREEN_WIDTH/2-100, 330, 200, 50)
