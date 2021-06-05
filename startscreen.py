@@ -64,9 +64,9 @@ def startscreen():
         mouse_x, mouse_y = pygame.mouse.get_pos()
 
         # Buttonzeichnung
-        start_button = pygame.Rect(SCREEN_WIDTH/2-100, 210, 200, 50)
-        introduction_button = pygame.Rect(SCREEN_WIDTH/2-100, 330, 200, 50)
-        game_exit_button = pygame.Rect(SCREEN_WIDTH/2-100, 470, 200, 50)
+        start_button = pygame.Rect(SCREEN_WIDTH / 2 - 100, 210, 200, 50)
+        introduction_button = pygame.Rect(SCREEN_WIDTH / 2 - 100, 330, 200, 50)
+        game_exit_button = pygame.Rect(SCREEN_WIDTH / 2 - 100, 470, 200, 50)
 
         # Mausclick-Abfragen
         if start_button.collidepoint((mouse_x, mouse_y)):
