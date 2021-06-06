@@ -35,6 +35,7 @@ def game():
         pygame.display.update()
         mainClock.tick(SCREEN_FPS)
 
+
 # hier wird die Anleitung generiert
 def introduction():
     running = True
