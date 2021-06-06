@@ -21,7 +21,7 @@ class CollisionHandler:
                                 if character.leben == 0:
                                     pass
                                 #Game-Over-Overlay
-            #Zug-Lane, need refactoring
+
             if lane.type != 'cars':
                 if character.position_x <= sprite.position_x:
                     if character.position_x >= sprite.position_x+320:
@@ -46,3 +46,4 @@ class CollisionHandler:
 
 
         return False
+      
