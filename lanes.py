@@ -79,9 +79,8 @@ class Lane:
             position_x += 180
 
     def add(self, sprite: Sprite, position_x: int):
-        sprite.position_y = self.position_y
-        sprite.position_x = -50 + position_x
         sprite.speed = self.speed
+        sprite.set(-50 + position_x, self.position_y)
         sprite.setDirection(self.leftToRight)
         self.sprites.append(sprite)
         self.lastSprite = sprite
