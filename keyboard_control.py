@@ -27,13 +27,16 @@ class KeyboardControl:
         self.assign_arrowkey_right(MoveRightCommand(game.player))
         self.assign_arrowkey_left(MoveLeftCommand(game.player))
 
-    def execute(self, events):
-        for event in events:
+    def execute(self):
+        for event in self.game.pygame.event.get():
             if event.type == self.game.pygame.QUIT:
-                self.game.quit()
+                self.quit()
 
             if event.type != self.game.pygame.KEYDOWN:
                 return  # Do nothing in case it's not a keydown
+
+            if event.key == self.game.pygame.K_ESCAPE:
+                self.game.mode = 'menu'
 
             if event.key in self.key_map:
                 self.key_map[event.key]()

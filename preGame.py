@@ -5,6 +5,7 @@ class PreGame:
     def __init__(self, game):
         self.game = game
         self.game.pygame.font.init()
+        self.mouse_click = False
 
         self.menu_font = self.game.pygame.font.SysFont(None, 50)
         self.header_font = self.game.pygame.font.SysFont(None, 70)
@@ -45,9 +46,10 @@ class PreGame:
             self.menu_font, (COLOR_BLACK), self.game.screen, 50, 500
         )
 
+        for event in self.game.pygame.event.get():
+            self.defaultExitOptions(event)
+            
     def menu(self):
-        mouse_click = False
-
         self.game.screen.blit(START_BACKGROUND_IMAGE, (0, 0))
         self.text_drawer(
             "Frogger City",
@@ -75,23 +77,35 @@ class PreGame:
 
         for event in self.game.pygame.event.get():
             if event.type == self.game.pygame.MOUSEBUTTONDOWN and event.button == 1:
-                mouse_click = True
+                self.mouse_click = True
+
+            self.defaultExitOptions(event)
 
         # Mausclick-Abfragen
-        if mouse_click and start_button.collidepoint((mouse_x, mouse_y)):
+        if self.mouse_click and start_button.collidepoint((mouse_x, mouse_y)):
             self.game.mode = 'game'
 
-        if mouse_click and introduction_button.collidepoint((mouse_x, mouse_y)):
+        if self.mouse_click and introduction_button.collidepoint((mouse_x, mouse_y)):
             self.game.mode = 'introduction'
 
-        if mouse_click and game_exit_button.collidepoint((mouse_x, mouse_y)):
+        if self.mouse_click and game_exit_button.collidepoint((mouse_x, mouse_y)):
             self.game.quit()
 
         # Eingabeüberprüfer
-        mouse_click = False
+        self.mouse_click = False
 
     def text_drawer(self, text, font, color, screen, x, y):
         textobj = font.render(text, 1, color)
         textrect = textobj.get_rect()
         textrect.topleft = (x, y)
         screen.blit(textobj, textrect)
+
+    def defaultExitOptions(self, event):
+        if event.type == self.game.pygame.QUIT:
+                self.game.quit()
+
+        if event.type != self.game.pygame.KEYDOWN:
+            return  # Do nothing in case it's not a keydown
+
+        if event.key == self.game.pygame.K_ESCAPE:
+            self.game.mode = 'menu'

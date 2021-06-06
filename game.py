@@ -46,7 +46,7 @@ class Game:
         self.preGame.menu()
 
     def game(self):
-        self.keyboard_control.execute(self.pygame.event.get())
+        self.keyboard_control.execute()
 
         self.lanes.update()
 
@@ -66,19 +66,9 @@ class Game:
 
     def beforeLoop(self):
         self.clock.tick(SCREEN_FPS)
-        self.implementExitOptioins()
 
     def afterLoop(self):
         self.pygame.display.flip()
-
-    def implementExitOptioins(self):
-        for event in self.pygame.event.get():
-            if event.type == self.pygame.QUIT:
-                self.quit()
-
-            if event.type == self.pygame.KEYDOWN:
-                if event.key == self.pygame.K_ESCAPE:
-                    self.mode = 'menu'
-
+    
     def quit(self):
         self.pygame.quit()
