@@ -48,7 +48,7 @@ class PreGame:
 
         for event in self.game.pygame.event.get():
             self.defaultExitOptions(event)
-            
+
     def menu(self):
         self.game.screen.blit(START_BACKGROUND_IMAGE, (0, 0))
         self.text_drawer(
@@ -102,7 +102,7 @@ class PreGame:
 
     def defaultExitOptions(self, event):
         if event.type == self.game.pygame.QUIT:
-                self.game.quit()
+            self.game.quit()
 
         if event.type != self.game.pygame.KEYDOWN:
             return  # Do nothing in case it's not a keydown

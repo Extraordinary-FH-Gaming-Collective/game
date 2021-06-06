@@ -69,6 +69,6 @@ class Game:
 
     def afterLoop(self):
         self.pygame.display.flip()
-    
+
     def quit(self):
         self.pygame.quit()
