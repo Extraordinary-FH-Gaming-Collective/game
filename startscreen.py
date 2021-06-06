@@ -10,6 +10,7 @@ pygame.font.init()
 menu_font = pygame.font.SysFont(None, 50)
 header_font = pygame.font.SysFont(None, 70)
 
+
 # Textgenerierer
 def text_drawer(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
@@ -36,8 +37,6 @@ def game():
 
 # hier wird die Anleitung generiert
 def introduction():
-
-
     running = True
     while running:
         screen.blit(START_BACKGROUND_IMAGE, (0, 0))
@@ -62,9 +61,8 @@ def introduction():
 
 mouse_click = False
 
+
 def startscreen():
-
-
     while True:
         # Ich denke das könnte man eleganter Lösen
         # Meine Versuche mit Screen_WIDTH/2 -Textlänge haben leider nicht geklappt
