@@ -21,7 +21,7 @@ class CollisionHandler:
                 if character.position_x <= sprite.position_x:
                     if character.position_x >= sprite.position_x + 320:
                         if character.position_y <= sprite.position_y:
-                           if character.position_y >= sprite.position_y + 34:
+                            if character.position_y >= sprite.position_y + 34:
                                 character.position_y = 715
                                 character.position_x = 580
                                 character.leben -= 1

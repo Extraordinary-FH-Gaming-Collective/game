@@ -33,7 +33,7 @@ class KeyboardControl:
                 self.game.quit()
 
             if event.type != self.game.pygame.KEYDOWN:
-                return #  Do nothing in case it's not a keydown
+                return  # Do nothing in case it's not a keydown
 
             if event.key in self.key_map:
                 self.key_map[event.key]()

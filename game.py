@@ -16,7 +16,7 @@ class Game:
         self.pygame.display.set_caption(GAME_NAME)
 
         self.preGame = PreGame(self)
-       
+
         self.clock = self.pygame.time.Clock()
         self.screen = self.pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
@@ -36,7 +36,7 @@ class Game:
             self.introduction()
         else:
             self.menu()
-    
+
         self.afterLoop()
 
     def introduction(self):
