@@ -17,6 +17,11 @@ from character_commands import (
 pygame.init()
 pygame.mixer.init()
 
+
+# background music
+pygame.mixer.music.load('sounds\Jim Hall - Elsewhere.mp3')
+pygame.mixer.Channel(0).play(pygame.mixer.Sound('sounds\Jim Hall - Elsewhere.mp3'))
+
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption(GAME_NAME)
 clock = pygame.time.Clock()
