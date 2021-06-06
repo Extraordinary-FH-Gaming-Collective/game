@@ -36,6 +36,14 @@ class Sprite:
     def set(self, position_x: int, position_y: int):
         self.position_x = position_x
         self.position_y = position_y
+    
+    def getWidth(self):
+        return self.image.get_rect().w
+
+    def getHeight(self):
+        return self.image.get_rect().h
+
+
 
 
 class SmallCar(Sprite):

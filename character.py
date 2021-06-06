@@ -56,7 +56,7 @@ class Character(pygame.sprite.Sprite):
 
     def walk(self):
         # plays a jumps-sound when moving
-        pygame.mixer.music.load('sounds\Jump.mp3')
+        pygame.mixer.music.load('sounds/Jump.mp3')
         pygame.mixer.music.play()
 
         if self.animationCount < 2:

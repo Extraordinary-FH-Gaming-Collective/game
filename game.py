@@ -19,8 +19,8 @@ pygame.mixer.init()
 
 
 # background music
-pygame.mixer.music.load('sounds\Jim Hall - Elsewhere.mp3')
-pygame.mixer.Channel(0).play(pygame.mixer.Sound('sounds\Jim Hall - Elsewhere.mp3'))
+pygame.mixer.music.load('sounds/Jim Hall - Elsewhere.mp3')
+pygame.mixer.Channel(0).play(pygame.mixer.Sound('sounds/Jim Hall - Elsewhere.mp3'))
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption(GAME_NAME)
@@ -98,8 +98,7 @@ while running:
     lanes.update()
     if lanes.isColliding(player):
         # We could doe something in case we want to.
-        player.leben -= 1
-
+ 
     # Render / Needs refactoring
 
     screen.blit(BACKGROUND_IMAGE, (0, 0))
