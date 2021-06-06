@@ -30,7 +30,7 @@ class KeyboardControl:
     def execute(self):
         for event in self.game.pygame.event.get():
             if event.type == self.game.pygame.QUIT:
-                self.quit()
+                self.game.quit()
 
             if event.type != self.game.pygame.KEYDOWN:
                 return  # Do nothing in case it's not a keydown
