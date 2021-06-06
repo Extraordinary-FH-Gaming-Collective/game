@@ -1,3 +1,5 @@
+import pygame
+
 class CollisionHandler:
     def __init__(self):
         self.hits = 0
@@ -15,7 +17,7 @@ class CollisionHandler:
                                 character.leben -=1
                                 if character.leben == 0:
                                     pass  # Game-Over-Overlay
-                                
+
             # Zug-Lane, needs refactoring
             if lane.type != 'cars':
                 if character.position_x <= sprite.position_x:
@@ -40,3 +42,4 @@ class CollisionHandler:
 
 
         return False
+      
