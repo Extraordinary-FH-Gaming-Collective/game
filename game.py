@@ -4,12 +4,6 @@ from character import Character
 from fence import FenceBottom, FenceTop
 from keyboard_control import KeyboardControl
 from sprite_generator import SpriteGenerator
-from character_commands import (
-    MoveDownCommand,
-    MoveLeftCommand,
-    MoveRightCommand,
-    MoveUpCommand,
-)
 
 
 class Game:
@@ -21,26 +15,14 @@ class Game:
 
         self.clock = self.pygame.time.Clock()
 
-        self.screen =  self.pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.screen = self.pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
         self.lanes = SpriteGenerator().generate()
         self.player = Character()
         self.fence_top = FenceTop()
         self.fence_bottom = FenceBottom()
 
-        self.keyboard_control = KeyboardControl()
-
-        self.key_map = {
-            self.pygame.K_UP: self.keyboard_control.press_arrowkey_up,
-            self.pygame.K_DOWN: self.keyboard_control.press_arrowkey_down,
-            self.pygame.K_RIGHT: self.keyboard_control.press_arrowkey_right,
-            self.pygame.K_LEFT: self.keyboard_control.press_arrowkey_left,
-        }
-
-        self.keyboard_control.assign_arrowkey_up(MoveUpCommand(self.player))
-        self.keyboard_control.assign_arrowkey_down(MoveDownCommand(self.player))
-        self.keyboard_control.assign_arrowkey_right(MoveRightCommand(self.player))
-        self.keyboard_control.assign_arrowkey_left(MoveLeftCommand(self.player))
+        self.keyboard_control = KeyboardControl(self.pygame, self.player)
 
     def loop(self):
         self.clock.tick(SCREEN_FPS)
@@ -53,8 +35,7 @@ class Game:
 
             # Listen for Keyboard Events and execute mapped Keyboard Control
             if event.type == self.pygame.KEYDOWN:
-                if event.key in self.key_map:
-                    self.key_map[event.key]()
+                self.keyboard_control.execute(event)
 
         self.lanes.update()
 
