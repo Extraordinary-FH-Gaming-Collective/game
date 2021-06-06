@@ -21,7 +21,7 @@ car_dict["small"] = (
     Image(dir_car_assets, 'car.png').get(),
     Image(dir_car_assets, 'car.png').flip().get()
 )
-train_dict["green_small"] = ( 
+train_dict["green_small"] = (
     Image(dir_train_assets, 'zug_g_57x320.png').get(),
     Image(dir_train_assets, 'zug_g_57x320.png').flip().get()
 )
@@ -29,19 +29,19 @@ train_dict["green_medium"] = (
     Image(dir_train_assets, 'zug_g_97x320.png').get(),
     Image(dir_train_assets, 'zug_g_97x320.png').flip().get()
 )
-train_dict["green_large"] = ( 
+train_dict["green_large"] = (
     Image(dir_train_assets, 'zug_g_112x320.png').get(),
     Image(dir_train_assets, 'zug_g_112x320.png').flip().get()
 )
-train_dict["orange_small"] = ( 
+train_dict["orange_small"] = (
     Image(dir_train_assets, 'zug_o_57x320.png').get(),
     Image(dir_train_assets, 'zug_o_57x320.png').flip().get()
 )
-train_dict["orange_medium"] = ( 
+train_dict["orange_medium"] = (
     Image(dir_train_assets, 'zug_o_97x320.png').get(),
     Image(dir_train_assets, 'zug_o_97x320.png').flip().get()
 )
-train_dict["orange_large"] = ( 
+train_dict["orange_large"] = (
     Image(dir_train_assets, 'zug_o_112x320.png').get(),
     Image(dir_train_assets, 'zug_o_112x320.png').flip().get()
 )
