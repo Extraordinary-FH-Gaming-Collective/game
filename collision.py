@@ -32,7 +32,7 @@ class CollisionHandler:
                 if character.position_x <= sprite.position_x:
                     if character.position_x >= sprite.position_x + 320:
                         if character.position_y <= sprite.position_y:
-                           if character.position_y >= sprite.position_y + 34:
+                            if character.position_y >= sprite.position_y + 34:
                                 character.position_y = CHARACTER_START_POSITION_Y
                                 character.position_x = CHARACTER_START_POSITION_X
                                 print('daneben')
