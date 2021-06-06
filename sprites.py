@@ -43,6 +43,7 @@ class Sprite:
     def getHeight(self):
         return self.image.get_rect().h
 
+
 class SmallCar(Sprite):
     def __init__(self):
         super().__init__()

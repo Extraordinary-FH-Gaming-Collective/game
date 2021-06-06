@@ -1,6 +1,7 @@
 from settings import CHARACTER_START_POSITION_X, CHARACTER_START_POSITION_Y
 import pygame
 
+
 class CollisionHandler:
     def __init__(self):
         pass
@@ -9,11 +10,11 @@ class CollisionHandler:
 def check(self, lane, character):
     for sprite in lane.sprites:
         if self.isHit() == True:
-                character.position_y = CHARACTER_START_POSITION_Y
-                character.position_x = CHARACTER_START_POSITION_X
-                character.leben -=1
-                pygame.mixer.music.load('sounds/Hit.mp3')
-                pygame.mixer.music.play()
+            character.position_y = CHARACTER_START_POSITION_Y
+            character.position_x = CHARACTER_START_POSITION_X
+            character.leben -= 1
+            pygame.mixer.music.load('sounds/Hit.mp3')
+            pygame.mixer.music.play()
         return False
 
 
@@ -22,7 +23,8 @@ def isHit(self, lane, character, sprite):
     if self.isHitByCar() or self.missesTrain():
         return True
 
-# check if player hits the car 
+
+# check if player hits the car
 # if lanetpye is train, the iteration breaks
 # if lanetype is car a x/y-intersection will be checked
 # intersection: true / no intersection: false
@@ -47,12 +49,14 @@ def missesTrain(self, lane, character, sprite):
     else:
         return True
 
-#checks if player is hit at X-Axis
+
+# checks if player is hit at X-Axis
 def isWithinXaxis(self, lane, character, sprite):
     if character.position_x > sprite.position_x and character.position_x < sprite.position_x + sprite.getWidth:
         return True
     else:
         return False
+
 
 # checks, if player is hit at Y-Axis
 # if lanetype is not cars it returns false, so trains will not be checked, they have their own logic in missesTrain()
@@ -61,9 +65,5 @@ def hitsYAxis(self, lane, character, sprite):
         return False
     if character.row == sprite.lane:
         return True
-
-
-
-
 
       
