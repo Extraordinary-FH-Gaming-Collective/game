@@ -8,27 +8,35 @@ from character_commands import (
 
 
 class KeyboardControl:
-    def __init__(self, pygame, player):
+    def __init__(self, game):
         self.arrowkey_up = None
         self.arrowkey_down = None
         self.arrowkey_right = None
         self.arrowkey_left = None
+        self.game = game
 
         self.key_map = {
-            pygame.K_UP: self.press_arrowkey_up,
-            pygame.K_DOWN: self.press_arrowkey_down,
-            pygame.K_RIGHT: self.press_arrowkey_right,
-            pygame.K_LEFT: self.press_arrowkey_left,
+            game.pygame.K_UP: self.press_arrowkey_up,
+            game.pygame.K_DOWN: self.press_arrowkey_down,
+            game.pygame.K_RIGHT: self.press_arrowkey_right,
+            game.pygame.K_LEFT: self.press_arrowkey_left,
         }
 
-        self.assign_arrowkey_up(MoveUpCommand(player))
-        self.assign_arrowkey_down(MoveDownCommand(player))
-        self.assign_arrowkey_right(MoveRightCommand(player))
-        self.assign_arrowkey_left(MoveLeftCommand(player))
+        self.assign_arrowkey_up(MoveUpCommand(game.player))
+        self.assign_arrowkey_down(MoveDownCommand(game.player))
+        self.assign_arrowkey_right(MoveRightCommand(game.player))
+        self.assign_arrowkey_left(MoveLeftCommand(game.player))
 
-    def execute(self, event):
-        if event.key in self.key_map:
-            self.key_map[event.key]()
+    def execute(self, events):
+        for event in events:
+            if event.type == self.game.pygame.QUIT:
+                self.game.quit()
+
+            if event.type != self.game.pygame.KEYDOWN:
+                return #  Do nothing in case it's not a keydown
+
+            if event.key in self.key_map:
+                self.key_map[event.key]()
 
     def assign_arrowkey_up(self, command: ICommandCharacter):
         self.arrowkey_up = command
