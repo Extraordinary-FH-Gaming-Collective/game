@@ -27,4 +27,3 @@ class CollisionHandler:
                                 character.leben -= 1
 
         return False
-      
