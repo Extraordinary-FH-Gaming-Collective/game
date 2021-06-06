@@ -1,133 +1,84 @@
 import pygame
 from settings import *
 from character import Character
+from fence import FenceBottom, FenceTop
 from keyboard_control import KeyboardControl
 from sprite_generator import SpriteGenerator
-from endzone import Endzone
-from obstacles import Obstacle
-from fence import FenceBottom, FenceTop
-from character_commands import (
-    MoveDownCommand,
-    MoveLeftCommand,
-    MoveRightCommand,
-    MoveUpCommand,
-)
-
-# Initialisierung
-pygame.init()
-pygame.mixer.init()
-
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption(GAME_NAME)
-clock = pygame.time.Clock()
-
-running = True
-
-# Create a Character
-player = Character()
-
-# Create Lanes including moving Sprites
-lanes = SpriteGenerator().generate()
-
-# Create Fences
-fence_top = FenceTop()
-fence_bottom = FenceBottom()
-
-# Create Obstacles
-
-obs1 = Obstacle(0, 230)
-obs2 = Obstacle(283, 140)
-obs3 = Obstacle(490, 120)
-obs4 = Obstacle(675, 135)
-obs5 = Obstacle(875, 110)
-obs6 = Obstacle(1050, 600)
-
-obstacle_group = pygame.sprite.Group()
-obstacle_group.add(obs1, obs2, obs3, obs4, obs5, obs6)
+from preGame import PreGame
 
 
-# Create Endzones
-endzone1 = Endzone(243, 165)
-endzone2 = Endzone(450, 165)
-endzone3 = Endzone(630, 165)
-endzone4 = Endzone(830, 165)
-endzone5 = Endzone(1010, 165)
+class Game:
+    def __init__(self):
+        self.mode = 'menu'
+        self.pygame = pygame
+        self.pygame.init()
+        self.pygame.mixer.init()
+        self.pygame.display.set_caption(GAME_NAME)
 
-endzone_group = pygame.sprite.Group()
-endzone_group.add(endzone1, endzone2, endzone3, endzone4, endzone5)
+        self.preGame = PreGame(self)
 
+        self.clock = self.pygame.time.Clock()
+        self.screen = self.pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-# Create Control for Keyboard Events
-keyboard_control = KeyboardControl()
+        self.lanes = SpriteGenerator().generate()
+        self.player = Character()
+        self.fence_top = FenceTop()
+        self.fence_bottom = FenceBottom()
 
-# Map Keys to Keyboard Control
-key_map = {
-    pygame.K_UP: keyboard_control.press_arrowkey_up,
-    pygame.K_DOWN: keyboard_control.press_arrowkey_down,
-    pygame.K_RIGHT: keyboard_control.press_arrowkey_right,
-    pygame.K_LEFT: keyboard_control.press_arrowkey_left,
-}
+        self.keyboard_control = KeyboardControl(self)
 
-# Map Character Commands to Control
-keyboard_control.assign_arrowkey_up(MoveUpCommand(player))
-keyboard_control.assign_arrowkey_down(MoveDownCommand(player))
-keyboard_control.assign_arrowkey_right(MoveRightCommand(player))
-keyboard_control.assign_arrowkey_left(MoveLeftCommand(player))
+    def loop(self):
+        self.beforeLoop()
 
-while running:
-    # Game Loop
-    clock.tick(SCREEN_FPS)
+        if self.mode == 'game':
+            self.game()
+        elif self.mode == 'introduction':
+            self.introduction()
+        else:
+            self.menu()
 
-    for event in pygame.event.get():
+        self.afterLoop()
 
-        # Did the user click the window close button?
-        if event.type == pygame.QUIT:
-            running = False
+    def introduction(self):
+        self.preGame.introduction()
 
-        # Listen for Keyboard Events and execute mapped Keyboard Control
-        if event.type == pygame.KEYDOWN:
-            if event.key in key_map:
-                key_map[event.key]()
+    def menu(self):
+        self.preGame.menu()
 
-    # Update / Needs refactoring
-    lanes.update()
-    if lanes.isColliding(player):
-        # We could doe something in case we want to.
-        player.leben -=1
+    def game(self):
+        self.keyboard_control.execute(self.pygame.event.get())
 
-    # Render / Needs refactoring
+        self.lanes.update()
 
-    screen.blit(BACKGROUND_IMAGE, (0, 0))
-    endzone_group.draw(screen)
-    fence_top.render(screen)
-    lanes.render(screen)
-    player.render(screen)
-    fence_bottom.render(screen)
+        if self.lanes.isColliding(self.player):
+            # We could doe something in case we want to.
+            self.player.leben -= 1
 
-    # Update Rect Positions
-    player.update()
-    endzone_group.update()
-    obstacle_group.update()
+        self.screen.blit(BACKGROUND_IMAGE, (0, 0))
+        self.fence_top.render(self.screen)
+        self.player.render(self.screen)
+        self.fence_bottom.render(self.screen)
 
-    # Collision Detection Player/Obstacles
-    obstacle_reached = pygame.sprite.spritecollideany(player, obstacle_group)
-    if obstacle_reached:
-        player.bounce_back()
+        self.lanes.render(self.screen)
 
-    # Collision Detection for Player/Endzones
-    endzone_reached = pygame.sprite.spritecollideany(player, endzone_group)
+    def gameOver(self):
+        pass
 
-    if endzone_reached:
-        player.cheer()
-        endzone_reached.reached(player)
-        player.back_to_start()
-        # TBD:
-        # Counter += 1
-        # Wenn der Counter auf 5 steht:
-        #   Winning Screen anzeigen mit Score z.B.
+    def beforeLoop(self):
+        self.clock.tick(SCREEN_FPS)
+        self.implementExitOptioins()
 
-    # Display
-    pygame.display.flip()
+    def afterLoop(self):
+        self.pygame.display.flip()
 
+    def implementExitOptioins(self):
+        for event in self.pygame.event.get():
+            if event.type == self.pygame.QUIT:
+                self.quit()
 
-pygame.quit()
+            if event.type == self.pygame.KEYDOWN:
+                if event.key == self.pygame.K_ESCAPE:
+                    self.mode = 'menu'
+
+    def quit(self):
+        self.pygame.quit()
