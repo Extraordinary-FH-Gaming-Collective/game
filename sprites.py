@@ -54,11 +54,12 @@ class Sprite:
         self.image_right_to_left = None
         self.position_x = -9999
         self.position_y = -9999
-        self.leftToRight = None
+        self.left_to_right = None
+        self.height_correction = 0
         self.speed = 0
 
     def update(self):
-        if self.leftToRight:
+        if self.left_to_right:
             self.position_x += self.speed
         else:
             self.position_x -= self.speed
@@ -69,13 +70,13 @@ class Sprite:
     def speed(self, speed: int):
         self.speed = speed
 
-    def setDirection(self, leftToRight: bool):
-        if leftToRight:
+    def setDirection(self, left_to_right: bool):
+        if left_to_right:
             self.image = self.image_left_to_right
         else:
             self.image = self.image_right_to_left
 
-        self.leftToRight = leftToRight
+        self.left_to_right = left_to_right
 
     def set(self, position_x: int, position_y: int):
         self.position_x = position_x
