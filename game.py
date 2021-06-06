@@ -40,8 +40,8 @@ class Game:
         self.lanes.update()
 
         if self.lanes.isColliding(self.player):
-        # We could doe something in case we want to.
-            self.player.leben -=1
+            # We could doe something in case we want to.
+            self.player.leben -= 1
 
         self.screen.blit(BACKGROUND_IMAGE, (0, 0))
         self.fence_top.render(self.screen)
