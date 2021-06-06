@@ -6,7 +6,6 @@ class CollisionHandler:
     def __init__(self):
         self.hits = 0
 
-
     def check(self, lane, character):
         for sprite in lane.sprites:
             if lane.type == 'cars':
@@ -18,7 +17,7 @@ class CollisionHandler:
                                 character.position_x = CHARACTER_START_POSITION_X
                                 print(self.hits, 'Hits')
                                 self.hits += 1
-                                character.leben -=1
+                                character.leben -= 1
 
                                 # plays a hit-sound when hit
                                 pygame.mixer.music.load('sounds\Hit.mp3')

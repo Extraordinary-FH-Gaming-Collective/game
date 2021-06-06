@@ -98,7 +98,7 @@ while running:
     lanes.update()
     if lanes.isColliding(player):
         # We could doe something in case we want to.
-        player.leben -=1
+        player.leben -= 1
 
     # Render / Needs refactoring
 
