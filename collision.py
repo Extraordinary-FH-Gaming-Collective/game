@@ -9,7 +9,7 @@ class CollisionHandler:
 
 def check(self, lane, character):
     for sprite in lane.sprites:
-        if self.isHit() == True:
+        if self.isHit() is True:
             character.position_y = CHARACTER_START_POSITION_Y
             character.position_x = CHARACTER_START_POSITION_X
             character.leben -= 1
