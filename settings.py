@@ -1,12 +1,12 @@
-import pygame
+from support import Image
 
 GAME_NAME = "Frogger City"
 
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 SCREEN_FPS = 60
-BACKGROUND_IMAGE = pygame.image.load("assets/map_1280x720.png")
-START_BACKGROUND_IMAGE = pygame.image.load("assets/map_1280x720_gray.png")
+BACKGROUND_IMAGE = Image("assets/", "map_1280x720.png").get()
+START_BACKGROUND_IMAGE = Image("assets/", "map_1280x720_gray.png").get()
 
 
 # Borders of the walkable Area for the Character
