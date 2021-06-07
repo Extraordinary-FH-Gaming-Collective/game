@@ -54,6 +54,7 @@ class Lane:
     def __init__(self, row: int, type: str, direction: str):
         self.sprites = []
         self.type = type
+        self.lane = row
         self.spriteCount = random.randrange(
             settings.MINIMUM_CARS_PER_LANE if type == 'cars' else settings.MINIMUM_TRAINS_PER_LANE,
             settings.MAXIMUM_CARS_PER_LANE if type == 'cars' else settings.MAXIMUM_TRAINS_PER_LANE,
