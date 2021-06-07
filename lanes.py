@@ -76,7 +76,10 @@ class Lane:
         while self.spriteCount > 0:
             self.add(sprites.pop(1), position_x)
             self.spriteCount -= 1
-            position_x += 180
+            if self.type == 'cars':
+                position_x += self.lastSprite.getWidth() + random.randrange(settings.MINIMUM_CARS_DISTANCE, settings.MAXIMUM_CARS_DISTANCE)
+            else:
+                position_x += self.lastSprite.getWidth() + random.randrange(settings.MINIMUM_TRAINS_DISTANCE, settings.MAXIMUM_TRAINS_DISTANCE)
 
     def add(self, sprite: Sprite, position_x: int):
         sprite.speed = self.speed
