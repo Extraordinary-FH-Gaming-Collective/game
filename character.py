@@ -50,9 +50,7 @@ class Character(pygame.sprite.Sprite):
         self.state = None
 
         self.leben = 3
-        self.herzImage = pygame.image.load(
-            os.path.join(dir_assets_other, "pixelherz64_56.png")
-        )
+        self.herzImage = Image(dir_assets_other, "pixelherz64_56.png").get()
 
     def walk(self):
         if self.animationCount < 2:
