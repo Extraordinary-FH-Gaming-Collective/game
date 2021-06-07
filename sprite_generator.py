@@ -1,6 +1,7 @@
 from lanes import Lanes
 from settings import *
 import random
+from sprite_pool import *
 from sprites import (
     FireTruck,
     EstateCar,
@@ -13,11 +14,6 @@ from sprites import (
     TrainLargeGreen,
     TrainLargeOrange,
 )
-
-inactive_cars = []
-inactive_trains_small = []
-inactive_trains_medium = []
-inactive_trains_large = []
 
 to_create = {}
 to_create["cars_firetruck"] = GENERATE_CARS_FIRETRUCK

@@ -1,13 +1,14 @@
-import pygame
+from support import Image
 
 GAME_NAME = "Frogger City"
 
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 SCREEN_FPS = 60
-BACKGROUND_IMAGE = pygame.image.load("assets/map_1280x720.png")
-START_BACKGROUND_IMAGE = pygame.image.load("assets/map_1280x720_gray.png")
-BACKGROUND_DEATH = pygame.image.load("assets/map_1280x720_death.png")
+
+BACKGROUND_IMAGE = Image("assets/", "map_1280x720.png").get()
+START_BACKGROUND_IMAGE = Image("assets/", "map_1280x720_gray.png").get()
+BACKGROUND_DEATH = Image("assets/", "map_1280x720_death.png").get()
 
 # Borders of the walkable Area for the Character
 BORDER_TOP = 180  # Y Position of Top Border
@@ -37,7 +38,12 @@ GENERATE_TRAINS_LARGE = 8
 SPRITE_MINIMUM_SPEED = 4
 SPRITE_MAXIMUM_SPEED = 9
 
-MINIMUM_CARS_PER_LANE = 5
-MAXIMUM_CARS_PER_LANE = 8
-MINIMUM_TRAINS_PER_LANE = 1
+MINIMUM_CARS_PER_LANE = 4
+MAXIMUM_CARS_PER_LANE = 6
+MINIMUM_TRAINS_PER_LANE = 2
 MAXIMUM_TRAINS_PER_LANE = 3
+
+MINIMUM_CARS_DISTANCE = 20
+MAXIMUM_CARS_DISTANCE = 300
+MINIMUM_TRAINS_DISTANCE = 40
+MAXIMUM_TRAINS_DISTANCE = 300

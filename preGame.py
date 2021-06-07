@@ -92,19 +92,19 @@ class PreGame:
         game_exit_button = self.game.pygame.Rect(SCREEN_WIDTH / 2 - 100, 470, 200, 50)
 
         # Zeichnung Button für den Start
-        pygame.draw.rect(self.game.screen, (COLOR_GRAY_WHITE), start_button)
+        self.game.pygame.draw.rect(self.game.screen, (COLOR_GRAY_WHITE), start_button)
         self.text_drawer(
             "Start", self.menu_font, (COLOR_BLACK), self.game.screen, 600, 220
         )
 
         # Zeichnung Button für die Anleitung
-        pygame.draw.rect(self.game.screen, (COLOR_GRAY_WHITE), introduction_button)
+        self.game.pygame.draw.rect(self.game.screen, (COLOR_GRAY_WHITE), introduction_button)
         self.text_drawer(
             "Anleitung", self.menu_font, (COLOR_BLACK), self.game.screen, 555, 340
         )
 
         # Zeichnung Button für Spiel schließen
-        pygame.draw.rect(self.game.screen, (COLOR_GRAY_WHITE), game_exit_button)
+        self.game.pygame.draw.rect(self.game.screen, (COLOR_GRAY_WHITE), game_exit_button)
         self.text_drawer(
             "Beenden", self.menu_font, (COLOR_BLACK), self.game.screen, 565, 480
         )
