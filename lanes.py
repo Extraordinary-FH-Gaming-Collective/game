@@ -121,7 +121,7 @@ class Lane:
         self.add(newSprite, newStart)
 
     def carDistance(self):
-       return random.randrange(MINIMUM_CARS_DISTANCE, MAXIMUM_CARS_DISTANCE)
+        return random.randrange(MINIMUM_CARS_DISTANCE, MAXIMUM_CARS_DISTANCE)
 
     def trainDistance(self):
         return random.randrange(MINIMUM_TRAINS_DISTANCE, MAXIMUM_TRAINS_DISTANCE)
