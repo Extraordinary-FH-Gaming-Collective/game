@@ -79,6 +79,12 @@ class Sprite:
         self.position_x = position_x
         self.position_y = position_y - self.height_correction
 
+    def getWidth(self):
+        return self.image.get_rect().w
+
+    def getHeight(self):
+        return self.image.get_rect().h
+
 
 class SmallCar(Sprite):
     def __init__(self):

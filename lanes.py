@@ -57,13 +57,13 @@ class Lane:
             sprite.update()
 
             # check if the first sprite is out of view.
-            # If it is, remove it from the sprite and make the next to the first sprite
+            # If it is, remove it from the lane and add the next to the first sprite
             # move this sprite back as an inaktive sprite
             if self.outOfView(sprite):
                 if self.leftToRight:
-                    sprite.position_x = -230
+                    sprite.position_x = -sprite.getWidth()
                 else:
-                    sprite.position_x = settings.SCREEN_WIDTH + 230
+                    sprite.position_x = settings.SCREEN_WIDTH + sprite.getWidth()
 
             # After it has been removed, add a new sprite.
 
@@ -89,7 +89,7 @@ class Lane:
         if self.leftToRight:
             return settings.SCREEN_WIDTH < sprite.position_x
         else:
-            return sprite.position_x + 100 <= 0
+            return sprite.position_x + sprite.getWidth() < 0
 
     def calculateYPosition(self, row: int):  # TODO: Calculate correctly
         return settings.SCREEN_HEIGHT - (row * settings.CHARACTER_STEP_SIZE) - settings.MAP_BOTTOM_PADDING - 50
