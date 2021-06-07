@@ -28,3 +28,7 @@ class Scorer:
             winning_screen()
         else:
             self.points += 500
+
+    def reached_endzone(self):
+        self.goal += 1
+        self.points += 500

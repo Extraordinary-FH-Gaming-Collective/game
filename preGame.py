@@ -185,3 +185,7 @@ def winning_screen():
         pygame.time.delay(6000)
         pygame.quit()
         exit()
+            self.game.mode = 'menu'
+
+    def death_screen(self):
+           self.game.screen.blit(BACKGROUND_DEATH, (0, 0))
