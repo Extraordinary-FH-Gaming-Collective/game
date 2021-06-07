@@ -7,6 +7,7 @@ from obstacles import Obstacles
 from keyboard_control import KeyboardControl
 from sprite_generator import SpriteGenerator
 from preGame import PreGame
+from score import Scorer
 
 
 class Game:
@@ -16,6 +17,7 @@ class Game:
         self.pygame.init()
         self.pygame.mixer.init()
         self.pygame.display.set_caption(GAME_NAME)
+        self.scorer = Scorer()
 
         self.preGame = PreGame(self)
 
@@ -38,6 +40,10 @@ class Game:
             self.game()
         elif self.mode == "introduction":
             self.introduction()
+        elif self.mode == "gameover":
+            self.game_over()
+        elif self.mode == "gamewon":
+            self.won()
         else:
             self.menu()
 
@@ -48,6 +54,10 @@ class Game:
 
     def menu(self):
         self.preGame.menu()
+        self.reset_game()
+
+    def won(self):
+        self.preGame.won(self.scorer.points)
 
     def game(self):
         self.keyboard_control.execute()
@@ -56,10 +66,17 @@ class Game:
             # We could doe something in case we want to.
             self.player.leben -= 1
 
+        if self.player.leben == 0:
+            self.mode = "gameover"
+
+        if self.scorer.goal == 5:
+            self.mode = "gamewon"
+
         self.render()
         self.update()
 
-        self.endzones.check_for_reach(self.player)
+        self.endzones.check_for_reach(self.player, self.scorer)
+        print(self.scorer.points)
         self.obstacles.check_for_collision(self.player)
 
     def render(self):
@@ -76,11 +93,16 @@ class Game:
         self.obstacles.group.update()
         self.player.update()
 
-    def gameOver(self):
-        pass
+    def game_over(self):
+        self.preGame.dead()
 
     def beforeLoop(self):
         self.clock.tick(SCREEN_FPS)
+
+    def reset_game(self):
+        self.scorer.reset_score()
+        self.player.leben = 3
+        self.endzones = Endzones()
 
     def afterLoop(self):
         self.pygame.display.flip()
