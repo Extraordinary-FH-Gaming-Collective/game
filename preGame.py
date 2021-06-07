@@ -158,3 +158,35 @@ class PreGame:
 
         for event in self.game.pygame.event.get():
             self.defaultExitOptions(event)
+
+    def won(self, score):
+        self.game.screen.blit(START_BACKGROUND_IMAGE, (0, 0))
+        scoretext = f"Du hast {score} Punkte erzielt"
+
+        self.text_drawer(
+            "Du hast gewonnen!",
+            self.header_font,
+            (COLOR_BLACK),
+            self.game.screen,
+            350,
+            150,
+        )
+
+        self.text_drawer(
+            scoretext,
+            self.menu_font,
+            (COLOR_BLACK),
+            self.game.screen,
+            300,
+            300,
+        )
+        self.text_drawer(
+            "Mit der Escape-Taste kommst du zurück ins Menu.",
+            self.menu_font,
+            (COLOR_BLACK),
+            self.game.screen,
+            250,
+            500,
+        )
+        for event in self.game.pygame.event.get():
+            self.defaultExitOptions(event)
