@@ -94,5 +94,5 @@ class Lane:
         else:
             return sprite.position_x + sprite.getWidth() < 0
 
-    def calculateYPosition(self, row: int):  # TODO: Calculate correctly
+    def calculateYPosition(self, row: int):
         return settings.SCREEN_HEIGHT - (row * settings.CHARACTER_STEP_SIZE) - settings.MAP_BOTTOM_PADDING - 50
