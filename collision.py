@@ -25,9 +25,8 @@ class CollisionHandler:
         if lane.type == 'cars':
             if character.position_x >= sprite.position_x:
                 if character.position_x <= sprite.position_x + sprite.getWidth():
-                    if character.position_y + character.getHeight() < sprite.position_y + sprite.getHeight():
-                        if character.position_y + character.getHeight() > (sprite.position_y + (sprite.getHeight()/2)):
-                            return True
+                    if character.row == lane.lane:
+                        return True
         else:
             return False
         
