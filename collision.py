@@ -65,5 +65,3 @@ def hitsYAxis(self, lane, character, sprite):
         return False
     if character.row == sprite.lane:
         return True
-
-      
