@@ -2,7 +2,6 @@ from support import Image
 from settings import *
 from fence import FenceBottom, FenceTop
 import pygame
-import os
 
 
 # Load Images
