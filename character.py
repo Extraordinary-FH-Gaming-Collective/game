@@ -98,6 +98,8 @@ class Character(pygame.sprite.Sprite):
         self.position_y = CHARACTER_START_POSITION_Y
         self.position_x = CHARACTER_START_POSITION_X
 
+    def getHeight(self):
+        return self.image.get_rect().h
 
 class CharacterState:
     def __init__(self, character: Character):
