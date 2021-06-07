@@ -8,7 +8,6 @@ SCREEN_FPS = 60
 BACKGROUND_IMAGE = Image("assets/", "map_1280x720.png").get()
 START_BACKGROUND_IMAGE = Image("assets/", "map_1280x720_gray.png").get()
 
-
 # Borders of the walkable Area for the Character
 BORDER_TOP = 180  # Y Position of Top Border
 BORDER_BOTTOM = 675  # Y Position of Bottom Border
