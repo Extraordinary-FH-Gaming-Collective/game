@@ -186,7 +186,7 @@ class LookingLeft(CharacterState):
     def __init__(self, character: Character):
         character.walk()
         character.image = player_image_dict["standing_left"][character.animationCount]
-        if (character.rect.x - character.rect.w) > BORDER_LEFT:
+        if character.rect.x - character.rect.w > BORDER_LEFT:
             character.position_x -= character.step_size
 
     def look_up(self, character: Character):
