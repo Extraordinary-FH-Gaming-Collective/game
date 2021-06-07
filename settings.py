@@ -7,7 +7,7 @@ SCREEN_HEIGHT = 720
 SCREEN_FPS = 60
 BACKGROUND_IMAGE = pygame.image.load("assets/map_1280x720.png")
 START_BACKGROUND_IMAGE = pygame.image.load("assets/map_1280x720_gray.png")
-
+BACKGROUND_DEATH = pygame.image.load("assets/map_1280x720_death.png")
 
 # Borders of the walkable Area for the Character
 BORDER_TOP = 180  # Y Position of Top Border
@@ -34,8 +34,8 @@ GENERATE_TRAINS_SMALL = 8
 GENERATE_TRAINS_MEDIUM = 8
 GENERATE_TRAINS_LARGE = 8
 
-SPRITE_MINIMUM_SPEED = 6
-SPRITE_MAXIMUM_SPEED = 12
+SPRITE_MINIMUM_SPEED = 4
+SPRITE_MAXIMUM_SPEED = 9
 
 MINIMUM_CARS_PER_LANE = 5
 MAXIMUM_CARS_PER_LANE = 8

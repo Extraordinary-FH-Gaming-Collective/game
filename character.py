@@ -2,7 +2,6 @@ from support import Image
 from settings import *
 from fence import FenceBottom, FenceTop
 import pygame
-import os
 
 
 # Load Images
@@ -50,9 +49,7 @@ class Character(pygame.sprite.Sprite):
         self.state = None
 
         self.leben = 3
-        self.herzImage = pygame.image.load(
-            os.path.join(dir_assets_other, "pixelherz64_56.png")
-        )
+        self.herzImage = Image(dir_assets_other, "pixelherz64_56.png").get()
 
     def walk(self):
         if self.animationCount < 2:
@@ -186,7 +183,7 @@ class LookingLeft(CharacterState):
     def __init__(self, character: Character):
         character.walk()
         character.image = player_image_dict["standing_left"][character.animationCount]
-        if (character.rect.x - character.rect.w) > BORDER_LEFT:
+        if character.rect.x - character.rect.w > BORDER_LEFT:
             character.position_x -= character.step_size
 
     def look_up(self, character: Character):

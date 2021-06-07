@@ -11,14 +11,14 @@ class Lanes:
         self.collisionHandler = CollisionHandler()
 
     def generate(self):
-        self.lanes.append(Lane(9, 'large_trains'))
-        self.lanes.append(Lane(8, 'medium_trains'))
-        self.lanes.append(Lane(7, 'small_trains'))
-        self.lanes.append(Lane(5, 'cars'))
-        self.lanes.append(Lane(4, 'cars'))
-        self.lanes.append(Lane(3, 'cars'))
-        self.lanes.append(Lane(2, 'cars'))
-        self.lanes.append(Lane(1, 'cars'))
+        self.lanes.append(Lane(9, 'large_trains', 'left'))
+        self.lanes.append(Lane(8, 'medium_trains', 'right'))
+        self.lanes.append(Lane(7, 'small_trains', 'left'))
+        self.lanes.append(Lane(5, 'cars', 'left'))
+        self.lanes.append(Lane(4, 'cars', 'right'))
+        self.lanes.append(Lane(3, 'cars', 'left'))
+        self.lanes.append(Lane(2, 'cars', 'right'))
+        self.lanes.append(Lane(1, 'cars', 'left'))
 
         return self
 
@@ -39,7 +39,7 @@ class Lanes:
 
 
 class Lane:
-    def __init__(self, row: int, type: str):
+    def __init__(self, row: int, type: str, direction: str):
         self.sprites = []
         self.type = type
         self.spriteCount = random.randrange(
@@ -48,6 +48,7 @@ class Lane:
         )
         self.speed = random.randrange(settings.SPRITE_MINIMUM_SPEED, settings.SPRITE_MAXIMUM_SPEED)
         self.position_y = self.calculateYPosition(row)
+        self.leftToRight = True if direction == 'left' else False
         self.firstSprite: Sprite
         self.lastSprite: Sprite
 
@@ -59,7 +60,10 @@ class Lane:
             # If it is, remove it from the sprite and make the next to the first sprite
             # move this sprite back as an inaktive sprite
             if self.outOfView(sprite):
-                sprite.position_x = -230
+                if self.leftToRight:
+                    sprite.position_x = -230
+                else:
+                    sprite.position_x = settings.SCREEN_WIDTH + 230
 
             # After it has been removed, add a new sprite.
 
@@ -75,14 +79,17 @@ class Lane:
             position_x += 180
 
     def add(self, sprite: Sprite, position_x: int):
-        sprite.position_y = self.position_y
-        sprite.position_x = -50 + position_x
         sprite.speed = self.speed
+        sprite.set(-50 + position_x, self.position_y)
+        sprite.setDirection(self.leftToRight)
         self.sprites.append(sprite)
         self.lastSprite = sprite
 
     def outOfView(self, sprite: Sprite):
-        return settings.SCREEN_WIDTH < sprite.position_x
+        if self.leftToRight:
+            return settings.SCREEN_WIDTH < sprite.position_x
+        else:
+            return sprite.position_x + 100 <= 0
 
     def calculateYPosition(self, row: int):  # TODO: Calculate correctly
         return settings.SCREEN_HEIGHT - (row * settings.CHARACTER_STEP_SIZE) - settings.MAP_BOTTOM_PADDING - 50
