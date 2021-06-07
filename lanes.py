@@ -28,8 +28,18 @@ class Lanes:
         for lane in self.lanes:
             lane.update()
 
-    def render(self, screen):
+    def renderCars(self, screen):
         for lane in self.lanes:
+            if lane.type != 'cars':
+                continue
+
+            lane.render(screen)
+
+    def renderTrains(self, screen):
+        for lane in self.lanes:
+            if lane.type == 'cars':
+                continue
+
             lane.render(screen)
 
     def isColliding(self, character: Character):
