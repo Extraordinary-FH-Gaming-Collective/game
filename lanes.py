@@ -125,7 +125,7 @@ class Lane:
         else:
             newStart = settings.SCREEN_WIDTH + newSprite.getWidth() + distance
 
-            if self.lastSprite.position_x >= newStart:
+            if self.lastSprite.position_x + newSprite.getWidth() >= newStart:
                 newStart = self.lastSprite.position_x + newSprite.getWidth() + distance
 
         self.add(newSprite, newStart)
