@@ -53,7 +53,8 @@ class Game:
         if self.lanes.isColliding(self.player):
             # We could doe something in case we want to.
             self.player.leben -= 1
-
+        if self.player.leben >=0:   # Abfrage des Lebens
+            self.death_screen()        # bei >= 0 death_screen
         self.screen.blit(BACKGROUND_IMAGE, (0, 0))
         self.fence_top.render(self.screen)
         self.player.render(self.screen)

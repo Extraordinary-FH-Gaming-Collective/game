@@ -109,3 +109,30 @@ class PreGame:
 
         if event.key == self.game.pygame.K_ESCAPE:
             self.game.mode = 'menu'
+
+
+# Ich bekomme das aktuell nicht so schön eingebunden wie Jonas es geschafft hat
+    def time_screen(): 
+    running = True
+    while running:
+        screen.blit(START_BACKGROUND_IMAGE, (0, 0)) 
+        text_drawer("Deine Punkte sind aufgebraucht versuche es erneut.", menu_font, (COLOR_BLACK), screen, 200, 250)
+        pygame.display.update()
+        mainClock.tick(SCREEN_FPS)
+        pygame.time.delay(2500) # der Bildschirm schließt sich nach 6 Sekunden
+        pygame.quit()
+        exit()
+
+
+def winning_screen():
+    running = True
+    while running:
+        screen.blit(START_BACKGROUND_IMAGE, (0, 0)) 
+        text_drawer("Super, du hast gewonnen Gewonnen!", menu_font, (COLOR_BLACK), screen, 350, 150)
+        text_drawer("Deine Punktestand beträgt:", menu_font, (COLOR_BLACK), screen, 435, 250)
+        text_drawer(str(punkte), menu_font, (COLOR_BLACK), screen, 610, 300)
+        pygame.display.update()
+        mainClock.tick(SCREEN_FPS)
+        pygame.time.delay(6000)
+        pygame.quit()
+        exit() 
