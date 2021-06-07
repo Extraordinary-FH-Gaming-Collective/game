@@ -5,6 +5,7 @@ from fence import FenceBottom, FenceTop
 from keyboard_control import KeyboardControl
 from sprite_generator import SpriteGenerator
 from preGame import PreGame
+from score import Scorer
 
 
 class Game:
@@ -14,6 +15,7 @@ class Game:
         self.pygame.init()
         self.pygame.mixer.init()
         self.pygame.display.set_caption(GAME_NAME)
+        self.scorer = Scorer(self)
 
         self.preGame = PreGame(self)
 
@@ -53,8 +55,8 @@ class Game:
         if self.lanes.isColliding(self.player):
             # We could doe something in case we want to.
             self.player.leben -= 1
-        if self.player.leben >=0:   # Abfrage des Lebens
-            self.death_screen()        # bei >= 0 death_screen
+        if self.player.leben == 0:   # Abfrage des Lebens
+            self.scorer.death_screen()        # bei >= 0 death_screen
         self.screen.blit(BACKGROUND_IMAGE, (0, 0))
         self.fence_top.render(self.screen)
         self.player.render(self.screen)
