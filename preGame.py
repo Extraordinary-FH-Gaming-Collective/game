@@ -144,48 +144,17 @@ class PreGame:
         if event.key == self.game.pygame.K_ESCAPE:
             self.game.mode = "menu"
 
-    # Ich bekomme das aktuell nicht so schön eingebunden wie Jonas es geschafft hat
-    def time_screen():
-        running = True
-        while running:
-            screen.blit(START_BACKGROUND_IMAGE, (0, 0))
-            text_drawer(
-                "Deine Punkte sind aufgebraucht versuche es erneut.",
-                menu_font,
-                (COLOR_BLACK),
-                screen,
-                200,
-                250,
-            )
-            pygame.display.update()
-            mainClock.tick(SCREEN_FPS)
-            pygame.time.delay(2500)  # der Bildschirm schließt sich nach 6 Sekunden
-            pygame.quit()
-            exit()
+    def dead(self):
+        self.game.screen.blit(BACKGROUND_DEATH, (0, 0))
 
-
-def winning_screen():
-    running = True
-    while running:
-        screen.blit(START_BACKGROUND_IMAGE, (0, 0))
-        text_drawer(
-            "Super, du hast gewonnen Gewonnen!",
-            menu_font,
+        self.text_drawer(
+            "Mit der Escape-Taste kommst du zurück ins Menu.",
+            self.menu_font,
             (COLOR_BLACK),
-            screen,
-            350,
-            150,
+            self.game.screen,
+            250,
+            500,
         )
-        text_drawer(
-            "Deine Punktestand beträgt:", menu_font, (COLOR_BLACK), screen, 435, 250
-        )
-        text_drawer(str(punkte), menu_font, (COLOR_BLACK), screen, 610, 300)
-        pygame.display.update()
-        mainClock.tick(SCREEN_FPS)
-        pygame.time.delay(6000)
-        pygame.quit()
-        exit()
-            self.game.mode = 'menu'
 
-    def death_screen(self):
-           self.game.screen.blit(BACKGROUND_DEATH, (0, 0))
+        for event in self.game.pygame.event.get():
+            self.defaultExitOptions(event)
