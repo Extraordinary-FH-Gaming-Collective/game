@@ -1,4 +1,5 @@
 import pygame
+import time
 from settings import *
 from character import Character
 from fence import FenceBottom, FenceTop
@@ -40,6 +41,8 @@ class Game:
             self.game()
         elif self.mode == "introduction":
             self.introduction()
+        elif self.mode == "dead":
+            self.dead()
         else:
             self.menu()
 
@@ -51,14 +54,21 @@ class Game:
     def menu(self):
         self.preGame.menu()
 
+    def dead(self):
+        self.preGame.dead()
+
     def game(self):
         self.keyboard_control.execute()
 
         if self.lanes.isColliding(self.player):
             # We could doe something in case we want to.
             self.player.leben -= 1
-        if self.player.leben == 0:   # Abfrage des Lebens
-            self.preGame.death_screen()        # bei >= 0 death_screen
+
+        if self.player.leben == 0:
+            self.mode = "dead"
+
+        if self.scorer.goal == 5:
+            print("WIR SIND FUENF")
 
         self.render()
         self.update()
@@ -88,6 +98,6 @@ class Game:
 
     def afterLoop(self):
         self.pygame.display.flip()
-        
+
     def quit(self):
         self.pygame.quit()
