@@ -6,7 +6,6 @@ class Scorer:
     def reached_endzone(self):
         self.goal += 1
         self.points += 500
-        print(self.points)
 
     def lost_life(self):
         self.points -= 250

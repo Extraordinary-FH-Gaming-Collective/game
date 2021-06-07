@@ -76,7 +76,6 @@ class Game:
         self.update()
 
         self.endzones.check_for_reach(self.player, self.scorer)
-        print(self.scorer.points)
         self.obstacles.check_for_collision(self.player)
 
     def render(self):
