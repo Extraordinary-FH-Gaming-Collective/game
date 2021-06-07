@@ -58,12 +58,12 @@ class Game:
             # We could doe something in case we want to.
             self.player.leben -= 1
         if self.player.leben == 0:   # Abfrage des Lebens
-            self.scorer.death_screen()        # bei >= 0 death_screen
+            self.preGame.death_screen()        # bei >= 0 death_screen
 
         self.render()
         self.update()
 
-        self.endzones.check_for_reach(self.player)
+        self.endzones.check_for_reach(self.player, self.scorer)
         self.obstacles.check_for_collision(self.player)
 
     def render(self):
@@ -88,6 +88,6 @@ class Game:
 
     def afterLoop(self):
         self.pygame.display.flip()
-
+        
     def quit(self):
         self.pygame.quit()

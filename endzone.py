@@ -31,9 +31,12 @@ class Endzones:
         self.group = pygame.sprite.Group()
         self.group.add(self.ez1, self.ez2, self.ez3, self.ez4, self.ez5)
 
-    def check_for_reach(self, character):
+    def check_for_reach(self, character, scorer):
         reached_endzone = pygame.sprite.spritecollideany(character, self.group)
         if reached_endzone:
             character.cheer()
             reached_endzone.reached(character)
             character.back_to_start()
+            print(scorer.goal)
+            scorer.reached_endzone()
+            print(scorer.goal)

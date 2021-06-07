@@ -7,7 +7,7 @@ SCREEN_HEIGHT = 720
 SCREEN_FPS = 60
 BACKGROUND_IMAGE = pygame.image.load("assets/map_1280x720.png")
 START_BACKGROUND_IMAGE = pygame.image.load("assets/map_1280x720_gray.png")
-
+BACKGROUND_DEATH = pygame.image.load("assets/map_1280x720_death.png")
 
 # Borders of the walkable Area for the Character
 BORDER_TOP = 180  # Y Position of Top Border
