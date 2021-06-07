@@ -105,7 +105,7 @@ class Lane:
         list.append(poppedSprite)
         newSprite = list.pop(1)
         distance = self.carDistance() if newSprite.type == 'cars' else self.trainDistance()
-        
+
         if self.leftToRight:
             newStart = - newSprite.getWidth() - distance
 
