@@ -109,7 +109,6 @@ class PreGame:
             "Beenden", self.menu_font, (COLOR_BLACK), self.game.screen, 565, 480
         )
 
-
         for event in self.game.pygame.event.get():
             if event.type == self.game.pygame.MOUSEBUTTONDOWN and event.button == 1:
                 self.mouse_click = True
