@@ -49,7 +49,7 @@ class Game:
         self.obstacles = Obstacles()
 
         self.keyboard_control = KeyboardControl(self)
-        self.loadMusic()
+        self.load_music()
 
     def loop(self):
         """Can I introduce? Our game loop.
@@ -78,7 +78,7 @@ class Game:
         """The game mode, which show the main game element: A busy boy running through Frogger City."""
 
         self.keyboard_control.execute()
-        self.lanes.checkCollision(self.player, self.scorer)
+        self.lanes.check_collision(self.player, self.scorer)
 
         if self.player.life == 0:
             self.mode = "gameover"
@@ -155,7 +155,7 @@ class Game:
         self.player.life = 3
         self.endzones = Endzones()
 
-    def loadMusic(self):
+    def load_music(self):
         """Loads the background music."""
 
         self.pygame.mixer.music.load("assets/sounds/Jim Hall - Elsewhere.mp3")
