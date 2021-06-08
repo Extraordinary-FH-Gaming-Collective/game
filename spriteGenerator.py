@@ -1,7 +1,7 @@
 from lanes import Lanes
 from settings import *
 import random
-from sprite_pool import *
+from spritePool import *
 from sprites import (
     FireTruck,
     EstateCar,
