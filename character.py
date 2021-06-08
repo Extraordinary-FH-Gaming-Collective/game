@@ -56,7 +56,7 @@ class Character(pygame.sprite.Sprite):
         self.row = 0
         self.animationCount = 0
 
-        self.leben = 3
+        self.life = 3
         self.herzImage = Image(dir_assets_other, "pixelherz64_56.png").get()
 
     def walk(self):
@@ -96,19 +96,19 @@ class Character(pygame.sprite.Sprite):
         self.herzen(screen)
 
     def herzen(self, screen):
-        if self.leben == 3:
+        if self.life == 3:
             screen.blit(self.herzImage, (1088, 15))
             screen.blit(self.herzImage, (1152, 15))
             screen.blit(self.herzImage, (1215, 15))
-        if self.leben == 2:
+        if self.life == 2:
             screen.blit(self.herzImage, (1088, 15))
             screen.blit(self.herzImage, (1152, 15))
-        if self.leben == 1:
+        if self.life == 1:
             screen.blit(self.herzImage, (1088, 15))
 
     def hit(self):
         self.back_to_start()
-        self.leben -= 1
+        self.life -= 1
 
         pygame.mixer.music.load("assets/sounds/Hit.mp3")
         pygame.mixer.music.play()
