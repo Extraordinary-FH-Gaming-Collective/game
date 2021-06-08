@@ -6,7 +6,7 @@ from endzone import Endzones
 from obstacles import Obstacles
 from keyboard_control import KeyboardControl
 from sprite_generator import SpriteGenerator
-from preGame import PreGame
+from text_screen import TextScreen
 from score import Scorer
 from text_drawer import TextDrawer
 
@@ -24,7 +24,7 @@ class Game:
         self.screen = self.pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
         self.text_drawer = TextDrawer(self.screen)
-        self.preGame = PreGame(self)
+        self.text_screen = TextScreen(self)
 
         self.lanes = SpriteGenerator().generate()
         self.player = Character()
@@ -35,13 +35,16 @@ class Game:
 
         self.keyboard_control = KeyboardControl(self)
 
+        pygame.mixer.music.load('assets/sounds/Jim Hall - Elsewhere.mp3')
+        pygame.mixer.Channel(0).play(pygame.mixer.Sound('assets/sounds/Jim Hall - Elsewhere.mp3'))
+
     def loop(self):
         self.beforeLoop()
 
         if self.mode == "game":
             self.game()
-        elif self.mode == "introduction":
-            self.introduction()
+        elif self.mode == "instructions":
+            self.instructions()
         elif self.mode == "gameover":
             self.game_over()
         elif self.mode == "gamewon":
@@ -51,15 +54,18 @@ class Game:
 
         self.afterLoop()
 
-    def introduction(self):
-        self.preGame.introduction()
+    def instructions(self):
+        self.text_screen.show_instructions()
 
     def menu(self):
-        self.preGame.menu()
+        self.text_screen.show_menu()
         self.reset_game()
 
     def won(self):
-        self.preGame.won(self.scorer.points)
+        self.text_screen.show_winning_screen(self.scorer.points)
+
+    def game_over(self):
+        self.text_screen.show_game_over_screen()
 
     def game(self):
         self.keyboard_control.execute()
@@ -92,9 +98,6 @@ class Game:
         self.endzones.group.update()
         self.obstacles.group.update()
         self.player.update()
-
-    def game_over(self):
-        self.preGame.dead()
 
     def show_score(self):
         self.pygame.font.init()
