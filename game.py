@@ -32,7 +32,6 @@ class Game:
         self.mode = "menu"
         self.pygame = pygame
         self.pygame.init()
-        self.pygame.mixer.init()
         self.pygame.display.set_caption(GAME_NAME)
         self.scorer = Scorer()
 
@@ -51,7 +50,7 @@ class Game:
         self.sounds = Sounds(self)
 
         self.keyboard_control = KeyboardControl(self)
-        self.sounds.playMusic()
+        self.sounds.play_music()
 
     def loop(self):
         """ Can I introduce? Our game loop.
