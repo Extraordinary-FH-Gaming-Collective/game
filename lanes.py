@@ -13,10 +13,10 @@ class Lanes:
         self.collisionHandler = CollisionHandler()
 
     def generate(self):
-        self.lanes.append(Lane(10, 'large_trains', 'right'))
-        self.lanes.append(Lane(9, 'large_trains', 'left'))
-        self.lanes.append(Lane(8, 'medium_trains', 'right'))
-        self.lanes.append(Lane(7, 'small_trains', 'left'))
+        self.lanes.append(Lane(11, 'large_trains', 'right'))
+        self.lanes.append(Lane(10, 'large_trains', 'left'))
+        self.lanes.append(Lane(9, 'medium_trains', 'right'))
+        self.lanes.append(Lane(8, 'small_trains', 'left'))
         self.lanes.append(Lane(5, 'cars', 'left'))
         self.lanes.append(Lane(4, 'cars', 'right'))
         self.lanes.append(Lane(3, 'cars', 'left'))
@@ -43,8 +43,11 @@ class Lanes:
 
             lane.render(screen)
 
-    def isColliding(self, character: Character):
+    def checkCollision(self, character: Character):
         for lane in self.lanes:
+            if lane.row != character.row:
+                continue
+
             self.collisionHandler.check(lane, character)
 
     def get(self):
@@ -55,7 +58,7 @@ class Lane:
     def __init__(self, row: int, type: str, direction: str):
         self.sprites = []
         self.type = type
-        self.lane = row
+        self.row = row
         self.spriteCount = random.randrange(
             settings.MINIMUM_CARS_PER_LANE if type == 'cars' else settings.MINIMUM_TRAINS_PER_LANE,
             settings.MAXIMUM_CARS_PER_LANE if type == 'cars' else settings.MAXIMUM_TRAINS_PER_LANE,

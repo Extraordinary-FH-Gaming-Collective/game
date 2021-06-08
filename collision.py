@@ -1,29 +1,33 @@
 class CollisionHandler:
     def __init__(self):
-        self.hits = 0
+        pass
 
     def check(self, lane, character):
-        for sprite in lane.sprites:
-            if lane.type == 'cars':
-                if character.position_x >= sprite.position_x:
-                    if character.position_x <= sprite.position_x + 25:
-                        if character.position_y >= sprite.position_y:
-                            if character.position_y <= sprite.position_y + 25:
-                                character.position_y = 715
-                                character.position_x = 580
-                                self.hits += 1
-                                character.leben -= 1
-                                if character.leben == 0:
-                                    pass  # Game-Over-Overlay
+        if self.isHitByCar(character, lane) or self.isNotOnTrain(character, lane):
+            character.hit()
 
-            # Zug-Lane, needs refactoring
-            if lane.type != 'cars':
-                if character.position_x <= sprite.position_x:
-                    if character.position_x >= sprite.position_x + 320:
-                        if character.position_y <= sprite.position_y:
-                            if character.position_y >= sprite.position_y + 34:
-                                character.position_y = 715
-                                character.position_x = 580
-                                character.leben -= 1
+    def isHitByCar(self, character, lane):
+        if lane.type != 'cars':
+            return
+
+        for sprite in lane.sprites:
+            if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(character, sprite):
+                return True
 
         return False
+
+    def isNotOnTrain(self, character, lane):
+        if lane.type == 'cars':
+            return False
+
+        for sprite in lane.sprites:
+            if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(character, sprite):
+                return False
+
+        return True
+
+    def rightFromLeftEdge(self, character, sprite):
+        return character.getWidth() + character.position_x > sprite.position_x
+
+    def leftFromRightEdge(self, character, sprite):
+        return sprite.position_x + sprite.getWidth() > character.position_x
