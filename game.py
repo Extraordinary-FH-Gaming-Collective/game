@@ -63,8 +63,9 @@ class Game:
         self.keyboard_control.execute()
 
         if self.lanes.isColliding(self.player):
+            pass
             # We could doe something in case we want to.
-            self.player.leben -= 1
+
 
         if self.player.leben == 0:
             self.mode = "gameover"
