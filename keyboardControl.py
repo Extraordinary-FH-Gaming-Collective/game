@@ -6,6 +6,8 @@ from characterCommands import (
     MoveUpCommand,
 )
 
+# KeyboardControl is the steering wheel for the character and maps Character Commands to Keys
+
 
 class KeyboardControl:
     def __init__(self, game):
@@ -15,6 +17,7 @@ class KeyboardControl:
         self.arrowkey_left = None
         self.game = game
 
+        # Maps Key Events to the right KeyboardControl Methods
         self.key_map = {
             game.pygame.K_UP: self.press_arrowkey_up,
             game.pygame.K_DOWN: self.press_arrowkey_down,
@@ -22,6 +25,7 @@ class KeyboardControl:
             game.pygame.K_LEFT: self.press_arrowkey_left,
         }
 
+        # Maps the imported Character Commands to the Keyboard Control Methods
         self.assign_arrowkey_up(MoveUpCommand(game.player))
         self.assign_arrowkey_down(MoveDownCommand(game.player))
         self.assign_arrowkey_right(MoveRightCommand(game.player))
@@ -35,9 +39,11 @@ class KeyboardControl:
             if event.type != self.game.pygame.KEYDOWN:
                 return  # Do nothing in case it's not a keydown
 
+            # Changes Game Mode to Menu over Escape Key
             if event.key == self.game.pygame.K_ESCAPE:
                 self.game.mode = "menu"
 
+            # Access the given Keys in the Key Map and compares them to triggered Events
             if event.key in self.key_map:
                 self.key_map[event.key]()
 

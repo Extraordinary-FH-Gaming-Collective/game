@@ -1,6 +1,7 @@
 import pygame
 
 
+# Creates a transparent Rect Endzone Sprite at the given Position
 class Endzone(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
         pygame.sprite.Sprite.__init__(self)
@@ -16,10 +17,13 @@ class Endzone(pygame.sprite.Sprite):
         self.rect.x = self.position_x
         self.rect.y = self.position_y
 
+    # Renders an the Image of the colliding Player instead of the transparent playholder rect
+    # Gives the illusion the player is still standing in the endzone
     def reached(self, player):
         self.image = player.image
 
 
+# Creates all needed Endzones and groups them for easy access
 class Endzones:
     def __init__(self):
         self.ez1 = Endzone(243, 165)
@@ -30,6 +34,10 @@ class Endzones:
         self.group = pygame.sprite.Group()
         self.group.add(self.ez1, self.ez2, self.ez3, self.ez4, self.ez5)
 
+    # Checks if any of the endzones in the group collide with the given Character
+    # Let the Character cheer if so
+    # and Renders the last Image of the Character
+    # and Updates the Scorer
     def check_for_reach(self, character, scorer):
         reached_endzone = pygame.sprite.spritecollideany(character, self.group)
         if reached_endzone:

@@ -4,6 +4,8 @@ import pygame
 fence_top_image = pygame.image.load("assets/boundaries/fence_top.png")
 fence_bottom_image = pygame.image.load("assets/boundaries/fence_bottom.png")
 
+# Renders the images of thefences in the given Position
+
 
 class Fence:
     def __init__(self):
@@ -12,6 +14,9 @@ class Fence:
 
     def render(self):
         raise NotImplementedError
+
+
+# Renders the Top Fence
 
 
 class FenceTop(Fence):
@@ -24,6 +29,7 @@ class FenceTop(Fence):
         screen.blit(self.image, (self.position_x, self.position_y))
 
 
+# Renders the Bottom Fence
 class FenceBottom(Fence):
     def __init__(self):
         self.image = fence_bottom_image
