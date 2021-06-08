@@ -5,13 +5,11 @@ class CollisionHandler:
     def __init__(self):
         """ Please move on. There nothing happening here. Really! """
         pass
-    
 
-    
     def check(self, lane, character) -> None:
         """ Check against a collision with a car or train.
         In case the character / player is hit, we will call the hit method to handle that case.
-        
+
         Please note: As a hit by car may be obvious, it's a little different with trains:
 
         We'll handle the case that the character is not on a train, as he jumped down to
