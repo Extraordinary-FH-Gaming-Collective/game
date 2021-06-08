@@ -100,9 +100,9 @@ class Game:
         self.screen.blit(BACKGROUND_IMAGE, (0, 0))
         self.fence_top.render(self.screen)
         self.endzones.group.draw(self.screen)
-        self.lanes.renderTrains(self.screen)
+        self.lanes.render_trains(self.screen)
         self.player.render(self.screen)
-        self.lanes.renderCars(self.screen)
+        self.lanes.render_cars(self.screen)
         self.fence_bottom.render(self.screen)
         self.show_score()
 
