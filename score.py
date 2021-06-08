@@ -1,15 +1,25 @@
 class Scorer:
     def __init__(self):
-        self.points = 0
+        self.points = 5000
         self.goal = 0
+        self.counter = 0
 
-    def reached_endzone(self):
+    def reached_goal(self):
         self.goal += 1
         self.points += 500
 
-    def lost_life(self):
-        self.points -= 250
+    def add_points(self, points):
+        self.points -= points
+
+    def remove_points(self, points):
+        self.points -= points
+
+    def countdown_score(self):
+        self.counter += 1
+        if self.counter == 60:
+            self.points -= 10
+            self.counter = 0
 
     def reset_score(self):
-        self.points = 0
+        self.points = 5000
         self.goal = 0
