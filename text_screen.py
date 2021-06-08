@@ -63,6 +63,13 @@ class TextScreen:
             (COLOR_BLACK),
             50,
             500,
+        ),
+        self.text_drawer.draw(
+            "Drücke Escape um zum Menü zurück zu kehren ",
+            self.menu_font,
+            (COLOR_BLACK),
+            50,
+            600,
         )
 
         for event in self.game.pygame.event.get():
@@ -96,6 +103,14 @@ class TextScreen:
             self.game.screen, (COLOR_GRAY_WHITE), game_exit_button
         )
         self.text_drawer.draw("Beenden", self.menu_font, (COLOR_BLACK), 565, 480)
+
+        self.text_drawer.draw(
+            "Drücke die Leertaste um das Spiel direkt zu starten ",
+            self.menu_font,
+            (COLOR_BLACK),
+            180,
+            600,
+        )
 
         for event in self.game.pygame.event.get():
             if event.type == self.game.pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -140,10 +155,17 @@ class TextScreen:
         self.game.screen.blit(BACKGROUND_DEATH, (0, 0))
 
         self.text_drawer.draw(
-            "Mit der Escape-Taste kommst du zurück ins Menu.",
+            "Zurück ins Menü:  Escape Taste",
             self.menu_font,
             (COLOR_BLACK),
-            250,
+            400,
+            450,
+        ),
+        self.text_drawer.draw(
+            "Spiel neu starten:  Leertaste",
+            self.menu_font,
+            (COLOR_BLACK),
+            400,
             500,
         )
 
@@ -152,7 +174,7 @@ class TextScreen:
 
     def show_winning_screen(self, score):
         self.game.screen.blit(START_BACKGROUND_IMAGE, (0, 0))
-        scoretext = f"Du hast {score} Punkte erzielt"
+        scoretext = f"Deine Punkte: {score}"
 
         self.text_drawer.draw(
             "Du hast gewonnen!",
@@ -166,14 +188,21 @@ class TextScreen:
             scoretext,
             self.menu_font,
             (COLOR_BLACK),
-            300,
+            400,
             300,
         )
         self.text_drawer.draw(
-            "Mit der Escape-Taste kommst du zurück ins Menu.",
+            "Zurück ins Menü:  Escape Taste",
             self.menu_font,
             (COLOR_BLACK),
-            250,
+            400,
+            450,
+        ),
+        self.text_drawer.draw(
+            "Spiel neu starten:  Leertaste",
+            self.menu_font,
+            (COLOR_BLACK),
+            400,
             500,
         )
         for event in self.game.pygame.event.get():
