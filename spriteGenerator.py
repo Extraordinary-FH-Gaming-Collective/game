@@ -30,7 +30,7 @@ class SpriteGenerator:
     """ This is the fun part, to auto generate all moving sprites.
 
     How it works:
-    Basically we do generate all needed lanes, sprites, do shuffle them and move sprites to the lanes. 
+    Basically we do generate all needed lanes, sprites, do shuffle them and move sprites to the lanes.
 
     We are using a sprite pool, to create all sprites before the game starts. From there, sprites will
     be moved to lanes. After they are out of view from the game window, the will be moved backed to

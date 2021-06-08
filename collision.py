@@ -54,5 +54,5 @@ class CollisionHandler:
 
     def leftFromRightEdge(self, character, sprite) -> bool:
         """ Checks if the character is on the left side from the right side the sprite. """
-        
+
         return sprite.position_x + sprite.getWidth() > character.position_x

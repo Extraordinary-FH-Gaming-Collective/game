@@ -15,19 +15,19 @@ class Game:
     """ The Game class is the backbone of Frogger City
 
     Basically we do initialize all needed classes, which we later can reference too and am
-    looping through our loop method as you can see in `main.py`. 
+    looping through our loop method as you can see in `main.py`.
     """
 
     def __init__(self):
         """ Initialize all needed classes
-        
-        This way of building our game does help, if working together with a team. Main information are kept 
+
+        This way of building our game does help, if working together with a team. Main information are kept
         in the game class. By passing `self` into a new initialized Class, all needed information can
         be parsed and worked with.
 
         This does make it possible for a team to work in different classes and to centralize all the logic there.
         """
-    
+
         self.mode = "menu"
         self.pygame = pygame
         self.pygame.init()
@@ -53,7 +53,7 @@ class Game:
 
     def loop(self):
         """ Can I introduce? Our game loop.
-        
+
         We'll loop this method as often as defined in our frames per seconds setting in `settings.py`
 
         Depending on the game mode, we'll call different methods.
@@ -122,9 +122,9 @@ class Game:
 
     def menu(self):
         """ Displays the menu, which is the first screen in the game. 
-        
-        This is the place we send the player to after each game, why 
-        we thougth it might make sense to reset the game right here. 
+
+        This is the place we send the player to after each game, why
+        we thougth it might make sense to reset the game right here.
         """
 
         self.text_screen.show_menu()
@@ -137,12 +137,12 @@ class Game:
 
     def won(self):
         """ Displays the winning screen. """
-        
+
         self.text_screen.show_winning_screen(self.scorer.points)
 
     def game_over(self):
         """ Displays the game over screen. """
-        
+
         self.text_screen.show_game_over_screen()
 
     def reset_game(self):
@@ -150,7 +150,7 @@ class Game:
 
         self.scorer.reset_score()
         self.player.life = 3
-        self.endzones = Endzones()        
+        self.endzones = Endzones()
 
     def loadMusic(self):
         """ Loads the background music. """

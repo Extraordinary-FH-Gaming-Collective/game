@@ -7,9 +7,9 @@ import random
 
 
 class Lanes:
-    """ One lane is defined as a row in our game. 
-    
-    One row can fx contain different cars moving from one direction to the other. 
+    """ One lane is defined as a row in our game.
+
+    One row can fx contain different cars moving from one direction to the other.
 
     To seperate code concerns, a single lane will mostly be handled by the lanes class.
     """
@@ -22,7 +22,7 @@ class Lanes:
 
     def generate(self):
         """ Generate all needed Lanes.
-        
+
         As shown the row number, sprite type and driving direction needs to get passed.
         """
 
@@ -46,14 +46,14 @@ class Lanes:
 
     def renderCars(self, screen):
         """ Only render cars.
-        
-        As the time of rendering does define which images stay on top, a seperate render process is needed. 
-        See the render method in the Game class. 
 
-        Cars will rendered so they will stay on top of the player, 
+        As the time of rendering does define which images stay on top, a seperate render process is needed.
+        See the render method in the Game class.
+
+        Cars will rendered so they will stay on top of the player,
         meaing the player behind the car can't be seen.
         """
-        
+
         for lane in self.lanes:
             if lane.type != 'cars':
                 continue
@@ -62,11 +62,11 @@ class Lanes:
 
     def renderTrains(self, screen):
         """ Only render trains.
-        
-        As the time of rendering does define which images stay on top, a seperate render process is needed. 
-        See the render method in the Game class. 
 
-        Trains will rendered a little so the player will never be hidden by train images. 
+        As the time of rendering does define which images stay on top, a seperate render process is needed.
+        See the render method in the Game class.
+
+        Trains will rendered a little so the player will never be hidden by train images.
         This is needed as the player does stand on the train roof.
         """
 
@@ -78,7 +78,7 @@ class Lanes:
 
     def checkCollision(self, character: Character):
         """ Check if the character does collide with any sprite in the lane.
-        
+
         To save some calculation power, collisions will only be deteced in the current character lane.
         """
 
@@ -102,7 +102,7 @@ class Lanes:
 
 class Lane:
     """ A single lane.
-    
+
     On initialization, we randomly choose the speed from a pre defined range, as well as the sprite count.
     """
 
@@ -121,9 +121,9 @@ class Lane:
         self.lastSprite: Sprite
 
     def update(self):
-        """ Updates a lane to keep evertthing moving. 
-    
-        All sprites will be called and updated, so the positions can be adjustes on every frame per second. 
+        """ Updates a lane to keep evertthing moving.
+
+        All sprites will be called and updated, so the positions can be adjustes on every frame per second.
 
         In case a sprite is no longer in the view it will be removed and a new sprite will be added.
         """
@@ -152,7 +152,7 @@ class Lane:
 
     def firstPlacement(self, sprites: list):
         """ Calculates the first placement of all sprites, before the game starts.
-        
+
         If not doing this, the screen would start empty. Nahhhh ... that's no good.
         """
 
@@ -188,12 +188,12 @@ class Lane:
         return SCREEN_HEIGHT - (row * CHARACTER_STEP_SIZE) - MAP_BOTTOM_PADDING - 50
 
     def removeSpriteAndAddANewOne(self, poppedSprite: Sprite, list: list):
-        """ Remove a sprite and does add a new one 
-        
+        """ Remove a sprite and does add a new one
+
         1. Add the removed sprite to the inactive list / sprite pool.
-        2. Fetch a new sprite from the sprite pool. 
+        2. Fetch a new sprite from the sprite pool.
         3. Calculate a random distance to the next sprite.
-        4. If colliding with an existing sprite, the new sprite will be placed behind + a random distance. 
+        4. If colliding with an existing sprite, the new sprite will be placed behind + a random distance.
         """
 
         list.append(poppedSprite)

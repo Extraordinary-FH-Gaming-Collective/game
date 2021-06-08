@@ -75,8 +75,8 @@ class Sprite:
         screen.blit(self.image, (self.position_x, self.position_y))
 
     def setDirection(self, left_to_right: bool):
-        """ On creation we want to define the direction. 
-        
+        """ On creation we want to define the direction.
+
         This is important to flip the image correctly and to let the sprite drive into the correct direction as well.
         """
 
@@ -88,8 +88,8 @@ class Sprite:
         self.left_to_right = left_to_right
 
     def set(self, position_x: int, position_y: int):
-        """ If moving a sprite from the sprite pool into a lane, to make it kind of active, we need to set the start positions. 
-        
+        """ If moving a sprite from the sprite pool into a lane, to make it kind of active, we need to set the start positions.
+
         As images have different heights, the positioning does take our height correction into account.
         """
 
