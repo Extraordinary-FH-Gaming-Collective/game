@@ -6,6 +6,8 @@ fence_bottom_image = pygame.image.load("assets/boundaries/fence_bottom.png")
 
 
 class Fence:
+    """"Renders the images of thefences in the given Position."""
+
     def __init__(self):
         self.image
         self.position_y
@@ -15,6 +17,8 @@ class Fence:
 
 
 class FenceTop(Fence):
+    """Renders the Top Fence."""
+
     def __init__(self):
         self.image = fence_top_image
         self.position_y = 185
@@ -24,6 +28,7 @@ class FenceTop(Fence):
         screen.blit(self.image, (self.position_x, self.position_y))
 
 
+# Renders the Bottom Fence
 class FenceBottom(Fence):
     def __init__(self):
         self.image = fence_bottom_image

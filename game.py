@@ -13,14 +13,14 @@ from sounds import *
 
 
 class Game:
-    """ The Game class is the backbone of Frogger City
+    """The Game class is the backbone of Frogger City
 
     Basically we do initialize all needed classes, which we later can reference too and am
     looping through our loop method as you can see in `main.py`.
     """
 
     def __init__(self):
-        """ Initialize all needed classes
+        """Initialize all needed classes
 
         This way of building our game does help, if working together with a team. Main information are kept
         in the game class. By passing `self` into a new initialized Class, all needed information can
@@ -53,7 +53,7 @@ class Game:
         self.sounds.play_music()
 
     def loop(self):
-        """ Can I introduce? Our game loop.
+        """Can I introduce? Our game loop.
 
         We'll loop this method as often as defined in our frames per seconds setting in `settings.py`
 
@@ -76,7 +76,7 @@ class Game:
         self.pygame.display.flip()
 
     def game(self):
-        """ The game mode, which show the main game element: A busy boy running through Frogger City. """
+        """The game mode, which show the main game element: A busy boy running through Frogger City."""
 
         self.keyboard_control.execute()
         self.lanes.check_collision(self.player, self.scorer)
@@ -88,25 +88,27 @@ class Game:
             self.mode = "gamewon"
 
         self.render()
-        self.show_score()
+
         self.update()
 
         self.endzones.check_for_reach(self.player, self.scorer)
         self.obstacles.check_for_collision(self.player)
 
     def render(self):
-        """ Render all game elements. """
+        """Render all game elements.
+        The Order is important here because of the Layering of the Objects"""
 
         self.screen.blit(BACKGROUND_IMAGE, (0, 0))
         self.fence_top.render(self.screen)
         self.endzones.group.draw(self.screen)
-        self.fence_bottom.render(self.screen)
         self.lanes.render_trains(self.screen)
         self.player.render(self.screen)
         self.lanes.render_cars(self.screen)
+        self.fence_bottom.render(self.screen)
+        self.show_score()
 
     def update(self):
-        """ Update alle game elements, so evertything keeps moving and calculating. """
+        """Update alle game elements, so evertything keeps moving and calculating."""
 
         self.lanes.update()
         self.endzones.group.update()
@@ -115,7 +117,7 @@ class Game:
         self.scorer.countdown_score()
 
     def show_score(self):
-        """ Renders the score in the game window. """
+        """Renders the score in the game window."""
 
         self.pygame.font.init()
         font = self.pygame.font.SysFont(None, 40)
@@ -123,7 +125,7 @@ class Game:
         self.text_drawer.draw(score_text, font, (COLOR_WHITE), 1100, 100)
 
     def menu(self):
-        """ Displays the menu, which is the first screen in the game.
+        """Displays the menu, which is the first screen in the game.
 
         This is the place we send the player to after each game, why
         we thougth it might make sense to reset the game right here.
@@ -133,28 +135,28 @@ class Game:
         self.reset_game()
 
     def instructions(self):
-        """ A referenz to the TextScreen class to show game instructions. """
+        """A reference to the TextScreen class to show game instructions."""
 
         self.text_screen.show_instructions()
 
     def won(self):
-        """ Displays the winning screen. """
+        """Displays the winning screen."""
 
         self.text_screen.show_winning_screen(self.scorer.points)
 
     def game_over(self):
-        """ Displays the game over screen. """
+        """Displays the game over screen."""
 
         self.text_screen.show_game_over_screen()
 
     def reset_game(self):
-        """ Resets the game so you can start all over again. """
+        """Resets the game so you can start all over again."""
 
         self.scorer.reset_score()
         self.player.life = 3
         self.endzones = Endzones()
 
     def quit(self):
-        """ Quits the game, if you want to leave. """
+        """Quits the game, if you want to leave."""
 
         self.pygame.quit()
