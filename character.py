@@ -98,7 +98,7 @@ class Character(pygame.sprite.Sprite):
     def hit(self):
         self.back_to_start()
         self.leben -= 1
-        
+
         pygame.mixer.music.load('assets/sounds/Hit.mp3')
         pygame.mixer.music.play()
 
