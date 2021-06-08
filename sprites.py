@@ -125,7 +125,7 @@ class FireTruck(Sprite):
 class TrainSmallGreen(Sprite):
     def __init__(self):
         super().__init__()
-        self.height_correction = 22
+        self.height_correction = -22
         self.image_left_to_right = train_dict["green_small"][0]
         self.image_right_to_left = train_dict["green_small"][1]
         self.type = 'train_small'
@@ -134,7 +134,7 @@ class TrainSmallGreen(Sprite):
 class TrainSmallOrange(Sprite):
     def __init__(self):
         super().__init__()
-        self.height_correction = 22
+        self.height_correction = -22
         self.image_left_to_right = train_dict["orange_small"][0]
         self.image_right_to_left = train_dict["orange_small"][1]
         self.type = 'train_small'
@@ -143,7 +143,7 @@ class TrainSmallOrange(Sprite):
 class TrainMediumGreen(Sprite):
     def __init__(self):
         super().__init__()
-        self.height_correction = 20
+        self.height_correction = -20
         self.image_left_to_right = train_dict["green_medium"][0]
         self.image_right_to_left = train_dict["green_medium"][1]
         self.type = 'train_medium'
@@ -152,7 +152,7 @@ class TrainMediumGreen(Sprite):
 class TrainMediumOrange(Sprite):
     def __init__(self):
         super().__init__()
-        self.height_correction = 20
+        self.height_correction = -20
         self.image_left_to_right = train_dict["orange_medium"][0]
         self.image_right_to_left = train_dict["orange_medium"][1]
         self.type = 'train_medium'
@@ -161,7 +161,7 @@ class TrainMediumOrange(Sprite):
 class TrainLargeGreen(Sprite):
     def __init__(self):
         super().__init__()
-        self.height_correction = 18
+        self.height_correction = -20
         self.image_left_to_right = train_dict["green_large"][0]
         self.image_right_to_left = train_dict["green_large"][1]
         self.type = 'train_large'
@@ -170,7 +170,7 @@ class TrainLargeGreen(Sprite):
 class TrainLargeOrange(Sprite):
     def __init__(self):
         super().__init__()
-        self.height_correction = 18
+        self.height_correction = -20
         self.image_left_to_right = train_dict["orange_large"][0]
         self.image_right_to_left = train_dict["orange_large"][1]
         self.type = 'train_large'

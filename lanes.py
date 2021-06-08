@@ -13,10 +13,10 @@ class Lanes:
         self.collisionHandler = CollisionHandler()
 
     def generate(self):
-        self.lanes.append(Lane(10, 'large_trains', 'right'))
-        self.lanes.append(Lane(9, 'large_trains', 'left'))
-        self.lanes.append(Lane(8, 'medium_trains', 'right'))
-        self.lanes.append(Lane(7, 'small_trains', 'left'))
+        self.lanes.append(Lane(11, 'large_trains', 'right'))
+        self.lanes.append(Lane(10, 'large_trains', 'left'))
+        self.lanes.append(Lane(9, 'medium_trains', 'right'))
+        self.lanes.append(Lane(8, 'small_trains', 'left'))
         self.lanes.append(Lane(5, 'cars', 'left'))
         self.lanes.append(Lane(4, 'cars', 'right'))
         self.lanes.append(Lane(3, 'cars', 'left'))

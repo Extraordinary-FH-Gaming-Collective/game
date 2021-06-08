@@ -3,32 +3,31 @@ from settings import *
 
 class CollisionHandler:
     def __init__(self):
-            self.lastHit = self.currentMilliSecondTime()
-            self.protectionTime = PROTECTION_TIME_IN_MILLI_SECONDS
+            pass
 
     def check(self, lane, character):
+        if self.isHitByCar(character, lane) or self.isNotOnTrain(character, lane):
+            character.hit()
+
+    def isHitByCar(self, character, lane):
+        if lane.type != 'cars':
+            return
+
         for sprite in lane.sprites:
-            if self.inProtectionTime():
-                return
+            if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(character, sprite):
+                return True
 
-            if self.isHitByCar(character, sprite):
-                self.setProtectionTime()
-                character.hit()
-                return
+        return False
 
-    def isHitByCar(self, character, sprite):
-        if sprite.type != 'car':
+    def isNotOnTrain(self, character, lane):
+        if lane.type == 'cars':
             return False
-
-        return self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(character, sprite)
-
-    def isHitByTrain(self, character, sprite):
-        if sprite.type == 'car':
-            return False
+    
+        for sprite in lane.sprites:
+            if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(character, sprite):
+                return False
         
-        print('train')
-
-        return self.rightFromLeftEdge(character, sprite) and not self.leftFromRightEdge(character, sprite)
+        return True
 
     def rightFromLeftEdge(self, character, sprite):
         return character.getWidth() + character.position_x > sprite.position_x
@@ -38,12 +37,3 @@ class CollisionHandler:
 
     def leftFromRightEdge(self, character, sprite):
         return sprite.position_x + sprite.getWidth() > character.position_x
-
-    def inProtectionTime(self):
-        return self.lastHit + self.protectionTime > self.currentMilliSecondTime()
-
-    def setProtectionTime(self):
-        self.lastHit = self.currentMilliSecondTime()
-
-    def currentMilliSecondTime(self):
-        return round(time.time() * 1000)
