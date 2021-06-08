@@ -142,7 +142,7 @@ class PreGame:
 
     def won(self, score):
         self.game.screen.blit(START_BACKGROUND_IMAGE, (0, 0))
-        scoretext = "Du hast {score} Punkte erzielt"
+        scoretext = f"Du hast {score} Punkte erzielt"
 
         self.text_drawer.draw(
             "Du hast gewonnen!",
