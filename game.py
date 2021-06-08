@@ -63,10 +63,7 @@ class Game:
 
     def game(self):
         self.keyboard_control.execute()
-
-        if self.lanes.isColliding(self.player):
-            # We could doe something in case we want to.
-            self.player.leben -= 1
+        self.lanes.checkCollision(self.player)
 
         if self.player.leben == 0:
             self.mode = "gameover"
