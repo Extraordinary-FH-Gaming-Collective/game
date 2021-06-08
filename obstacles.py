@@ -1,6 +1,8 @@
 import pygame
 
 # Creates a obstacle sprite in the given Position ( Behind the Top Fences)
+
+
 class Obstacle(pygame.sprite.Sprite):
     def __init__(self, start_pos_x, length):
         pygame.sprite.Sprite.__init__(self)
@@ -15,6 +17,8 @@ class Obstacle(pygame.sprite.Sprite):
 
 
 # Creates all needed Obstacles and groups them for easy access
+
+
 class Obstacles:
     def __init__(self):
         self.obs1 = Obstacle(0, 230)

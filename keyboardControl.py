@@ -14,6 +14,7 @@ class KeyboardControl:
         self.arrowkey_right = None
         self.arrowkey_left = None
         self.game = game
+
         # Maps Key Events to the right KeyboardControl Methods
         self.key_map = {
             game.pygame.K_UP: self.press_arrowkey_up,
@@ -21,6 +22,7 @@ class KeyboardControl:
             game.pygame.K_RIGHT: self.press_arrowkey_right,
             game.pygame.K_LEFT: self.press_arrowkey_left,
         }
+
         # Maps the imported Character Commands to the Keyboard Control Methods
         self.assign_arrowkey_up(MoveUpCommand(game.player))
         self.assign_arrowkey_down(MoveDownCommand(game.player))
