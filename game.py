@@ -78,6 +78,12 @@ class Game:
         self.endzones.check_for_reach(self.player, self.scorer)
         self.obstacles.check_for_collision(self.player)
 
+    def update(self):
+        self.lanes.update()
+        self.endzones.group.update()
+        self.obstacles.group.update()
+        self.player.update(self.lanes)
+
     def render(self):
         self.screen.blit(BACKGROUND_IMAGE, (0, 0))
         self.fence_top.render(self.screen)
@@ -86,12 +92,6 @@ class Game:
         self.lanes.renderTrains(self.screen)
         self.player.render(self.screen)
         self.lanes.renderCars(self.screen)
-
-    def update(self):
-        self.lanes.update()
-        self.endzones.group.update()
-        self.obstacles.group.update()
-        self.player.update()
 
     def game_over(self):
         self.preGame.dead()

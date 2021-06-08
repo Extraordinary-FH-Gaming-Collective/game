@@ -116,12 +116,6 @@ class PreGame:
         # Eingabeüberprüfer
         self.mouse_click = False
 
-    # def text_drawer(self, text, font, color, screen, x, y):
-    #     textobj = font.render(text, 1, color)
-    #     textrect = textobj.get_rect()
-    #     textrect.topleft = (x, y)
-    #     screen.blit(textobj, textrect)
-
     def defaultExitOptions(self, event):
         if event.type == self.game.pygame.QUIT:
             self.game.quit()
@@ -148,7 +142,7 @@ class PreGame:
 
     def won(self, score):
         self.game.screen.blit(START_BACKGROUND_IMAGE, (0, 0))
-        scoretext = f"Du hast {score} Punkte erzielt"
+        scoretext = "Du hast {score} Punkte erzielt"
 
         self.text_drawer.draw(
             "Du hast gewonnen!",
