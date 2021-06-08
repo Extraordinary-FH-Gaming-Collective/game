@@ -1,7 +1,7 @@
 from collision import CollisionHandler
 from character import Character
 from sprites import Sprite
-from sprite_pool import *
+from spritePool import *
 from settings import *
 import settings
 import random
