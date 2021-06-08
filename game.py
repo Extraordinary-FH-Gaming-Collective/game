@@ -4,11 +4,11 @@ from character import Character
 from fence import FenceBottom, FenceTop
 from endzone import Endzones
 from obstacles import Obstacles
-from keyboard_control import KeyboardControl
-from sprite_generator import SpriteGenerator
-from text_screen import TextScreen
+from keyboardControl import KeyboardControl
+from spriteGenerator import SpriteGenerator
+from textScreen import TextScreen
 from score import Scorer
-from text_drawer import TextDrawer
+from textDrawer import TextDrawer
 
 
 class Game:

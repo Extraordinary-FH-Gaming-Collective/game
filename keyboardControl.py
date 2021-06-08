@@ -1,5 +1,5 @@
-from character_commands import ICommandCharacter
-from character_commands import (
+from characterCommands import ICommandCharacter
+from characterCommands import (
     MoveDownCommand,
     MoveLeftCommand,
     MoveRightCommand,
