@@ -56,6 +56,8 @@ class Character(pygame.sprite.Sprite):
             self.animationCount += 1
         else:
             self.animationCount = 0
+        pygame.mixer.music.load('assets/sounds/Jump.mp3')
+        pygame.mixer.music.play()
 
     def move_up(self):
         self.state = LookingUp(self)
@@ -96,6 +98,9 @@ class Character(pygame.sprite.Sprite):
     def hit(self):
         self.back_to_start()
         self.leben -= 1
+        
+        pygame.mixer.music.load('assets/sounds/Hit.mp3')
+        pygame.mixer.music.play()
 
     def update(self):
         self.rect.x = self.position_x
