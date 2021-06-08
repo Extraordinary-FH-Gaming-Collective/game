@@ -37,13 +37,25 @@ fence_bottom = FenceBottom()
 
 
 class Character(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, lanes):
         pygame.sprite.Sprite.__init__(self)
         self.image = player_image_dict["standing_up"][0]
         self.rect = self.image.get_rect()
         self.position_y = CHARACTER_START_POSITION_Y
         self.position_x = CHARACTER_START_POSITION_X
         self.step_size = CHARACTER_STEP_SIZE
+
+        self.trainSpeed = {}
+        self.trainFromLeft = {}
+        self.trainSpeed[8] = lanes.getLane(8).speed
+        self.trainFromLeft[8] = lanes.getLane(8).leftToRight
+        self.trainSpeed[9] = lanes.getLane(9).speed
+        self.trainFromLeft[9] = lanes.getLane(9).leftToRight
+        self.trainSpeed[10] = lanes.getLane(10).speed
+        self.trainFromLeft[10] = lanes.getLane(10).leftToRight
+        self.trainSpeed[11] = lanes.getLane(11).speed
+        self.trainFromLeft[11] = lanes.getLane(11).leftToRight
+        
         self.row = 0
         self.animationCount = 0
         self.state = None
@@ -98,8 +110,19 @@ class Character(pygame.sprite.Sprite):
         self.leben -= 1
 
     def update(self):
+        self.adoptTrainMovement()
+
         self.rect.x = self.position_x
         self.rect.y = self.position_y
+
+    def adoptTrainMovement(self):
+        if self.row < 8 or self.row > 11:
+            return
+
+        if self.trainFromLeft[self.row] and self.position_x + self.getWidth() < SCREEN_WIDTH:
+            self.position_x += self.trainSpeed[self.row]
+        elif  self.position_x >= 0:
+            self.position_x -= self.trainSpeed[self.row]
 
     def back_to_start(self):
         self.position_y = CHARACTER_START_POSITION_Y

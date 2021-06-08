@@ -27,7 +27,7 @@ class Game:
         self.preGame = PreGame(self)
 
         self.lanes = SpriteGenerator().generate()
-        self.player = Character()
+        self.player = Character(self.lanes)
         self.fence_top = FenceTop()
         self.fence_bottom = FenceBottom()
         self.endzones = Endzones()
@@ -82,7 +82,7 @@ class Game:
         self.lanes.update()
         self.endzones.group.update()
         self.obstacles.group.update()
-        self.player.update(self.lanes)
+        self.player.update()
 
     def render(self):
         self.screen.blit(BACKGROUND_IMAGE, (0, 0))

@@ -50,6 +50,11 @@ class Lanes:
 
             self.collisionHandler.check(lane, character)
 
+    def getLane(self, row: int):
+        for lane in self.lanes:
+            if lane.row == row:
+                return lane
+
     def get(self):
         return self.lanes
 
@@ -74,6 +79,7 @@ class Lane:
             sprite.update()
 
             if self.outOfView(sprite):
+                
                 index = self.sprites.index(sprite)
                 poppedSprite = self.sprites.pop(index)
 
