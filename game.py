@@ -40,8 +40,8 @@ class Game:
 
         if self.mode == "game":
             self.game()
-        elif self.mode == "introduction":
-            self.introduction()
+        elif self.mode == "instructions":
+            self.instructions()
         elif self.mode == "gameover":
             self.game_over()
         elif self.mode == "gamewon":
@@ -51,15 +51,18 @@ class Game:
 
         self.afterLoop()
 
-    def introduction(self):
-        self.text_screen.introduction()
+    def instructions(self):
+        self.text_screen.show_instructions()
 
     def menu(self):
-        self.text_screen.menu()
+        self.text_screen.show_menu()
         self.reset_game()
 
     def won(self):
-        self.text_screen.won(self.scorer.points)
+        self.text_screen.show_winning_screen(self.scorer.points)
+
+    def game_over(self):
+        self.text_screen.show_game_over_screen()
 
     def game(self):
         self.keyboard_control.execute()
@@ -92,9 +95,6 @@ class Game:
         self.endzones.group.update()
         self.obstacles.group.update()
         self.player.update()
-
-    def game_over(self):
-        self.text_screen.dead()
 
     def show_score(self):
         self.pygame.font.init()

@@ -11,7 +11,7 @@ class TextScreen:
         self.menu_font = self.game.pygame.font.SysFont(None, 50)
         self.header_font = self.game.pygame.font.SysFont(None, 70)
 
-    def introduction(self):
+    def show_instructions(self):
         self.game.screen.blit(START_BACKGROUND_IMAGE, (0, 0))
 
         self.text_drawer.draw("Anleitung", self.menu_font, (COLOR_BLACK), 560, 30)
@@ -68,7 +68,7 @@ class TextScreen:
         for event in self.game.pygame.event.get():
             self.defaultExitOptions(event)
 
-    def menu(self):
+    def show_menu(self):
         self.game.screen.blit(START_BACKGROUND_IMAGE, (0, 0))
         self.text_drawer.draw("Frogger City", self.header_font, (COLOR_BLACK), 495, 80)
 
@@ -76,7 +76,7 @@ class TextScreen:
 
         # Buttonzeichnung
         start_button = self.game.pygame.Rect(SCREEN_WIDTH / 2 - 100, 210, 200, 50)
-        introduction_button = self.game.pygame.Rect(
+        instructions_button = self.game.pygame.Rect(
             SCREEN_WIDTH / 2 - 100, 330, 200, 50
         )
         game_exit_button = self.game.pygame.Rect(SCREEN_WIDTH / 2 - 100, 470, 200, 50)
@@ -87,7 +87,7 @@ class TextScreen:
 
         # Zeichnung Button für die Anleitung
         self.game.pygame.draw.rect(
-            self.game.screen, (COLOR_GRAY_WHITE), introduction_button
+            self.game.screen, (COLOR_GRAY_WHITE), instructions_button
         )
         self.text_drawer.draw("Anleitung", self.menu_font, (COLOR_BLACK), 555, 340)
 
@@ -107,8 +107,8 @@ class TextScreen:
         if self.mouse_click and start_button.collidepoint((mouse_x, mouse_y)):
             self.game.mode = "game"
 
-        if self.mouse_click and introduction_button.collidepoint((mouse_x, mouse_y)):
-            self.game.mode = "introduction"
+        if self.mouse_click and instructions_button.collidepoint((mouse_x, mouse_y)):
+            self.game.mode = "instructions"
 
         if self.mouse_click and game_exit_button.collidepoint((mouse_x, mouse_y)):
             self.game.quit()
@@ -136,7 +136,7 @@ class TextScreen:
             self.game.reset_game()
             self.game.mode = "game"
 
-    def dead(self):
+    def show_game_over_screen(self):
         self.game.screen.blit(BACKGROUND_DEATH, (0, 0))
 
         self.text_drawer.draw(
@@ -150,7 +150,7 @@ class TextScreen:
         for event in self.game.pygame.event.get():
             self.defaultExitOptions(event)
 
-    def won(self, score):
+    def show_winning_screen(self, score):
         self.game.screen.blit(START_BACKGROUND_IMAGE, (0, 0))
         scoretext = f"Du hast {score} Punkte erzielt"
 
