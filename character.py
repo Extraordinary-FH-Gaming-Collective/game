@@ -1,6 +1,7 @@
 from support import Image
 from settings import *
 import pygame
+from sounds import *
 
 
 # Load Images
@@ -58,14 +59,14 @@ class Character(pygame.sprite.Sprite):
 
         self.life = 3
         self.heart_image = Image(dir_assets_other, "pixelherz64_56.png").get()
+        self.sounds = Sounds(self)
 
     def walk(self):
         if self.animation_count < 2:
             self.animation_count += 1
         else:
             self.animation_count = 0
-        pygame.mixer.music.load("assets/sounds/Jump.mp3")
-        pygame.mixer.music.play()
+        self.sounds.playJump()
 
     def move_up(self):
         self.state.move_up(self)
@@ -109,9 +110,7 @@ class Character(pygame.sprite.Sprite):
     def hit(self):
         self.back_to_start()
         self.life -= 1
-
-        pygame.mixer.music.load("assets/sounds/Hit.mp3")
-        pygame.mixer.music.play()
+        self.sounds.loadHit(self)
 
     def update(self):
         self.adoptTrainMovement()

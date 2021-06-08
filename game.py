@@ -9,6 +9,7 @@ from spriteGenerator import SpriteGenerator
 from textScreen import TextScreen
 from score import Scorer
 from textDrawer import TextDrawer
+from sounds import *
 
 
 class Game:
@@ -47,9 +48,10 @@ class Game:
         self.fence_bottom = FenceBottom()
         self.endzones = Endzones()
         self.obstacles = Obstacles()
+        self.sounds = Sounds(self)
 
         self.keyboard_control = KeyboardControl(self)
-        self.load_music()
+        self.sounds.playMusic()
 
     def loop(self):
         """ Can I introduce? Our game loop.
@@ -152,12 +154,6 @@ class Game:
         self.scorer.reset_score()
         self.player.life = 3
         self.endzones = Endzones()
-
-    def load_music(self):
-        """ Loads the background music. """
-
-        self.pygame.mixer.music.load('assets/sounds/Jim Hall - Elsewhere.mp3')
-        self.pygame.mixer.Channel(0).play(self.pygame.mixer.Sound('assets/sounds/Jim Hall - Elsewhere.mp3'))
 
     def quit(self):
         """ Quits the game, if you want to leave. """
