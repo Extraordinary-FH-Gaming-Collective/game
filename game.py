@@ -35,8 +35,10 @@ class Game:
 
         self.keyboard_control = KeyboardControl(self)
 
-        pygame.mixer.music.load('assets/sounds/Jim Hall - Elsewhere.mp3')
-        pygame.mixer.Channel(0).play(pygame.mixer.Sound('assets/sounds/Jim Hall - Elsewhere.mp3'))
+        pygame.mixer.music.load("assets/sounds/Jim Hall - Elsewhere.mp3")
+        pygame.mixer.Channel(0).play(
+            pygame.mixer.Sound("assets/sounds/Jim Hall - Elsewhere.mp3")
+        )
 
     def loop(self):
         self.beforeLoop()
@@ -69,7 +71,7 @@ class Game:
 
     def game(self):
         self.keyboard_control.execute()
-        self.lanes.checkCollision(self.player)
+        self.lanes.checkCollision(self.player, self.scorer)
 
         if self.player.leben == 0:
             self.mode = "gameover"
@@ -98,6 +100,7 @@ class Game:
         self.endzones.group.update()
         self.obstacles.group.update()
         self.player.update()
+        self.scorer.countdown_score()
 
     def show_score(self):
         self.pygame.font.init()

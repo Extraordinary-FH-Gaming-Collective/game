@@ -13,15 +13,15 @@ class Lanes:
         self.collisionHandler = CollisionHandler()
 
     def generate(self):
-        self.lanes.append(Lane(11, 'large_trains', 'right'))
-        self.lanes.append(Lane(10, 'large_trains', 'left'))
-        self.lanes.append(Lane(9, 'medium_trains', 'right'))
-        self.lanes.append(Lane(8, 'small_trains', 'left'))
-        self.lanes.append(Lane(5, 'cars', 'left'))
-        self.lanes.append(Lane(4, 'cars', 'right'))
-        self.lanes.append(Lane(3, 'cars', 'left'))
-        self.lanes.append(Lane(2, 'cars', 'right'))
-        self.lanes.append(Lane(1, 'cars', 'left'))
+        self.lanes.append(Lane(11, "large_trains", "right"))
+        self.lanes.append(Lane(10, "large_trains", "left"))
+        self.lanes.append(Lane(9, "medium_trains", "right"))
+        self.lanes.append(Lane(8, "small_trains", "left"))
+        self.lanes.append(Lane(5, "cars", "left"))
+        self.lanes.append(Lane(4, "cars", "right"))
+        self.lanes.append(Lane(3, "cars", "left"))
+        self.lanes.append(Lane(2, "cars", "right"))
+        self.lanes.append(Lane(1, "cars", "left"))
 
         return self
 
@@ -31,24 +31,24 @@ class Lanes:
 
     def renderCars(self, screen):
         for lane in self.lanes:
-            if lane.type != 'cars':
+            if lane.type != "cars":
                 continue
 
             lane.render(screen)
 
     def renderTrains(self, screen):
         for lane in self.lanes:
-            if lane.type == 'cars':
+            if lane.type == "cars":
                 continue
 
             lane.render(screen)
 
-    def checkCollision(self, character: Character):
+    def checkCollision(self, character: Character, scorer):
         for lane in self.lanes:
             if lane.row != character.row:
                 continue
 
-            self.collisionHandler.check(lane, character)
+            self.collisionHandler.check(lane, character, scorer)
 
     def getLane(self, row: int):
         for lane in self.lanes:
@@ -65,12 +65,18 @@ class Lane:
         self.type = type
         self.row = row
         self.spriteCount = random.randrange(
-            settings.MINIMUM_CARS_PER_LANE if type == 'cars' else settings.MINIMUM_TRAINS_PER_LANE,
-            settings.MAXIMUM_CARS_PER_LANE if type == 'cars' else settings.MAXIMUM_TRAINS_PER_LANE,
+            settings.MINIMUM_CARS_PER_LANE
+            if type == "cars"
+            else settings.MINIMUM_TRAINS_PER_LANE,
+            settings.MAXIMUM_CARS_PER_LANE
+            if type == "cars"
+            else settings.MAXIMUM_TRAINS_PER_LANE,
         )
-        self.speed = random.randrange(settings.SPRITE_MINIMUM_SPEED, settings.SPRITE_MAXIMUM_SPEED)
+        self.speed = random.randrange(
+            settings.SPRITE_MINIMUM_SPEED, settings.SPRITE_MAXIMUM_SPEED
+        )
         self.position_y = self.calculateYPosition(row)
-        self.leftToRight = True if direction == 'left' else False
+        self.leftToRight = True if direction == "left" else False
         self.firstSprite: Sprite
         self.lastSprite: Sprite
 
@@ -82,13 +88,13 @@ class Lane:
                 index = self.sprites.index(sprite)
                 poppedSprite = self.sprites.pop(index)
 
-                if poppedSprite.type == 'car':
+                if poppedSprite.type == "car":
                     self.removeSpriteAndAddANewOne(poppedSprite, inactive_cars)
-                elif poppedSprite.type == 'train_small':
+                elif poppedSprite.type == "train_small":
                     self.removeSpriteAndAddANewOne(poppedSprite, inactive_trains_small)
-                elif poppedSprite.type == 'train_medium':
+                elif poppedSprite.type == "train_medium":
                     self.removeSpriteAndAddANewOne(poppedSprite, inactive_trains_medium)
-                elif poppedSprite.type == 'train_large':
+                elif poppedSprite.type == "train_large":
                     self.removeSpriteAndAddANewOne(poppedSprite, inactive_trains_large)
 
     def render(self, screen):
@@ -100,7 +106,7 @@ class Lane:
         while self.spriteCount > 0:
             self.add(sprites.pop(1), position_x)
             self.spriteCount -= 1
-            if self.type == 'cars':
+            if self.type == "cars":
                 position_x += self.lastSprite.getWidth() + self.carDistance()
             else:
                 position_x += self.lastSprite.getWidth() + self.carDistance()
@@ -119,15 +125,22 @@ class Lane:
             return sprite.position_x + sprite.getWidth() < 0
 
     def calculateYPosition(self, row: int):
-        return settings.SCREEN_HEIGHT - (row * settings.CHARACTER_STEP_SIZE) - settings.MAP_BOTTOM_PADDING - 50
+        return (
+            settings.SCREEN_HEIGHT
+            - (row * settings.CHARACTER_STEP_SIZE)
+            - settings.MAP_BOTTOM_PADDING
+            - 50
+        )
 
     def removeSpriteAndAddANewOne(self, poppedSprite: Sprite, list: list):
         list.append(poppedSprite)
         newSprite = list.pop(1)
-        distance = self.carDistance() if newSprite.type == 'cars' else self.trainDistance()
+        distance = (
+            self.carDistance() if newSprite.type == "cars" else self.trainDistance()
+        )
 
         if self.leftToRight:
-            newStart = - newSprite.getWidth() - distance
+            newStart = -newSprite.getWidth() - distance
 
             if self.lastSprite.position_x <= newStart + newSprite.getWidth():
                 newStart = self.lastSprite.position_x - newSprite.getWidth() - distance

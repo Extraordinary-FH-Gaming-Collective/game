@@ -36,4 +36,5 @@ class Endzones:
             character.cheer()
             reached_endzone.reached(character)
             character.back_to_start()
-            scorer.reached_endzone()
+            scorer.reached_goal()
+            scorer.add_points(500)

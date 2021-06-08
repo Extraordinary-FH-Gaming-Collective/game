@@ -2,26 +2,31 @@ class CollisionHandler:
     def __init__(self):
         pass
 
-    def check(self, lane, character):
+    def check(self, lane, character, scorer):
         if self.isHitByCar(character, lane) or self.isNotOnTrain(character, lane):
             character.hit()
+            scorer.remove_points(250)
 
     def isHitByCar(self, character, lane):
-        if lane.type != 'cars':
+        if lane.type != "cars":
             return
 
         for sprite in lane.sprites:
-            if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(character, sprite):
+            if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(
+                character, sprite
+            ):
                 return True
 
         return False
 
     def isNotOnTrain(self, character, lane):
-        if lane.type == 'cars':
+        if lane.type == "cars":
             return False
 
         for sprite in lane.sprites:
-            if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(character, sprite):
+            if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(
+                character, sprite
+            ):
                 return False
 
         return True
