@@ -132,7 +132,7 @@ class TextScreen:
         if event.key == self.game.pygame.K_ESCAPE:
             self.game.mode = "menu"
 
-        if event.key == self.game.pygame.K_RETURN:
+        if event.key == self.game.pygame.K_SPACE:
             self.game.reset_game()
             self.game.mode = "game"
 

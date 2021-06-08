@@ -35,7 +35,7 @@ class KeyboardControl:
             if event.type != self.game.pygame.KEYDOWN:
                 return  # Do nothing in case it's not a keydown
 
-            if event.key == self.game.pygame.K_RETURN:
+            if event.key == self.game.pygame.K_ESCAPE:
                 self.game.mode = "menu"
 
             if event.key in self.key_map:
