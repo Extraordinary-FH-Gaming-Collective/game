@@ -17,9 +17,8 @@ class Endzone(pygame.sprite.Sprite):
         self.rect.x = self.position_x
         self.rect.y = self.position_y
 
-    """If a Player reaches the Endzone, the last image of the Player will be rendered instead 
-of the transparent rect. Gives the illusion of the Player still standing in the Endzone"""
-
+    # Renders an the Image of the colliding Player instead of the transparent playholder rect
+    # Gives the illusion the player is still standing in the endzone
     def reached(self, player):
         self.image = player.image
 
