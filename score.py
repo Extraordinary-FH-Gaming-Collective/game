@@ -13,10 +13,9 @@ class Scorer:
         """
 
         self.goal += 1
-        self.points += 500
 
     def add_points(self, points):
-        self.points -= points
+        self.points += points
 
     def remove_points(self, points):
         self.points -= points
