@@ -43,20 +43,20 @@ class SpriteGenerator:
     def generate(self):
         """ Generates everything and does return all lanes. """
 
-        self.generateLanes()
-        self.generateCars()
-        self.generateTrains()
+        self.generate_lanes()
+        self.generate_cars()
+        self.generate_trains()
         self.shuffle()
-        self.moveToLanes()
+        self.move_to_lanes()
 
         return self.lanes
 
-    def generateLanes(self):
+    def generate_lanes(self):
         """ For a seperation of concerns, only the Lanes class now about what to generate. """
 
         self.lanes = Lanes().generate()
 
-    def generateCars(self):
+    def generate_cars(self):
         """ All needed cars will be created as often as defined in `settings.py`. """
 
         while to_create["cars_firetruck"] > 0:
@@ -75,7 +75,7 @@ class SpriteGenerator:
             inactive_cars.append(SmallCar())
             to_create["cars_small"] -= 1
 
-    def generateTrains(self):
+    def generate_trains(self):
         """ All needed trains will be created as often as defined in `settings.py`. """
 
         while to_create["trains_small"] > 0:
@@ -101,7 +101,7 @@ class SpriteGenerator:
         random.shuffle(inactive_trains_medium)
         random.shuffle(inactive_trains_large)
 
-    def moveToLanes(self):
+    def move_to_lanes(self):
         """ Loop through all lanes and inject them with our aut generated sprites. """
 
         for lane in self.lanes.get():
@@ -114,4 +114,4 @@ class SpriteGenerator:
             if lane.type == 'large_trains':
                 sprites = inactive_trains_large
 
-            lane.firstPlacement(sprites)
+            lane.init_placement(sprites)

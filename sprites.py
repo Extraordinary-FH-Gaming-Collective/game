@@ -74,7 +74,7 @@ class Sprite:
 
         screen.blit(self.image, (self.position_x, self.position_y))
 
-    def setDirection(self, left_to_right: bool):
+    def set_direction(self, left_to_right: bool):
         """ On creation we want to define the direction.
 
         This is important to flip the image correctly and to let the sprite drive into the correct direction as well.
@@ -96,12 +96,12 @@ class Sprite:
         self.position_x = position_x
         self.position_y = position_y - self.height_correction
 
-    def getWidth(self):
+    def get_width(self):
         """ Calculates the width of a sprite. """
 
         return self.image_left_to_right.get_rect().w
 
-    def getHeight(self):
+    def get_height(self):
         """ Calculates the height of a sprite. """
 
         return self.image_left_to_right.get_rect().h
