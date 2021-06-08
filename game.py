@@ -6,7 +6,7 @@ from endzone import Endzones
 from obstacles import Obstacles
 from keyboard_control import KeyboardControl
 from sprite_generator import SpriteGenerator
-from preGame import PreGame
+from text_screen import TextScreen
 from score import Scorer
 from text_drawer import TextDrawer
 
@@ -27,7 +27,7 @@ class Game:
         self.preGame = PreGame(self)
 
         self.lanes = SpriteGenerator().generate()
-        self.player = Character(self.lanes)
+        self.player = Character()
         self.fence_top = FenceTop()
         self.fence_bottom = FenceBottom()
         self.endzones = Endzones()
@@ -35,13 +35,16 @@ class Game:
 
         self.keyboard_control = KeyboardControl(self)
 
+        pygame.mixer.music.load('assets/sounds/Jim Hall - Elsewhere.mp3')
+        pygame.mixer.Channel(0).play(pygame.mixer.Sound('assets/sounds/Jim Hall - Elsewhere.mp3'))
+
     def loop(self):
         self.beforeLoop()
 
         if self.mode == "game":
             self.game()
-        elif self.mode == "introduction":
-            self.introduction()
+        elif self.mode == "instructions":
+            self.instructions()
         elif self.mode == "gameover":
             self.game_over()
         elif self.mode == "gamewon":
@@ -51,15 +54,18 @@ class Game:
 
         self.afterLoop()
 
-    def introduction(self):
-        self.preGame.introduction()
+    def instructions(self):
+        self.text_screen.show_instructions()
 
     def menu(self):
-        self.preGame.menu()
+        self.text_screen.show_menu()
         self.reset_game()
 
     def won(self):
-        self.preGame.won(self.scorer.points)
+        self.text_screen.show_winning_screen(self.scorer.points)
+
+    def game_over(self):
+        self.text_screen.show_game_over_screen()
 
     def game(self):
         self.keyboard_control.execute()
@@ -78,12 +84,6 @@ class Game:
         self.endzones.check_for_reach(self.player, self.scorer)
         self.obstacles.check_for_collision(self.player)
 
-    def update(self):
-        self.lanes.update()
-        self.endzones.group.update()
-        self.obstacles.group.update()
-        self.player.update()
-
     def render(self):
         self.screen.blit(BACKGROUND_IMAGE, (0, 0))
         self.fence_top.render(self.screen)
@@ -93,8 +93,11 @@ class Game:
         self.player.render(self.screen)
         self.lanes.renderCars(self.screen)
 
-    def game_over(self):
-        self.preGame.dead()
+    def update(self):
+        self.lanes.update()
+        self.endzones.group.update()
+        self.obstacles.group.update()
+        self.player.update()
 
     def show_score(self):
         self.pygame.font.init()
