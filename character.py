@@ -85,7 +85,7 @@ class Character(pygame.sprite.Sprite):
     def cheer(self):
         self.image = player_image_dict["cheering"]
 
-        pygame.mixer.music.load('assets/sounds/Finish.mp3')
+        pygame.mixer.music.load("assets/sounds/Finish.mp3")
         pygame.mixer.music.play()
 
     def bounce_back(self):
@@ -123,7 +123,10 @@ class Character(pygame.sprite.Sprite):
         if self.row < 8 or self.row > 11:
             return
 
-        if self.trainFromLeft[self.row] and self.position_x + self.getWidth() < SCREEN_WIDTH:
+        if (
+            self.trainFromLeft[self.row]
+            and self.position_x + self.getWidth() < SCREEN_WIDTH
+        ):
             self.position_x += self.trainSpeed[self.row]
         elif self.position_x >= 0:
             self.position_x -= self.trainSpeed[self.row]
@@ -173,7 +176,8 @@ class LookingUp(CharacterState):
         character.image = player_image_dict["standing_up"][character.animationCount]
         if (character.position_y) > BORDER_TOP:
             character.position_y -= character.step_size
-            character.row += 1
+            if character.row < 11:
+                character.row += 1
 
     def move_up(self, character: Character):
         character.state = LookingUp(character)
@@ -194,7 +198,8 @@ class LookingDown(CharacterState):
         character.image = player_image_dict["standing_down"][character.animationCount]
         if character.position_y < BORDER_BOTTOM:
             character.position_y += character.step_size
-            character.row -= 1
+            if character.row > 0:
+                character.row -= 1
 
     def move_up(self, character: Character):
         character.state = LookingUp(character)
