@@ -18,7 +18,6 @@ class Endzone(pygame.sprite.Sprite):
         self.rect.x = self.position_x
         self.rect.y = self.position_y
 
-    
     def reached(self, player):
         """Renders an the Image of the colliding Player instead of the transparent playholder rect.
 

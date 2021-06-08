@@ -15,7 +15,7 @@ class Lanes:
     """
 
     def __init__(self):
-       """Initialize lanes and the collision handler."""
+        """Initialize lanes and the collision handler."""
 
         self.lanes = []
         self.collisionHandler = CollisionHandler()

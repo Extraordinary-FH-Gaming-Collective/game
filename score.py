@@ -8,7 +8,7 @@ class Scorer:
 
     def reached_goal(self):
         """When the Player reaches one of the Endzone he get´s 500 Points.
-        
+
         And one goals get`s added (5 is Winner Winner Chicken Dinner)
         """
 
@@ -23,7 +23,7 @@ class Scorer:
 
     def countdown_score(self):
         """Counts down on every Frame via the update Method in Game Loop.
-        
+
         After 60 frames it removes 10 Points and restarts
         """
 
