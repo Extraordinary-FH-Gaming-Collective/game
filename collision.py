@@ -4,6 +4,8 @@ This is where we detect any collisions.
 
 """
 class CollisionHandler:
+
+
     """ Please move on. There nothing happening here. Really! """
     def __init__(self):
         pass
@@ -32,9 +34,9 @@ class CollisionHandler:
 
         return False
 
-    """ Is the character not on the train? This would mean, he jumped onto the rails. 
-    
-    Living on the edge? Not tolerated in Frogger city.
+    """ Is the character not on the train? This would mean, he jumped onto the rails.
+
+    Living on the edge? Not tolerated in Frogger City.
 
     """
     def isNotOnTrain(self, character, lane) -> bool:
@@ -50,7 +52,6 @@ class CollisionHandler:
     """ Checks if the character is on the right side from the left side the sprite. """
     def rightFromLeftEdge(self, character, sprite) -> bool:
         return character.getWidth() + character.position_x > sprite.position_x
-
 
     """ Checks if the character is on the left side from the right side the sprite. """
     def leftFromRightEdge(self, character, sprite) -> bool:
