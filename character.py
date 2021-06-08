@@ -44,26 +44,26 @@ class Character(pygame.sprite.Sprite):
 
         self.trainSpeed = {}
         self.trainFromLeft = {}
-        self.trainSpeed[8] = lanes.getLane(8).speed
-        self.trainFromLeft[8] = lanes.getLane(8).leftToRight
-        self.trainSpeed[9] = lanes.getLane(9).speed
-        self.trainFromLeft[9] = lanes.getLane(9).leftToRight
-        self.trainSpeed[10] = lanes.getLane(10).speed
-        self.trainFromLeft[10] = lanes.getLane(10).leftToRight
-        self.trainSpeed[11] = lanes.getLane(11).speed
-        self.trainFromLeft[11] = lanes.getLane(11).leftToRight
+        self.trainSpeed[8] = lanes.get_lane(8).speed
+        self.trainFromLeft[8] = lanes.get_lane(8).left_to_right
+        self.trainSpeed[9] = lanes.get_lane(9).speed
+        self.trainFromLeft[9] = lanes.get_lane(9).left_to_right
+        self.trainSpeed[10] = lanes.get_lane(10).speed
+        self.trainFromLeft[10] = lanes.get_lane(10).left_to_right
+        self.trainSpeed[11] = lanes.get_lane(11).speed
+        self.trainFromLeft[11] = lanes.get_lane(11).left_to_right
 
         self.row = 0
-        self.animationCount = 0
+        self.animation_count = 0
 
         self.life = 3
-        self.herzImage = Image(dir_assets_other, "pixelherz64_56.png").get()
+        self.heart_image = Image(dir_assets_other, "pixelherz64_56.png").get()
 
     def walk(self):
-        if self.animationCount < 2:
-            self.animationCount += 1
+        if self.animation_count < 2:
+            self.animation_count += 1
         else:
-            self.animationCount = 0
+            self.animation_count = 0
         pygame.mixer.music.load("assets/sounds/Jump.mp3")
         pygame.mixer.music.play()
 
@@ -79,7 +79,7 @@ class Character(pygame.sprite.Sprite):
     def move_left(self):
         self.state.move_left(self)
 
-    def getWidth(self):
+    def get_width(self):
         return self.rect.w
 
     def cheer(self):
@@ -97,14 +97,14 @@ class Character(pygame.sprite.Sprite):
 
     def herzen(self, screen):
         if self.life == 3:
-            screen.blit(self.herzImage, (1088, 15))
-            screen.blit(self.herzImage, (1152, 15))
-            screen.blit(self.herzImage, (1215, 15))
+            screen.blit(self.heart_image, (1088, 15))
+            screen.blit(self.heart_image, (1152, 15))
+            screen.blit(self.heart_image, (1215, 15))
         if self.life == 2:
-            screen.blit(self.herzImage, (1088, 15))
-            screen.blit(self.herzImage, (1152, 15))
+            screen.blit(self.heart_image, (1088, 15))
+            screen.blit(self.heart_image, (1152, 15))
         if self.life == 1:
-            screen.blit(self.herzImage, (1088, 15))
+            screen.blit(self.heart_image, (1088, 15))
 
     def hit(self):
         self.back_to_start()
@@ -125,7 +125,7 @@ class Character(pygame.sprite.Sprite):
 
         if (
             self.trainFromLeft[self.row]
-            and self.position_x + self.getWidth() < SCREEN_WIDTH
+            and self.position_x + self.get_width() < SCREEN_WIDTH
         ):
             self.position_x += self.trainSpeed[self.row]
         elif self.position_x >= 0:
@@ -173,7 +173,7 @@ class InitialState(CharacterState):
 class LookingUp(CharacterState):
     def __init__(self, character: Character):
         character.walk()
-        character.image = player_image_dict["standing_up"][character.animationCount]
+        character.image = player_image_dict["standing_up"][character.animation_count]
         if (character.position_y) > BORDER_TOP:
             character.position_y -= character.step_size
             if character.row < 11:
@@ -195,7 +195,7 @@ class LookingUp(CharacterState):
 class LookingDown(CharacterState):
     def __init__(self, character: Character):
         character.walk()
-        character.image = player_image_dict["standing_down"][character.animationCount]
+        character.image = player_image_dict["standing_down"][character.animation_count]
         if character.position_y < BORDER_BOTTOM:
             character.position_y += character.step_size
             if character.row > 0:
@@ -217,7 +217,7 @@ class LookingDown(CharacterState):
 class LookingRight(CharacterState):
     def __init__(self, character: Character):
         character.walk()
-        character.image = player_image_dict["standing_right"][character.animationCount]
+        character.image = player_image_dict["standing_right"][character.animation_count]
         if (character.rect.x + character.rect.w) < BORDER_RIGHT:
             character.position_x += character.step_size
 
@@ -237,7 +237,7 @@ class LookingRight(CharacterState):
 class LookingLeft(CharacterState):
     def __init__(self, character: Character):
         character.walk()
-        character.image = player_image_dict["standing_left"][character.animationCount]
+        character.image = player_image_dict["standing_left"][character.animation_count]
         if character.rect.x - character.rect.w > BORDER_LEFT:
             character.position_x -= character.step_size
 
