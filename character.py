@@ -76,6 +76,9 @@ class Character(pygame.sprite.Sprite):
 
     def cheer(self):
         self.state = Cheering(self)
+        
+        pygame.mixer.music.load('assets/sounds/Finish.mp3')
+        pygame.mixer.music.play()
 
     def bounce_back(self):
         self.state = BounceBack(self)
