@@ -122,7 +122,7 @@ class Game:
         self.text_drawer.draw(score_text, font, (COLOR_WHITE), 1100, 100)
 
     def menu(self):
-        """ Displays the menu, which is the first screen in the game. 
+        """ Displays the menu, which is the first screen in the game.
 
         This is the place we send the player to after each game, why
         we thougth it might make sense to reset the game right here.
