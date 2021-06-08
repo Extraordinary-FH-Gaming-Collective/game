@@ -50,6 +50,11 @@ class Lanes:
 
             self.collisionHandler.check(lane, character)
 
+    def getLane(self, row: int):
+        for lane in self.lanes:
+            if lane.row == row:
+                return lane
+
     def get(self):
         return self.lanes
 
