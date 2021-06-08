@@ -1,9 +1,9 @@
-import time
 from settings import *
+
 
 class CollisionHandler:
     def __init__(self):
-            pass
+        pass
 
     def check(self, lane, character):
         if self.isHitByCar(character, lane) or self.isNotOnTrain(character, lane):
@@ -22,11 +22,11 @@ class CollisionHandler:
     def isNotOnTrain(self, character, lane):
         if lane.type == 'cars':
             return False
-    
+
         for sprite in lane.sprites:
             if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(character, sprite):
                 return False
-        
+
         return True
 
     def rightFromLeftEdge(self, character, sprite):
