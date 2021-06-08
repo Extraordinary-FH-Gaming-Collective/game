@@ -27,7 +27,7 @@ to_create["trains_large"] = GENERATE_TRAINS_LARGE
 
 
 class SpriteGenerator:
-    """ This is the fun part, to auto generate all moving sprites.
+    """This is the fun part, to auto generate all moving sprites.
 
     How it works:
     Basically we do generate all needed lanes, sprites, do shuffle them and move sprites to the lanes.
@@ -41,7 +41,7 @@ class SpriteGenerator:
         self.lanes = {}
 
     def generate(self):
-        """ Generates everything and does return all lanes. """
+        """Generates everything and does return all lanes."""
 
         self.generate_lanes()
         self.generate_cars()
@@ -52,12 +52,12 @@ class SpriteGenerator:
         return self.lanes
 
     def generate_lanes(self):
-        """ For a seperation of concerns, only the Lanes class now about what to generate. """
+        """For a seperation of concerns, only the Lanes class now about what to generate."""
 
         self.lanes = Lanes().generate()
 
     def generate_cars(self):
-        """ All needed cars will be created as often as defined in `settings.py`. """
+        """All needed cars will be created as often as defined in `settings.py`."""
 
         while to_create["cars_firetruck"] > 0:
             inactive_cars.append(FireTruck())
@@ -76,7 +76,7 @@ class SpriteGenerator:
             to_create["cars_small"] -= 1
 
     def generate_trains(self):
-        """ All needed trains will be created as often as defined in `settings.py`. """
+        """All needed trains will be created as often as defined in `settings.py`."""
 
         while to_create["trains_small"] > 0:
             inactive_trains_small.append(TrainSmallGreen())
@@ -94,7 +94,7 @@ class SpriteGenerator:
             to_create["trains_large"] -= 2
 
     def shuffle(self):
-        """ Shuffle all sprites so it's not predictable which sprite will be the next. """
+        """Shuffle all sprites so it's not predictable which sprite will be the next."""
 
         random.shuffle(inactive_cars)
         random.shuffle(inactive_trains_small)
@@ -102,7 +102,7 @@ class SpriteGenerator:
         random.shuffle(inactive_trains_large)
 
     def move_to_lanes(self):
-        """ Loop through all lanes and inject them with our aut generated sprites. """
+        """Loop through all lanes and inject them with our aut generated sprites."""
 
         for lane in self.lanes.get():
             if lane.type == 'cars':

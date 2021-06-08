@@ -3,7 +3,7 @@ import os
 
 
 class Image:
-    """ A little helper to load and flip images
+    """A little helper to load and flip images
 
     This is some nice syntactic suggar to keep our code clean.
     """

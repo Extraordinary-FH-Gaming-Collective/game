@@ -6,10 +6,10 @@ from characterCommands import (
     MoveUpCommand,
 )
 
-# KeyboardControl is the steering wheel for the character and maps Character Commands to Keys
-
 
 class KeyboardControl:
+    """KeyboardControl is the steering wheel for the character and maps Character Commands to Keys."""
+
     def __init__(self, game):
         self.arrowkey_up = None
         self.arrowkey_down = None
