@@ -1,6 +1,5 @@
 from support import Image
 from settings import *
-from fence import FenceBottom, FenceTop
 import pygame
 
 
@@ -32,17 +31,15 @@ player_image_dict["standing_left"] = (
 player_image_dict["cheering"] = Image(dir_assets_player, "player_cheers.png").get()
 
 
-fence_top = FenceTop()
-fence_bottom = FenceBottom()
-
-
 class Character(pygame.sprite.Sprite):
     def __init__(self, lanes):
         pygame.sprite.Sprite.__init__(self)
-        self.image = player_image_dict["standing_up"][0]
+        self.position_y = None
+        self.position_x = None
+        self.image = None
+        self.state = InitialState(self)
         self.rect = self.image.get_rect()
-        self.position_y = CHARACTER_START_POSITION_Y
-        self.position_x = CHARACTER_START_POSITION_X
+
         self.step_size = CHARACTER_STEP_SIZE
 
         self.trainSpeed = {}
@@ -58,7 +55,6 @@ class Character(pygame.sprite.Sprite):
 
         self.row = 0
         self.animationCount = 0
-        self.state = None
 
         self.leben = 3
         self.herzImage = Image(dir_assets_other, "pixelherz64_56.png").get()
@@ -68,32 +64,32 @@ class Character(pygame.sprite.Sprite):
             self.animationCount += 1
         else:
             self.animationCount = 0
-        pygame.mixer.music.load('assets/sounds/Jump.mp3')
+        pygame.mixer.music.load("assets/sounds/Jump.mp3")
         pygame.mixer.music.play()
 
     def move_up(self):
-        self.state = LookingUp(self)
+        self.state.move_up(self)
 
     def move_down(self):
-        self.state = LookingDown(self)
+        self.state.move_down(self)
 
     def move_right(self):
-        self.state = LookingRight(self)
+        self.state.move_right(self)
 
     def move_left(self):
-        self.state = LookingLeft(self)
+        self.state.move_left(self)
 
     def getWidth(self):
         return self.rect.w
 
     def cheer(self):
-        self.state = Cheering(self)
+        self.image = player_image_dict["cheering"]
 
-        pygame.mixer.music.load('assets/sounds/Finish.mp3')
+        pygame.mixer.music.load("assets/sounds/Finish.mp3")
         pygame.mixer.music.play()
 
     def bounce_back(self):
-        self.state = BounceBack(self)
+        self.position_y += 10
 
     def render(self, screen):
         screen.blit(self.image, (self.position_x, self.position_y))
@@ -114,7 +110,7 @@ class Character(pygame.sprite.Sprite):
         self.back_to_start()
         self.leben -= 1
 
-        pygame.mixer.music.load('assets/sounds/Hit.mp3')
+        pygame.mixer.music.load("assets/sounds/Hit.mp3")
         pygame.mixer.music.play()
 
     def update(self):
@@ -127,54 +123,73 @@ class Character(pygame.sprite.Sprite):
         if self.row < 8 or self.row > 11:
             return
 
-        if self.trainFromLeft[self.row] and self.position_x + self.getWidth() < SCREEN_WIDTH:
+        if (
+            self.trainFromLeft[self.row]
+            and self.position_x + self.getWidth() < SCREEN_WIDTH
+        ):
             self.position_x += self.trainSpeed[self.row]
         elif self.position_x >= 0:
             self.position_x -= self.trainSpeed[self.row]
 
     def back_to_start(self):
-        self.position_y = CHARACTER_START_POSITION_Y
-        self.position_x = CHARACTER_START_POSITION_X
-        self.row = 0
+        self.state = InitialState(self)
 
 
 class CharacterState:
     def __init__(self, character: Character):
-        def look_up(self, character: Character):
+        def move_up(self, character: Character):
             raise NotImplementedError
 
-        def look_down(self, character: Character):
+        def move_down(self, character: Character):
             raise NotImplementedError
 
-        def look_right(self, character: Character):
+        def move_right(self, character: Character):
             raise NotImplementedError
 
-        def look_left(self, character: Character):
+        def move_left(self, character: Character):
             raise NotImplementedError
+
+
+class InitialState(CharacterState):
+    def __init__(self, character: Character):
+        character.position_y = CHARACTER_START_POSITION_Y
+        character.position_x = CHARACTER_START_POSITION_X
+        character.image = player_image_dict["standing_up"][0]
+        character.row = 0
+
+    def move_up(self, character: Character):
+        character.state = LookingUp(character)
+
+    def move_down(self, character: Character):
+        character.state = LookingDown(character)
+
+    def move_right(self, character: Character):
+        character.state = LookingRight(character)
+
+    def move_left(self, character: Character):
+        character.state = LookingLeft(character)
 
 
 class LookingUp(CharacterState):
     def __init__(self, character: Character):
-        character.walk()  # TODO: Maybe there is a better solution?
+        character.walk()
         character.image = player_image_dict["standing_up"][character.animationCount]
         if (character.position_y) > BORDER_TOP:
             character.position_y -= character.step_size
-            character.row += 1
+            if character.row < 11:
+                character.row += 1
 
-    def look_up(self, character: Character):
-        pass
+    def move_up(self, character: Character):
+        character.state = LookingUp(character)
 
-    def look_down(self, character: Character):
-        character.state = LookingDown(self)
+    def move_down(self, character: Character):
+        character.state = LookingDown(character)
 
-    def look_right(self, character: Character):
-        character.state = LookingRight(self)
+    def move_right(self, character: Character):
+        character.state = LookingRight(character)
 
-    def look_left(self, character: Character):
-        character.state = LookingLeft(self)
-
-    def cheer(self, character: Character):
-        character.state = Cheering(character)
+    def move_left(self, character: Character):
+        character.state = LookingLeft(character)
 
 
 class LookingDown(CharacterState):
@@ -183,18 +198,19 @@ class LookingDown(CharacterState):
         character.image = player_image_dict["standing_down"][character.animationCount]
         if character.position_y < BORDER_BOTTOM:
             character.position_y += character.step_size
-            character.row -= 1
+            if character.row > 0:
+                character.row -= 1
 
-    def look_up(self, character: Character):
+    def move_up(self, character: Character):
         character.state = LookingUp(character)
 
-    def look_down(self, character: Character):
-        pass
+    def move_down(self, character: Character):
+        character.state = LookingDown(character)
 
-    def look_right(self, character: Character):
+    def move_right(self, character: Character):
         character.state = LookingRight(character)
 
-    def look_left(self, character: Character):
+    def move_left(self, character: Character):
         character.state = LookingLeft(character)
 
 
@@ -205,16 +221,16 @@ class LookingRight(CharacterState):
         if (character.rect.x + character.rect.w) < BORDER_RIGHT:
             character.position_x += character.step_size
 
-    def look_up(self, character: Character):
+    def move_up(self, character: Character):
         character.state = LookingUp(character)
 
-    def look_down(self, character: Character):
+    def move_down(self, character: Character):
         character.state = LookingDown(character)
 
-    def look_right(self, character: Character):
-        pass
+    def move_right(self, character: Character):
+        character.state = LookingRight(character)
 
-    def look_left(self, character: Character):
+    def move_left(self, character: Character):
         character.state = LookingLeft(character)
 
 
@@ -225,24 +241,14 @@ class LookingLeft(CharacterState):
         if character.rect.x - character.rect.w > BORDER_LEFT:
             character.position_x -= character.step_size
 
-    def look_up(self, character: Character):
+    def move_up(self, character: Character):
         character.state = LookingUp(character)
 
-    def look_down(self, character: Character):
+    def move_down(self, character: Character):
         character.state = LookingDown(character)
 
-    def look_right(self, character: Character):
+    def move_right(self, character: Character):
         character.state = LookingRight(character)
 
-    def look_left(self, character: Character):
-        pass
-
-
-class Cheering(CharacterState):
-    def __init__(self, character: Character):
-        character.image = player_image_dict["cheering"]
-
-
-class BounceBack(CharacterState):
-    def __init__(self, character: Character):
-        character.position_y += 10
+    def move_left(self, character: Character):
+        character.state = LookingLeft(character)
