@@ -137,23 +137,28 @@ class Game:
 
     def won(self):
         """ Displays the winning screen. """
+        
         self.text_screen.show_winning_screen(self.scorer.points)
 
     def game_over(self):
         """ Displays the game over screen. """
+        
         self.text_screen.show_game_over_screen()
 
     def reset_game(self):
         """ Resets the game so you can start all over again. """
+
         self.scorer.reset_score()
         self.player.life = 3
         self.endzones = Endzones()        
 
     def loadMusic(self):
         """ Loads the background music. """
+
         self.pygame.mixer.music.load('assets/sounds/Jim Hall - Elsewhere.mp3')
         self.pygame.mixer.Channel(0).play(self.pygame.mixer.Sound('assets/sounds/Jim Hall - Elsewhere.mp3'))
 
     def quit(self):
         """ Quits the game, if you want to leave. """
+
         self.pygame.quit()

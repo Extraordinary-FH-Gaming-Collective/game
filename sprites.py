@@ -48,6 +48,8 @@ train_dict["orange_large"] = (
 
 
 class Sprite:
+    """ The sprite base class with all needed attributes and methods. """
+
     def __init__(self):
         self.image = None
         self.image_left_to_right = None
@@ -60,15 +62,24 @@ class Sprite:
         self.type = None
 
     def update(self):
+        """ Updates the sprite position, depending on the direction it's driving. """
+
         if self.left_to_right:
             self.position_x += self.speed
         else:
             self.position_x -= self.speed
 
     def render(self, screen):
+        """ Renders the sprite image to the screen. """
+
         screen.blit(self.image, (self.position_x, self.position_y))
 
     def setDirection(self, left_to_right: bool):
+        """ On creation we want to define the direction. 
+        
+        This is important to flip the image correctly and to let the sprite drive into the correct direction as well.
+        """
+
         if left_to_right:
             self.image = self.image_left_to_right
         else:
@@ -77,13 +88,22 @@ class Sprite:
         self.left_to_right = left_to_right
 
     def set(self, position_x: int, position_y: int):
+        """ If moving a sprite from the sprite pool into a lane, to make it kind of active, we need to set the start positions. 
+        
+        As images have different heights, the positioning does take our height correction into account.
+        """
+
         self.position_x = position_x
         self.position_y = position_y - self.height_correction
 
     def getWidth(self):
+        """ Calculates the width of a sprite. """
+
         return self.image_left_to_right.get_rect().w
 
     def getHeight(self):
+        """ Calculates the height of a sprite. """
+
         return self.image_left_to_right.get_rect().h
 
 
