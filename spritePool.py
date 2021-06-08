@@ -1,4 +1,4 @@
-""" Our sprite pool, containing all inactive sprites.
+"""Our sprite pool, containing all inactive sprites.
 
 As those needs to be injected in different places, we did move it into a seperate file.
 """

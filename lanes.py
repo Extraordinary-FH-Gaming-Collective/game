@@ -7,7 +7,7 @@ import random
 
 
 class Lanes:
-    """ One lane is defined as a row in our game.
+    """One lane is defined as a row in our game.
 
     One row can fx contain different cars moving from one direction to the other.
 
@@ -15,13 +15,13 @@ class Lanes:
     """
 
     def __init__(self):
-        """ Initialize lanes and the collision handler. """
+       """Initialize lanes and the collision handler."""
 
         self.lanes = []
         self.collisionHandler = CollisionHandler()
 
     def generate(self):
-        """ Generate all needed Lanes.
+        """Generate all needed Lanes.
 
         As shown the row number, sprite type and driving direction needs to get passed.
         """
@@ -39,13 +39,13 @@ class Lanes:
         return self
 
     def update(self):
-        """ Update all existing lanes. """
+        """Update all existing lanes."""
 
         for lane in self.lanes:
             lane.update()
 
     def render_cars(self, screen):
-        """ Only render cars.
+        """Only render cars.
 
         As the time of rendering does define which images stay on top, a seperate render process is needed.
         See the render method in the Game class.
@@ -61,7 +61,7 @@ class Lanes:
             lane.render(screen)
 
     def render_trains(self, screen):
-        """ Only render trains.
+        """Only render trains.
 
         As the time of rendering does define which images stay on top, a seperate render process is needed.
         See the render method in the Game class.
@@ -77,7 +77,7 @@ class Lanes:
             lane.render(screen)
 
     def check_collision(self, character: Character, scorer):
-        """ Check if the character does collide with any sprite in the lane.
+        """Check if the character does collide with any sprite in the lane.
 
         To save some calculation power, collisions will only be deteced in the current character lane.
         """
@@ -89,19 +89,20 @@ class Lanes:
             self.collisionHandler.check(lane, character, scorer)
 
     def get_lane(self, row: int):
-        """ Get a lane by row number. """
+        """Get a lane by row number."""
 
         for lane in self.lanes:
             if lane.row == row:
                 return lane
 
     def get(self):
-        """ Get all lanes. """
+        """Get all lanes."""
+
         return self.lanes
 
 
 class Lane:
-    """ A single lane.
+    """A single lane.
 
     On initialization, we randomly choose the speed from a pre defined range, as well as the sprite count.
     """
@@ -121,7 +122,7 @@ class Lane:
         self.lastSprite: Sprite
 
     def update(self):
-        """ Updates a lane to keep evertthing moving.
+        """Updates a lane to keep evertthing moving.
 
         All sprites will be called and updated, so the positions can be adjustes on every frame per second.
 
@@ -145,13 +146,13 @@ class Lane:
                     self.remove_sprite_and_add_a_new_one(poppedSprite, inactive_trains_large)
 
     def render(self, screen):
-        """ Render all lane sprites to the screen. """
+        """Render all lane sprites to the screen."""
 
         for sprite in self.sprites:
             sprite.render(screen)
 
     def init_placement(self, sprites: list):
-        """ Calculates the first placement of all sprites, before the game starts.
+        """Calculates the first placement of all sprites, before the game starts.
 
         If not doing this, the screen would start empty. Nahhhh ... that's no good.
         """
@@ -166,7 +167,7 @@ class Lane:
                 position_x += self.lastSprite.get_width() + self.car_distance()
 
     def add(self, sprite: Sprite, position_x: int):
-        """ Adds a new sprite. """
+        """Adds a new sprite."""
 
         sprite.speed = self.speed
         sprite.set(position_x, self.position_y)
@@ -175,7 +176,7 @@ class Lane:
         self.lastSprite = sprite
 
     def out_of_view(self, sprite: Sprite):
-        """ Is a sprite out of view? """
+        """Is a sprite out of view?"""
 
         if self.left_to_right:
             return SCREEN_WIDTH < sprite.position_x
@@ -183,12 +184,12 @@ class Lane:
             return sprite.position_x + sprite.get_width() < 0
 
     def calculate_y_position(self, row: int):
-        """ Calculates the y position depending on the row. """
+        """Calculates the y position depending on the row."""
 
         return SCREEN_HEIGHT - (row * CHARACTER_STEP_SIZE) - MAP_BOTTOM_PADDING - 50
 
     def remove_sprite_and_add_a_new_one(self, poppedSprite: Sprite, list: list):
-        """ Remove a sprite and does add a new one
+        """Remove a sprite and does add a new one
 
         1. Add the removed sprite to the inactive list / sprite pool.
         2. Fetch a new sprite from the sprite pool.
@@ -217,16 +218,16 @@ class Lane:
         self.add(newSprite, newStart)
 
     def car_distance(self):
-        """ Calculates a random distance between two cars. """
+        """Calculates a random distance between two cars."""
 
         return random.randrange(MINIMUM_CARS_DISTANCE, MAXIMUM_CARS_DISTANCE)
 
     def train_distance(self):
-        """ Calculates a random distance between two trains. """
+        """Calculates a random distance between two trains."""
 
         return random.randrange(MINIMUM_TRAINS_DISTANCE, MAXIMUM_TRAINS_DISTANCE)
 
     def sprite_speed(self):
-        """ Calculates a random speed value. """
+        """Calculates a random speed value."""
 
         return random.randrange(SPRITE_MINIMUM_SPEED, SPRITE_MAXIMUM_SPEED)
