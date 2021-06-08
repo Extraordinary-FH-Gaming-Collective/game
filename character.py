@@ -1,6 +1,5 @@
 from support import Image
 from settings import *
-from fence import FenceBottom, FenceTop
 import pygame
 
 
@@ -32,10 +31,6 @@ player_image_dict["standing_left"] = (
 player_image_dict["cheering"] = Image(dir_assets_player, "player_cheers.png").get()
 
 
-fence_top = FenceTop()
-fence_bottom = FenceBottom()
-
-
 class Character(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -56,7 +51,7 @@ class Character(pygame.sprite.Sprite):
             self.animationCount += 1
         else:
             self.animationCount = 0
-        pygame.mixer.music.load('assets/sounds/Jump.mp3')
+        pygame.mixer.music.load("assets/sounds/Jump.mp3")
         pygame.mixer.music.play()
 
     def move_up(self):
@@ -99,7 +94,7 @@ class Character(pygame.sprite.Sprite):
         self.back_to_start()
         self.leben -= 1
 
-        pygame.mixer.music.load('assets/sounds/Hit.mp3')
+        pygame.mixer.music.load("assets/sounds/Hit.mp3")
         pygame.mixer.music.play()
 
     def update(self):
