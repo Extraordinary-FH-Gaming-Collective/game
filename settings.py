@@ -1,7 +1,10 @@
 from support import Image
 
+# Global Variables used in the Game
+
 GAME_NAME = "Frogger City"
 
+# Screen Settings
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 SCREEN_FPS = 60
