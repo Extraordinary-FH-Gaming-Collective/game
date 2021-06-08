@@ -1,6 +1,3 @@
-from settings import *
-
-
 class CollisionHandler:
     def __init__(self):
         pass
@@ -28,9 +25,6 @@ class CollisionHandler:
                 return False
 
         return True
-
-    def rightFromLeftEdge(self, character, sprite):
-        return character.getWidth() + character.position_x > sprite.position_x
 
     def rightFromLeftEdge(self, character, sprite):
         return character.getWidth() + character.position_x > sprite.position_x
