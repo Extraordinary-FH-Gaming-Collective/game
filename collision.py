@@ -7,7 +7,7 @@ class CollisionHandler:
 
         pass
 
-    def check(self, lane, character) -> None:
+    def check(self, lane, character, scorer) -> None:
         """ Check against a collision with a car or train.
         In case the character / player is hit, we will call the hit method to handle that case.
 
@@ -19,6 +19,7 @@ class CollisionHandler:
 
         if self.isHitByCar(character, lane) or self.isNotOnTrain(character, lane):
             character.hit()
+            scorer.remove_points(250)
 
     def isHitByCar(self, character, lane) -> bool:
         """ Returns a boolean if hit by a car. """
@@ -27,7 +28,9 @@ class CollisionHandler:
             return
 
         for sprite in lane.sprites:
-            if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(character, sprite):
+            if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(
+                character, sprite
+            ):
                 return True
 
         return False
@@ -42,7 +45,9 @@ class CollisionHandler:
             return False
 
         for sprite in lane.sprites:
-            if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(character, sprite):
+            if self.rightFromLeftEdge(character, sprite) and self.leftFromRightEdge(
+                character, sprite
+            ):
                 return False
 
         return True

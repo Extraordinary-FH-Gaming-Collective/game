@@ -78,7 +78,7 @@ class Game:
         """ The game mode, which show the main game element: A busy boy running through Frogger City. """
 
         self.keyboard_control.execute()
-        self.lanes.checkCollision(self.player)
+        self.lanes.checkCollision(self.player, self.scorer)
 
         if self.player.life == 0:
             self.mode = "gameover"
@@ -111,6 +111,7 @@ class Game:
         self.endzones.group.update()
         self.obstacles.group.update()
         self.player.update()
+        self.scorer.countdown_score()
 
     def show_score(self):
         """ Renders the score in the game window. """
