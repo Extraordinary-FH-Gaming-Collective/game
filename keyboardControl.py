@@ -7,6 +7,8 @@ from characterCommands import (
 )
 
 # KeyboardControl is the steering wheel for the character and maps Character Commands to Keys
+
+
 class KeyboardControl:
     def __init__(self, game):
         self.arrowkey_up = None
