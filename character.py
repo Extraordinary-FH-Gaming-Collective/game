@@ -46,7 +46,7 @@ class Character(pygame.sprite.Sprite):
         self.step_size = CHARACTER_STEP_SIZE
         self.row = 0
         self.animationCount = 0
-        self.state = None
+        self.state = LookingUp(self)
 
         self.leben = 3
         self.herzImage = Image(dir_assets_other, "pixelherz64_56.png").get()
@@ -58,22 +58,22 @@ class Character(pygame.sprite.Sprite):
             self.animationCount = 0
 
     def move_up(self):
-        self.state = LookingUp(self)
+        self.state.move_up(self)
 
     def move_down(self):
-        self.state = LookingDown(self)
+        self.state.move_down(self)
 
     def move_right(self):
-        self.state = LookingRight(self)
+        self.state.move_right(self)
 
     def move_left(self):
-        self.state = LookingLeft(self)
+        self.state.move_left(self)
 
     def cheer(self):
-        self.state = Cheering(self)
+        self.image = player_image_dict["cheering"]
 
     def bounce_back(self):
-        self.state = BounceBack(self)
+        self.position_y += 10
 
     def render(self, screen):
         screen.blit(self.image, (self.position_x, self.position_y))
@@ -101,38 +101,38 @@ class Character(pygame.sprite.Sprite):
 
 class CharacterState:
     def __init__(self, character: Character):
-        def look_up(self, character: Character):
+        def move_up(self, character: Character):
             raise NotImplementedError
 
-        def look_down(self, character: Character):
+        def move_down(self, character: Character):
             raise NotImplementedError
 
-        def look_right(self, character: Character):
+        def move_right(self, character: Character):
             raise NotImplementedError
 
-        def look_left(self, character: Character):
+        def move_left(self, character: Character):
             raise NotImplementedError
 
 
 class LookingUp(CharacterState):
     def __init__(self, character: Character):
-        character.walk()  # TODO: Maybe there is a better solution?
+        character.walk()
         character.image = player_image_dict["standing_up"][character.animationCount]
         if (character.position_y) > BORDER_TOP:
             character.position_y -= character.step_size
             character.row += 1
 
-    def look_up(self, character: Character):
-        pass
+    def move_up(self, character: Character):
+        character.state = LookingUp(character)
 
-    def look_down(self, character: Character):
-        character.state = LookingDown(self)
+    def move_down(self, character: Character):
+        character.state = LookingDown(character)
 
-    def look_right(self, character: Character):
-        character.state = LookingRight(self)
+    def move_right(self, character: Character):
+        character.state = LookingRight(character)
 
-    def look_left(self, character: Character):
-        character.state = LookingLeft(self)
+    def move_left(self, character: Character):
+        character.state = LookingLeft(character)
 
     def cheer(self, character: Character):
         character.state = Cheering(character)
@@ -146,16 +146,16 @@ class LookingDown(CharacterState):
             character.position_y += character.step_size
             character.row -= 1
 
-    def look_up(self, character: Character):
+    def move_up(self, character: Character):
         character.state = LookingUp(character)
 
-    def look_down(self, character: Character):
-        pass
+    def move_down(self, character: Character):
+        character.state = LookingDown(character)
 
-    def look_right(self, character: Character):
+    def move_right(self, character: Character):
         character.state = LookingRight(character)
 
-    def look_left(self, character: Character):
+    def move_left(self, character: Character):
         character.state = LookingLeft(character)
 
 
@@ -166,16 +166,16 @@ class LookingRight(CharacterState):
         if (character.rect.x + character.rect.w) < BORDER_RIGHT:
             character.position_x += character.step_size
 
-    def look_up(self, character: Character):
+    def move_up(self, character: Character):
         character.state = LookingUp(character)
 
-    def look_down(self, character: Character):
+    def move_down(self, character: Character):
         character.state = LookingDown(character)
 
-    def look_right(self, character: Character):
-        pass
+    def move_right(self, character: Character):
+        character.state = LookingRight(character)
 
-    def look_left(self, character: Character):
+    def move_left(self, character: Character):
         character.state = LookingLeft(character)
 
 
@@ -186,24 +186,14 @@ class LookingLeft(CharacterState):
         if character.rect.x - character.rect.w > BORDER_LEFT:
             character.position_x -= character.step_size
 
-    def look_up(self, character: Character):
+    def move_up(self, character: Character):
         character.state = LookingUp(character)
 
-    def look_down(self, character: Character):
+    def move_down(self, character: Character):
         character.state = LookingDown(character)
 
-    def look_right(self, character: Character):
+    def move_right(self, character: Character):
         character.state = LookingRight(character)
 
-    def look_left(self, character: Character):
-        pass
-
-
-class Cheering(CharacterState):
-    def __init__(self, character: Character):
-        character.image = player_image_dict["cheering"]
-
-
-class BounceBack(CharacterState):
-    def __init__(self, character: Character):
-        character.position_y += 10
+    def move_left(self, character: Character):
+        character.state = LookingLeft(character)
