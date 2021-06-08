@@ -34,14 +34,15 @@ player_image_dict["cheering"] = Image(dir_assets_player, "player_cheers.png").ge
 class Character(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = player_image_dict["standing_up"][0]
+        self.position_y = None
+        self.position_x = None
+        self.image = None
+        self.state = InitialState(self)
         self.rect = self.image.get_rect()
-        self.position_y = CHARACTER_START_POSITION_Y
-        self.position_x = CHARACTER_START_POSITION_X
+
         self.step_size = CHARACTER_STEP_SIZE
         self.row = 0
         self.animationCount = 0
-        self.state = LookingUp(self)
 
         self.leben = 3
         self.herzImage = Image(dir_assets_other, "pixelherz64_56.png").get()
@@ -102,9 +103,7 @@ class Character(pygame.sprite.Sprite):
         self.rect.y = self.position_y
 
     def back_to_start(self):
-        self.position_y = CHARACTER_START_POSITION_Y
-        self.position_x = CHARACTER_START_POSITION_X
-        self.row = 0
+        self.state = InitialState(self)
 
 
 class CharacterState:
@@ -120,6 +119,26 @@ class CharacterState:
 
         def move_left(self, character: Character):
             raise NotImplementedError
+
+
+class InitialState(CharacterState):
+    def __init__(self, character: Character):
+        character.position_y = CHARACTER_START_POSITION_Y
+        character.position_x = CHARACTER_START_POSITION_X
+        character.image = player_image_dict["standing_up"][0]
+        character.row = 0
+
+    def move_up(self, character: Character):
+        character.state = LookingUp(character)
+
+    def move_down(self, character: Character):
+        character.state = LookingDown(character)
+
+    def move_right(self, character: Character):
+        character.state = LookingRight(character)
+
+    def move_left(self, character: Character):
+        character.state = LookingLeft(character)
 
 
 class LookingUp(CharacterState):
@@ -141,9 +160,6 @@ class LookingUp(CharacterState):
 
     def move_left(self, character: Character):
         character.state = LookingLeft(character)
-
-    def cheer(self, character: Character):
-        character.state = Cheering(character)
 
 
 class LookingDown(CharacterState):
