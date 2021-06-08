@@ -79,7 +79,7 @@ class Lane:
             sprite.update()
 
             if self.outOfView(sprite):
-                
+
                 index = self.sprites.index(sprite)
                 poppedSprite = self.sprites.pop(index)
 

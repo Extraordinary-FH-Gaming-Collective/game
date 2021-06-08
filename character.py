@@ -55,7 +55,7 @@ class Character(pygame.sprite.Sprite):
         self.trainFromLeft[10] = lanes.getLane(10).leftToRight
         self.trainSpeed[11] = lanes.getLane(11).speed
         self.trainFromLeft[11] = lanes.getLane(11).leftToRight
-        
+
         self.row = 0
         self.animationCount = 0
         self.state = None
@@ -121,7 +121,7 @@ class Character(pygame.sprite.Sprite):
 
         if self.trainFromLeft[self.row] and self.position_x + self.getWidth() < SCREEN_WIDTH:
             self.position_x += self.trainSpeed[self.row]
-        elif  self.position_x >= 0:
+        elif self.position_x >= 0:
             self.position_x -= self.trainSpeed[self.row]
 
     def back_to_start(self):
