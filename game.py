@@ -24,7 +24,7 @@ class Game:
         self.screen = self.pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
         self.text_drawer = TextDrawer(self.screen)
-        self.preGame = PreGame(self)
+        self.text_screen = TextScreen(self)
 
         self.lanes = SpriteGenerator().generate()
         self.player = Character()
