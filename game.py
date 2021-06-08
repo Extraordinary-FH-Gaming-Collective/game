@@ -6,7 +6,7 @@ from endzone import Endzones
 from obstacles import Obstacles
 from keyboard_control import KeyboardControl
 from sprite_generator import SpriteGenerator
-from preGame import PreGame
+from text_screen import TextScreen
 from score import Scorer
 from text_drawer import TextDrawer
 
@@ -24,7 +24,7 @@ class Game:
         self.screen = self.pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
         self.text_drawer = TextDrawer(self.screen)
-        self.preGame = PreGame(self)
+        self.text_screen = TextScreen(self)
 
         self.lanes = SpriteGenerator().generate()
         self.player = Character()
@@ -52,14 +52,14 @@ class Game:
         self.afterLoop()
 
     def introduction(self):
-        self.preGame.introduction()
+        self.text_screen.introduction()
 
     def menu(self):
-        self.preGame.menu()
+        self.text_screen.menu()
         self.reset_game()
 
     def won(self):
-        self.preGame.won(self.scorer.points)
+        self.text_screen.won(self.scorer.points)
 
     def game(self):
         self.keyboard_control.execute()
@@ -94,7 +94,7 @@ class Game:
         self.player.update()
 
     def game_over(self):
-        self.preGame.dead()
+        self.text_screen.dead()
 
     def show_score(self):
         self.pygame.font.init()
