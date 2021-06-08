@@ -12,7 +12,22 @@ from textDrawer import TextDrawer
 
 
 class Game:
+    """ The Game class is the backbone of Frogger City
+
+    Basically we do initialize all needed classes, which we later can reference too and am
+    looping through our loop method as you can see in `main.py`. 
+    """
+
     def __init__(self):
+        """ Initialize all needed classes
+        
+        This way of building our game does help, if working together with a team. Main information are kept 
+        in the game class. By passing `self` into a new initialized Class, all needed information can
+        be parsed and worked with.
+
+        This does make it possible for a team to work in different classes and to centralize all the logic there.
+        """
+    
         self.mode = "menu"
         self.pygame = pygame
         self.pygame.init()
@@ -34,12 +49,17 @@ class Game:
         self.obstacles = Obstacles()
 
         self.keyboard_control = KeyboardControl(self)
-
-        pygame.mixer.music.load('assets/sounds/Jim Hall - Elsewhere.mp3')
-        pygame.mixer.Channel(0).play(pygame.mixer.Sound('assets/sounds/Jim Hall - Elsewhere.mp3'))
+        self.loadMusic()
 
     def loop(self):
-        self.beforeLoop()
+        """ Can I introduce? Our game loop.
+        
+        We'll loop this method as often as defined in our frames per seconds setting in `settings.py`
+
+        Depending on the game mode, we'll call different methods.
+        """
+
+        self.clock.tick(SCREEN_FPS)
 
         if self.mode == "game":
             self.game()
@@ -52,26 +72,15 @@ class Game:
         else:
             self.menu()
 
-        self.afterLoop()
-
-    def instructions(self):
-        self.text_screen.show_instructions()
-
-    def menu(self):
-        self.text_screen.show_menu()
-        self.reset_game()
-
-    def won(self):
-        self.text_screen.show_winning_screen(self.scorer.points)
-
-    def game_over(self):
-        self.text_screen.show_game_over_screen()
+        self.pygame.display.flip()
 
     def game(self):
+        """ The game mode, which show the main game element: A busy boy running through Frogger City. """
+
         self.keyboard_control.execute()
         self.lanes.checkCollision(self.player)
 
-        if self.player.leben == 0:
+        if self.player.life == 0:
             self.mode = "gameover"
 
         if self.scorer.goal == 5:
@@ -85,6 +94,8 @@ class Game:
         self.obstacles.check_for_collision(self.player)
 
     def render(self):
+        """ Render all game elements. """
+
         self.screen.blit(BACKGROUND_IMAGE, (0, 0))
         self.fence_top.render(self.screen)
         self.endzones.group.draw(self.screen)
@@ -94,27 +105,55 @@ class Game:
         self.lanes.renderCars(self.screen)
 
     def update(self):
+        """ Update alle game elements, so evertything keeps moving and calculating. """
+
         self.lanes.update()
         self.endzones.group.update()
         self.obstacles.group.update()
         self.player.update()
 
     def show_score(self):
+        """ Renders the score in the game window. """
+
         self.pygame.font.init()
         font = self.pygame.font.SysFont(None, 40)
         score_text = f"{self.scorer.points} Punkte"
         self.text_drawer.draw(score_text, font, (COLOR_WHITE), 1100, 100)
 
-    def beforeLoop(self):
-        self.clock.tick(SCREEN_FPS)
+    def menu(self):
+        """ Displays the menu, which is the first screen in the game. 
+        
+        This is the place we send the player to after each game, why 
+        we thougth it might make sense to reset the game right here. 
+        """
+
+        self.text_screen.show_menu()
+        self.reset_game()
+
+    def instructions(self):
+        """ A referenz to the TextScreen class to show game instructions. """
+
+        self.text_screen.show_instructions()
+
+    def won(self):
+        """ Displays the winning screen. """
+        self.text_screen.show_winning_screen(self.scorer.points)
+
+    def game_over(self):
+        """ Displays the game over screen. """
+        self.text_screen.show_game_over_screen()
 
     def reset_game(self):
+        """ Resets the game so you can start all over again. """
         self.scorer.reset_score()
-        self.player.leben = 3
-        self.endzones = Endzones()
+        self.player.life = 3
+        self.endzones = Endzones()        
 
-    def afterLoop(self):
-        self.pygame.display.flip()
+    def loadMusic(self):
+        """ Loads the background music. """
+        self.pygame.mixer.music.load('assets/sounds/Jim Hall - Elsewhere.mp3')
+        self.pygame.mixer.Channel(0).play(self.pygame.mixer.Sound('assets/sounds/Jim Hall - Elsewhere.mp3'))
 
     def quit(self):
+        """ Quits the game, if you want to leave. """
         self.pygame.quit()

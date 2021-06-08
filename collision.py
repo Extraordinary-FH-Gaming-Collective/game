@@ -4,6 +4,7 @@ class CollisionHandler:
 
     def __init__(self):
         """ Please move on. There nothing happening here. Really! """
+
         pass
 
     def check(self, lane, character) -> None:
@@ -15,11 +16,13 @@ class CollisionHandler:
         We'll handle the case that the character is not on a train, as he jumped down to
         the rails, as a hit and handle it equally as a hit by car.
         """
+
         if self.isHitByCar(character, lane) or self.isNotOnTrain(character, lane):
             character.hit()
 
     def isHitByCar(self, character, lane) -> bool:
         """ Returns a boolean if hit by a car. """
+
         if lane.type != 'cars':
             return
 
@@ -34,6 +37,7 @@ class CollisionHandler:
 
         Living on the edge? Not tolerated in Frogger City.
         """
+
         if lane.type == 'cars':
             return False
 
@@ -45,8 +49,10 @@ class CollisionHandler:
 
     def rightFromLeftEdge(self, character, sprite) -> bool:
         """ Checks if the character is on the right side from the left side the sprite. """
+
         return character.getWidth() + character.position_x > sprite.position_x
 
     def leftFromRightEdge(self, character, sprite) -> bool:
         """ Checks if the character is on the left side from the right side the sprite. """
+        
         return sprite.position_x + sprite.getWidth() > character.position_x

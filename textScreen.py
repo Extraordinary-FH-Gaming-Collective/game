@@ -44,7 +44,7 @@ class TextScreen:
             300,
         )
         self.text_drawer.draw(
-            "Du hast 3 Leben und somit 3 Versuche.",
+            "Du hast 3 life und somit 3 Versuche.",
             self.menu_font,
             (COLOR_BLACK),
             50,
