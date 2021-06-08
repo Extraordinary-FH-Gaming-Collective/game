@@ -1,7 +1,7 @@
 class Sounds:
     def __init__(self, game):
         self.game = game
-        self.pygame.mixer.init()
+        self.game.pygame.mixer.init()
         self.background_music = ('assets/sounds/Jim Hall - Elsewhere.mp3')
         self.jump_sound = ('assets/sounds/Jump.mp3')
         self.finish_sound = ('assets/sounds/Finish.mp3')

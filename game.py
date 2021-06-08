@@ -42,7 +42,7 @@ class Game:
         self.text_screen = TextScreen(self)
 
         self.lanes = SpriteGenerator().generate()
-        self.player = Character(self.lanes)
+        self.player = Character(self)
         self.fence_top = FenceTop()
         self.fence_bottom = FenceBottom()
         self.endzones = Endzones()
