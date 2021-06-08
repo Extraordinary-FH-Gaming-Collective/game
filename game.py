@@ -8,6 +8,7 @@ from keyboard_control import KeyboardControl
 from sprite_generator import SpriteGenerator
 from preGame import PreGame
 from score import Scorer
+from text_drawer import TextDrawer
 
 
 class Game:
@@ -19,10 +20,11 @@ class Game:
         self.pygame.display.set_caption(GAME_NAME)
         self.scorer = Scorer()
 
-        self.preGame = PreGame(self)
-
         self.clock = self.pygame.time.Clock()
         self.screen = self.pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+        self.text_drawer = TextDrawer(self.screen)
+        self.preGame = PreGame(self)
 
         self.lanes = SpriteGenerator().generate()
         self.player = Character()
@@ -73,6 +75,7 @@ class Game:
             self.mode = "gamewon"
 
         self.render()
+        self.show_score()
         self.update()
 
         self.endzones.check_for_reach(self.player, self.scorer)
@@ -95,6 +98,12 @@ class Game:
 
     def game_over(self):
         self.preGame.dead()
+
+    def show_score(self):
+        self.pygame.font.init()
+        font = self.pygame.font.SysFont(None, 40)
+        score_text = f"{self.scorer.points} Punkte"
+        self.text_drawer.draw(score_text, font, (COLOR_WHITE), 1100, 100)
 
     def beforeLoop(self):
         self.clock.tick(SCREEN_FPS)
