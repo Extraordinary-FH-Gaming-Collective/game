@@ -60,6 +60,7 @@ class Character(pygame.sprite.Sprite):
         self.life = 3
         self.heart_image = Image(dir_assets_other, "pixelherz64_56.png").get()
         self.sounds = Sounds(self)
+        self.pygame = pygame
 
     def walk(self):
         if self.animation_count < 2:
@@ -86,8 +87,7 @@ class Character(pygame.sprite.Sprite):
     def cheer(self):
         self.image = player_image_dict["cheering"]
 
-        pygame.mixer.music.load("assets/sounds/Finish.mp3")
-        pygame.mixer.music.play()
+        self.sounds.playFinish()
 
     def bounce_back(self):
         self.position_y += 10
@@ -110,7 +110,7 @@ class Character(pygame.sprite.Sprite):
     def hit(self):
         self.back_to_start()
         self.life -= 1
-        self.sounds.loadHit(self)
+        self.sounds.playHit()
 
     def update(self):
         self.adoptTrainMovement()
