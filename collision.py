@@ -1,21 +1,19 @@
-""" 
+"""
 
-This is where we detect any collisions. 
+This is where we detect any collisions.
 
 """
 class CollisionHandler:
-    
-    
     """ Please move on. There nothing happening here. Really! """
     def __init__(self):
         pass
 
-    """ Check against a collision with a car or train. 
+    """ Check against a collision with a car or train.
     In case the character / player is hit, we will call the hit method to handle that case.
     
     Please note: As a hit by car may be obvious, it's a little different with trains:
 
-    We'll handle the case that the character is not on a train, as he jumped down to 
+    We'll handle the case that the character is not on a train, as he jumped down to
     the rails, as a hit and handle it equally as a hit by car.
 
     """
