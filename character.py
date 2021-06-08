@@ -1,3 +1,4 @@
+from time import sleep
 from support import Image
 from settings import *
 from fence import FenceBottom, FenceTop
@@ -69,6 +70,9 @@ class Character(pygame.sprite.Sprite):
     def move_left(self):
         self.state = LookingLeft(self)
 
+    def getWidth(self):
+        return self.rect.w
+
     def cheer(self):
         self.state = Cheering(self)
 
@@ -90,6 +94,10 @@ class Character(pygame.sprite.Sprite):
         if self.leben == 1:
             screen.blit(self.herzImage, (1088, 15))
 
+    def hit(self):
+        self.back_to_start()
+        self.leben -= 1
+
     def update(self):
         self.rect.x = self.position_x
         self.rect.y = self.position_y
@@ -97,6 +105,7 @@ class Character(pygame.sprite.Sprite):
     def back_to_start(self):
         self.position_y = CHARACTER_START_POSITION_Y
         self.position_x = CHARACTER_START_POSITION_X
+        self.row = 0
 
 
 class CharacterState:
