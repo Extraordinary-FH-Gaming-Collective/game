@@ -32,10 +32,11 @@ player_image_dict["cheering"] = Image(dir_assets_player, "player_cheers.png").ge
 
 
 class Character(pygame.sprite.Sprite):
-    def __init__(self, lanes):
+    def __init__(self, game):
         pygame.sprite.Sprite.__init__(self)
         self.position_y = None
         self.position_x = None
+        self.game = game
         self.image = None
         self.state = InitialState(self)
         self.rect = self.image.get_rect()
@@ -44,14 +45,14 @@ class Character(pygame.sprite.Sprite):
 
         self.trainSpeed = {}
         self.trainFromLeft = {}
-        self.trainSpeed[8] = lanes.get_lane(8).speed
-        self.trainFromLeft[8] = lanes.get_lane(8).left_to_right
-        self.trainSpeed[9] = lanes.get_lane(9).speed
-        self.trainFromLeft[9] = lanes.get_lane(9).left_to_right
-        self.trainSpeed[10] = lanes.get_lane(10).speed
-        self.trainFromLeft[10] = lanes.get_lane(10).left_to_right
-        self.trainSpeed[11] = lanes.get_lane(11).speed
-        self.trainFromLeft[11] = lanes.get_lane(11).left_to_right
+        self.trainSpeed[8] = self.game.lanes.get_lane(8).speed
+        self.trainFromLeft[8] = self.game.lanes.get_lane(8).left_to_right
+        self.trainSpeed[9] = self.game.lanes.get_lane(9).speed
+        self.trainFromLeft[9] = self.game.lanes.get_lane(9).left_to_right
+        self.trainSpeed[10] = self.game.lanes.get_lane(10).speed
+        self.trainFromLeft[10] = self.game.lanes.get_lane(10).left_to_right
+        self.trainSpeed[11] = self.game.lanes.get_lane(11).speed
+        self.trainFromLeft[11] = self.game.lanes.get_lane(11).left_to_right
 
         self.row = 0
         self.animation_count = 0
@@ -64,8 +65,7 @@ class Character(pygame.sprite.Sprite):
             self.animation_count += 1
         else:
             self.animation_count = 0
-        pygame.mixer.music.load("assets/sounds/Jump.mp3")
-        pygame.mixer.music.play()
+        self.game.sounds.play_jump()
 
     def move_up(self):
         self.state.move_up(self)
@@ -85,8 +85,7 @@ class Character(pygame.sprite.Sprite):
     def cheer(self):
         self.image = player_image_dict["cheering"]
 
-        pygame.mixer.music.load("assets/sounds/Finish.mp3")
-        pygame.mixer.music.play()
+        self.game.sounds.play_finish()
 
     def bounce_back(self):
         self.position_y += 10
@@ -109,9 +108,7 @@ class Character(pygame.sprite.Sprite):
     def hit(self):
         self.back_to_start()
         self.life -= 1
-
-        pygame.mixer.music.load("assets/sounds/Hit.mp3")
-        pygame.mixer.music.play()
+        self.game.sounds.play_hit()
 
     def update(self):
         self.adoptTrainMovement()
