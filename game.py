@@ -35,6 +35,9 @@ class Game:
 
         self.keyboard_control = KeyboardControl(self)
 
+        pygame.mixer.music.load('assets/sounds/Jim Hall - Elsewhere.mp3')
+        pygame.mixer.Channel(0).play(pygame.mixer.Sound('assets/sounds/Jim Hall - Elsewhere.mp3'))
+
     def loop(self):
         self.beforeLoop()
 
